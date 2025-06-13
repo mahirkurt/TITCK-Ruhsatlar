@@ -9,7 +9,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 
 # --- SABİTLER ve VERİ KAYNAKLARI (Değişiklik yok) ---
-# ... Önceki yanıttaki PUBLIC_DATA_SOURCES ve PRIVATE_DATA_SOURCE tanımları burada olacak ...
 BASE_URL = "https://www.titck.gov.tr"
 LOGIN_URL = f"{BASE_URL}/login"
 OUTPUT_DIR = "data"
@@ -21,9 +20,7 @@ PUBLIC_DATA_SOURCES = [
     {"name": "Yurtdisi_Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/126", "output_xlsx": os.path.join(OUTPUT_DIR, "yurtdisi_etkin_madde_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "yurtdisi_etkin_madde_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_yurtdisi_etkinmadde.txt"), "skiprows": 3}
 ]
 PRIVATE_DATA_SOURCE = {"name": "Detayli_Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/88", "output_xlsx": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_detayli_fiyat.txt"), "skiprows": 3}
-
-# Headers artık Selenium'da yönetildiği için burada sadeleşebilir veya kalabilir
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'}
+HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9,tr;q=0.8', 'Connection': 'keep-alive', 'Sec-Ch-Ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': '"Windows"', 'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Sec-Fetch-User': '?1', 'Upgrade-Insecure-Requests': '1', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'}
 
 # ... Diğer yardımcı fonksiyonlar (get_latest_file_info, download_file vb.) aynı kalıyor ...
 def set_github_action_output(name, value):
@@ -76,7 +73,7 @@ def process_data_source(source, session=None):
         print(f"{source['name']} başarıyla güncellendi."); return True
     else: print(f"{source['name']} listesi güncel."); return False
 
-# ❗️❗️ TAMAMEN YENİLENEN FONKSİYON ❗️❗️
+# ❗️❗️ GÜNCELLENEN FONKSİYON ❗️❗️
 def process_private_source_with_selenium(source):
     print(f"\n--- {source['name']} (Selenium ile) Veri Kaynağı İşleniyor ---")
     username = os.getenv("TITCK_USERNAME")
@@ -93,34 +90,36 @@ def process_private_source_with_selenium(source):
     
     driver = None
     try:
-        # Selenium WebDriver'ı başlat
         print("DEBUG: Selenium WebDriver başlatılıyor...")
-        service = Service() # Otomatik olarak chromedriver'ı bulur
+        service = Service()
         driver = webdriver.Chrome(service=service, options=chrome_options)
         
-        # Giriş yap
         print(f"DEBUG: Selenium ile login sayfasına gidiliyor: {LOGIN_URL}")
         driver.get(LOGIN_URL)
-        time.sleep(3) # Sayfanın tam yüklenmesini bekle
+        time.sleep(3)
         
         print("DEBUG: Kullanıcı adı ve şifre alanları dolduruluyor...")
-        # Not: Sitedeki input ID'leri değişirse bu satırların güncellenmesi gerekir.
-        driver.find_element(By.ID, "username").send_keys(username)
-        driver.find_element(By.ID, "password").send_keys(password)
+        # ID'ler yerine daha genel olan 'name' attribute'larını kullanalım
+        driver.find_element(By.NAME, "username").send_keys(username)
+        driver.find_element(By.NAME, "password").send_keys(password)
         
         print("DEBUG: Giriş butonuna tıklanıyor...")
-        driver.find_element(By.ID, "login-btn").click()
-        time.sleep(5) # Giriş sonrası yönlendirmenin tamamlanmasını bekle
+        # Butonu ID ile değil, tipi ve üzerindeki yazı ile arayalım. Bu çok daha güvenilirdir.
+        # "//button[contains(., 'Giriş')]" -> İçinde 'Giriş' yazan <button> elementi
+        # "//input[@type='submit']" -> Tipi 'submit' olan <input> elementi
+        login_button = driver.find_element(By.XPATH, "//button[contains(., 'Giriş')] | //input[@type='submit']")
+        login_button.click()
         
-        # Girişin başarılı olup olmadığını kontrol et
+        print("DEBUG: Giriş sonrası yönlendirme için bekleniyor...")
+        time.sleep(5)
+        
         print(f"DEBUG: Giriş sonrası mevcut URL: {driver.current_url}")
         if "login" in driver.current_url.lower():
-            print("HATA: Giriş başarısız. Sayfa hala login ekranında.")
+            print("HATA: Giriş başarısız. Sayfa hala login ekranında. Kullanıcı adı/şifre hatalı veya site yapısı değişmiş olabilir.")
             driver.quit()
             return False
         print("Giriş başarılı.")
 
-        # Giriş yapılmış cookie'leri al ve requests session'ına aktar
         selenium_cookies = driver.get_cookies()
         requests_session = requests.Session()
         for cookie in selenium_cookies:
@@ -131,11 +130,13 @@ def process_private_source_with_selenium(source):
 
     except Exception as e:
         print(f"HATA: Selenium ile özel kaynak işlenirken bir hata oluştu: {e}")
+        # Hata anında ekran görüntüsü almak, sorunu anlamak için paha biçilmezdir.
+        # Bu dosya, Actions'ın "Artifacts" bölümünden indirilebilir.
+        # Bunun için workflow'a 'actions/upload-artifact' adımı eklenmelidir.
         if driver:
-            driver.save_screenshot('selenium_error.png') # Hata anının ekran görüntüsünü alır
+            driver.save_screenshot('selenium_error.png')
         return False
     finally:
-        # Tarayıcıyı her zaman kapat
         if driver:
             driver.quit()
             print("DEBUG: Selenium WebDriver kapatıldı.")
@@ -144,15 +145,13 @@ def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     any_update_done = False
     updated_sources = []
-
-    # Halka açık kaynakları işle
+    
     for source in PUBLIC_DATA_SOURCES:
-        time.sleep(3) # Halka açık istekler arasında kısa bir bekleme hala iyi bir fikir
+        time.sleep(3)
         if process_data_source(source):
             any_update_done = True
             updated_sources.append(source['name'])
 
-    # Şifre korumalı kaynağı Selenium ile işle
     time.sleep(3)
     if process_private_source_with_selenium(PRIVATE_DATA_SOURCE):
         any_update_done = True
