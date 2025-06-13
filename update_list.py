@@ -20,9 +20,9 @@ PUBLIC_DATA_SOURCES = [
     {"name": "Yurtdisi_Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/126", "output_xlsx": os.path.join(OUTPUT_DIR, "yurtdisi_etkin_madde_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "yurtdisi_etkin_madde_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_yurtdisi_etkinmadde.txt"), "skiprows": 3}
 ]
 PRIVATE_DATA_SOURCE = {"name": "Detayli_Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/88", "output_xlsx": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_detayli_fiyat.txt"), "skiprows": 3}
-HEADERS = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9,tr;q=0.8', 'Connection': 'keep-alive', 'Sec-Ch-Ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"', 'Sec-Ch-Ua-Mobile': '?0', 'Sec-Ch-Ua-Platform': '"Windows"', 'Sec-Fetch-Dest': 'document', 'Sec-Fetch-Mode': 'navigate', 'Sec-Fetch-Site': 'none', 'Sec-Fetch-User': '?1', 'Upgrade-Insecure-Requests': '1', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'}
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'}
 
-# ... Diğer yardımcı fonksiyonlar (get_latest_file_info, download_file vb.) aynı kalıyor ...
+# ... Halka açık kaynakları işleyen fonksiyonlar (process_data_source vb.) aynı kalıyor ...
 def set_github_action_output(name, value):
     github_output_file = os.getenv('GITHUB_OUTPUT')
     if github_output_file:
@@ -73,20 +73,22 @@ def process_data_source(source, session=None):
         print(f"{source['name']} başarıyla güncellendi."); return True
     else: print(f"{source['name']} listesi güncel."); return False
 
-# ❗️❗️ GÜNCELLENEN FONKSİYON ❗️❗️
+# ❗️❗️ NİHAİ GÜNCELLEME: SELENIUM'UN TÜM İŞİ YAPTIĞI FONKSİYON ❗️❗️
 def process_private_source_with_selenium(source):
-    print(f"\n--- {source['name']} (Selenium ile) Veri Kaynağı İşleniyor ---")
+    print(f"\n--- {source['name']} (Nihai Selenium Metodu) Veri Kaynağı İşleniyor ---")
     username = os.getenv("TITCK_USERNAME")
     password = os.getenv("TITCK_PASSWORD")
     if not (username and password):
         print("UYARI: TITCK_USERNAME ve TITCK_PASSWORD secret'ları bulunamadı. Bu adım atlanıyor.")
         return False
 
+    # Selenium'a dosyaları doğrudan 'data' klasörüne indirmesini söylüyoruz
+    download_dir = os.path.abspath(OUTPUT_DIR)
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument(f"user-agent={HEADERS['User-Agent']}")
+    chrome_options.add_experimental_option("prefs", {"download.default_directory": download_dir})
     
     driver = None
     try:
@@ -98,60 +100,78 @@ def process_private_source_with_selenium(source):
         driver.get(LOGIN_URL)
         time.sleep(3)
         
-        print("DEBUG: Kullanıcı adı ve şifre alanları dolduruluyor...")
-        # ID'ler yerine daha genel olan 'name' attribute'larını kullanalım
         driver.find_element(By.NAME, "username").send_keys(username)
         driver.find_element(By.NAME, "password").send_keys(password)
-        
-        print("DEBUG: Giriş butonuna tıklanıyor...")
-        # Butonu ID ile değil, tipi ve üzerindeki yazı ile arayalım. Bu çok daha güvenilirdir.
-        # "//button[contains(., 'Giriş')]" -> İçinde 'Giriş' yazan <button> elementi
-        # "//input[@type='submit']" -> Tipi 'submit' olan <input> elementi
         login_button = driver.find_element(By.XPATH, "//button[contains(., 'Giriş')] | //input[@type='submit']")
         login_button.click()
-        
-        print("DEBUG: Giriş sonrası yönlendirme için bekleniyor...")
+        print("DEBUG: Giriş yapıldı, yönlendirme bekleniyor...")
         time.sleep(5)
         
-        print(f"DEBUG: Giriş sonrası mevcut URL: {driver.current_url}")
         if "login" in driver.current_url.lower():
-            print("HATA: Giriş başarısız. Sayfa hala login ekranında. Kullanıcı adı/şifre hatalı veya site yapısı değişmiş olabilir.")
-            driver.quit()
-            return False
+            print("HATA: Giriş başarısız. Sayfa hala login ekranında."); driver.quit(); return False
         print("Giriş başarılı.")
 
-        selenium_cookies = driver.get_cookies()
-        requests_session = requests.Session()
-        for cookie in selenium_cookies:
-            requests_session.cookies.set(cookie['name'], cookie['value'])
+        # --- YENİ MANTIK: İŞİ SELENIUM BİTİRİYOR ---
+        print(f"DEBUG: Korumalı sayfaya gidiliyor: {source['page_url']}")
+        driver.get(source['page_url'])
+        time.sleep(3)
         
-        print("DEBUG: Cookie'ler requests'e aktarıldı. Korumalı kaynak işleniyor...")
-        return process_data_source(source, session=requests_session)
+        # Sayfadaki .xlsx linkini Selenium ile bul
+        excel_link_element = driver.find_element(By.XPATH, "//a[contains(@href, '.xlsx')]")
+        file_name = os.path.basename(excel_link_element.get_attribute('href'))
+        print(f"Tespit edilen dosya: {file_name}")
+
+        last_known_name = ""
+        if os.path.exists(source['last_known_file_record']):
+            with open(source['last_known_file_record'], 'r') as f: last_known_name = f.read().strip()
+
+        if file_name != last_known_name:
+            print(f"Yeni bir {source['name']} dosyası tespit edildi.")
+            # İndirmeyi başlatmak için linke tıkla
+            print(f"DEBUG: Selenium dosyayı indirmek için linke tıklıyor...")
+            excel_link_element.click()
+            # Dosya indirmesinin tamamlanması için uzun bir bekleme süresi
+            print("DEBUG: Dosya indirmesi için 30 saniye bekleniyor...")
+            time.sleep(30)
+            
+            # Selenium dosyayı 'data' klasörüne indirdi. Şimdi onu yeniden adlandıralım.
+            # Not: İndirilen dosyanın adının 'file_name' ile aynı olduğunu varsayıyoruz.
+            downloaded_file_path = os.path.join(download_dir, file_name)
+            if os.path.exists(downloaded_file_path):
+                 os.rename(downloaded_file_path, source['output_xlsx'])
+                 print(f"İndirilen dosya yeniden adlandırıldı: {source['output_xlsx']}")
+            else:
+                 print(f"HATA: Beklenen dosya indirme klasöründe bulunamadı: {downloaded_file_path}")
+                 return False
+
+            if not convert_xlsx_to_csv(source['output_xlsx'], source['output_csv'], source['skiprows']): return False
+            with open(source['last_known_file_record'], 'w') as f: f.write(file_name)
+            print(f"{source['name']} başarıyla güncellendi.")
+            return True
+        else:
+            print(f"{source['name']} listesi güncel.")
+            return False
 
     except Exception as e:
         print(f"HATA: Selenium ile özel kaynak işlenirken bir hata oluştu: {e}")
-        # Hata anında ekran görüntüsü almak, sorunu anlamak için paha biçilmezdir.
-        # Bu dosya, Actions'ın "Artifacts" bölümünden indirilebilir.
-        # Bunun için workflow'a 'actions/upload-artifact' adımı eklenmelidir.
-        if driver:
-            driver.save_screenshot('selenium_error.png')
+        if driver: driver.save_screenshot('selenium_error.png')
         return False
     finally:
-        if driver:
-            driver.quit()
-            print("DEBUG: Selenium WebDriver kapatıldı.")
+        if driver: driver.quit(); print("DEBUG: Selenium WebDriver kapatıldı.")
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     any_update_done = False
     updated_sources = []
     
+    # Halka açık kaynakları işle (bekleme süreleri ile)
     for source in PUBLIC_DATA_SOURCES:
         time.sleep(3)
         if process_data_source(source):
             any_update_done = True
             updated_sources.append(source['name'])
 
+    # Şifre korumalı kaynağı SADECE SELENIUM ile işle
     time.sleep(3)
     if process_private_source_with_selenium(PRIVATE_DATA_SOURCE):
         any_update_done = True
