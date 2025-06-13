@@ -25,8 +25,9 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      # ❗️ YENİ ADIM ❗️
+      # ❗️ DEĞİŞİKLİK 1: Bu adıma bir ID veriyoruz ❗️
       - name: Setup Chrome
+        id: setup_chrome 
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
@@ -36,13 +37,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # ❗️ DEĞİŞİKLİK 2: env bloğunu doğru şekilde ayarlıyoruz ❗️
       - name: Run update script
         id: run_script
         env:
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
-          # Selenium'un Chrome sürücüsünü bulması için PATH'e ekliyoruz
-          CHROME_DRIVER_PATH: ${{ env.CHROME_DRIVER }}
+          # 'setup_chrome' adımının 'chrome-driver' çıktısını ortam değişkeni olarak ata
+          CHROME_DRIVER_PATH: ${{ steps.setup_chrome.outputs.chrome-driver }}
         run: python update_list.py
 
       - name: Commit and push if files changed
