@@ -3,32 +3,29 @@ name: TİTCK İlaç Listesi Güncelleyici
 
 # Workflow'u Tetikleyecek Olaylar:
 on:
-  # 1. Zamanlanmış Görev: Belirtilen cron zamanlamasına göre otomatik çalışır.
-  # Cron zamanlaması UTC'ye göredir. Türkiye saati (UTC+3) için 3 saat geri alınır.
-  # '0 7,19 * * *' -> Her gün 07:00 ve 19:00 UTC'de, yani 10:00 ve 22:00 (TSİ) çalışır.
   schedule:
+    # Her gün 10:00 ve 22:00 (TSİ) çalışır.
     - cron: '0 7,19 * * *'
   
-  # 2. Manuel Tetikleme: GitHub arayüzündeki "Actions" sekmesinden "Run workflow" butonu ile
-  # manuel olarak tetiklemeyi sağlar. Bu, test ve anlık kontrol için çok kullanışlıdır.
   workflow_dispatch:
 
 # Workflow'un İşleri (Jobs):
 jobs:
-  # 'update-data' adında bir iş tanımlıyoruz.
   update-data:
-    # İşin çalışacağı sanal makine tipi. 'ubuntu-latest' en yaygın ve stabil seçimdir.
     runs-on: ubuntu-latest
+    
+    # ❗️ YENİ EKLENEN İZİN BLOKU ❗️
+    # Bu blok, GITHUB_TOKEN'a deponun içeriğini yazma izni verir.
+    permissions:
+      contents: write
     
     # İşin Adımları (Steps):
     steps:
       # Adım 1: Repoyu Klonla
-      # Sanal makineye reponuzdaki kodları indirir. Dosyalarınıza erişmek için bu adım ZORUNLUDUR ve ilk sırada olmalıdır.
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       # Adım 2: Python Ortamını Kur
-      # Belirtilen sürümde Python'ı kurar ve pip bağımlılıkları için önbellekleme (cache) mekanizmasını aktif eder.
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -36,21 +33,17 @@ jobs:
           cache: 'pip'
 
       # Adım 3: Python Bağımlılıklarını Yükle
-      # requirements.txt dosyasında listelenen tüm kütüphaneleri yükler.
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       # Adım 4: Güncelleme Script'ini Çalıştır
-      # Ana işi yapan Python script'ini çalıştırır. 'id' ataması, bu adımın çıktısını sonraki adımlarda kullanmamızı sağlar.
       - name: Run update script
         id: run_script
         run: python update_list.py
 
       # Adım 5: Değişiklikleri Repoya Yükle
-      # Bu adım, SADECE bir önceki 'run_script' adımından 'updated' çıktısı 'true' olarak gelirse çalışır.
-      # Bu, gereksiz commit'leri önler ve sadece veri güncellendiğinde repoya kayıt düşülmesini sağlar.
       - name: Commit and push if files changed
         if: steps.run_script.outputs.updated == 'true'
         run: |
