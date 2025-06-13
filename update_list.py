@@ -1,181 +1,181 @@
 import os
 import time
-import requests
+import shutil
 import pandas as pd
-from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# --- SABİTLER ve VERİ KAYNAKLARI (Değişiklik yok) ---
+# --- SABİTLER ---
 BASE_URL = "https://www.titck.gov.tr"
 LOGIN_URL = f"{BASE_URL}/login"
 OUTPUT_DIR = "data"
-PUBLIC_DATA_SOURCES = [
-    {"name": "Ruhsatli_Urunler", "page_url": f"{BASE_URL}/dinamikmodul/85", "output_xlsx": os.path.join(OUTPUT_DIR, "ruhsatli_ilaclar_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "ruhsatli_ilaclar_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_ruhsat.txt"), "skiprows": 4},
-    {"name": "Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/100", "output_xlsx": os.path.join(OUTPUT_DIR, "ilac_fiyat_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "ilac_fiyat_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_fiyat.txt"), "skiprows": 3},
-    {"name": "SKRS_E-Recete", "page_url": f"{BASE_URL}/dinamikmodul/43", "output_xlsx": os.path.join(OUTPUT_DIR, "skrs_erecete_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "skrs_erecete_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_skrs.txt"), "skiprows": 0},
-    {"name": "Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/108", "output_xlsx": os.path.join(OUTPUT_DIR, "etkin_madde_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "etkin_madde_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_etkinmadde.txt"), "skiprows": 3},
-    {"name": "Yurtdisi_Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/126", "output_xlsx": os.path.join(OUTPUT_DIR, "yurtdisi_etkin_madde_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "yurtdisi_etkin_madde_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_yurtdisi_etkinmadde.txt"), "skiprows": 3}
+# Klasörün tam yolunu alıyoruz, Selenium için bu gerekli.
+DOWNLOAD_DIR = os.path.abspath(OUTPUT_DIR)
+
+# --- VERİ KAYNAKLARI LİSTESİ ---
+DATA_SOURCES = [
+    {"name": "Ruhsatli_Urunler", "page_url": f"{BASE_URL}/dinamikmodul/85", "is_private": False, "skiprows": 4},
+    {"name": "Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/100", "is_private": False, "skiprows": 3},
+    {"name": "SKRS_E-Recete", "page_url": f"{BASE_URL}/dinamikmodul/43", "is_private": False, "skiprows": 0},
+    {"name": "Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/108", "is_private": False, "skiprows": 3},
+    {"name": "Yurtdisi_Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/126", "is_private": False, "skiprows": 3},
+    {"name": "Detayli_Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/88", "is_private": True, "skiprows": 3}
 ]
-PRIVATE_DATA_SOURCE = {"name": "Detayli_Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/88", "output_xlsx": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_detayli_fiyat.txt"), "skiprows": 3}
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'}
 
-# ... Halka açık kaynakları işleyen fonksiyonlar (process_data_source vb.) aynı kalıyor ...
-def set_github_action_output(name, value):
-    github_output_file = os.getenv('GITHUB_OUTPUT')
-    if github_output_file:
-        with open(github_output_file, 'a') as f: f.write(f"{name}={value}\n")
-    print(f"DEBUG: GHA Çıktısı Ayarlanıyor -> {name}={value}")
-def get_latest_file_info(page_url, session=None):
-    requester = session or requests
-    try:
-        response = requester.get(page_url, headers=HEADERS, timeout=30)
-        response.raise_for_status(); soup = BeautifulSoup(response.content, 'html.parser')
-        excel_link = soup.find('a', href=lambda href: href and href.endswith('.xlsx'))
-        if not excel_link: print(f"HATA: .xlsx linki bulunamadı: {page_url}"); return None, None
-        file_url = excel_link['href']
-        file_name = os.path.basename(file_url)
-        if not file_url.startswith('http'): file_url = f"{BASE_URL}{file_url}"
-        print(f"Tespit edilen dosya: {file_name}")
-        return file_url, file_name
-    except requests.RequestException as e: print(f"HATA: Sayfa erişim hatası - {e}"); return None, None
-def download_file(url, destination, session=None):
-    requester = session or requests
-    try:
-        with requester.get(url, headers=HEADERS, stream=True, timeout=120) as r:
-            r.raise_for_status()
-            with open(destination, 'wb') as f:
-                for chunk in r.iter_content(chunk_size=8192): f.write(chunk)
-        print(f"İndirme başarılı: {destination}"); return True
-    except requests.RequestException as e: print(f"HATA: İndirme hatası - {e}"); return False
-def convert_xlsx_to_csv(xlsx_path, csv_path, rows_to_skip):
-    try:
-        df = pd.read_excel(xlsx_path, skiprows=rows_to_skip)
-        df.dropna(how='all', inplace=True); df.to_csv(csv_path, index=False, encoding='utf-8-sig')
-        print(f"CSV oluşturuldu: {csv_path}"); return True
-    except Exception as e: print(f"HATA: CSV dönüştürme hatası - {e}"); return False
-def process_data_source(source, session=None):
-    print(f"\n--- {source['name']} Veri Kaynağı İşleniyor ---")
-    latest_url, latest_name = get_latest_file_info(source['page_url'], session=session)
-    if not latest_url: 
-        print(f"UYARI: {source['name']} için dosya bilgisi alınamadı, bu kaynak atlanıyor.")
-        return False
-    last_known_name = ""
-    if os.path.exists(source['last_known_file_record']):
-        with open(source['last_known_file_record'], 'r') as f: last_known_name = f.read().strip()
-    if latest_name != last_known_name:
-        print(f"Yeni bir {source['name']} dosyası tespit edildi.")
-        if not download_file(latest_url, source['output_xlsx'], session=session): return False
-        if not convert_xlsx_to_csv(source['output_xlsx'], source['output_csv'], source['skiprows']): return False
-        with open(source['last_known_file_record'], 'w') as f: f.write(latest_name)
-        print(f"{source['name']} başarıyla güncellendi."); return True
-    else: print(f"{source['name']} listesi güncel."); return False
-
-# ❗️❗️ NİHAİ GÜNCELLEME: SELENIUM'UN TÜM İŞİ YAPTIĞI FONKSİYON ❗️❗️
-def process_private_source_with_selenium(source):
-    print(f"\n--- {source['name']} (Nihai Selenium Metodu) Veri Kaynağı İşleniyor ---")
-    username = os.getenv("TITCK_USERNAME")
-    password = os.getenv("TITCK_PASSWORD")
-    if not (username and password):
-        print("UYARI: TITCK_USERNAME ve TITCK_PASSWORD secret'ları bulunamadı. Bu adım atlanıyor.")
-        return False
-
-    # Selenium'a dosyaları doğrudan 'data' klasörüne indirmesini söylüyoruz
-    download_dir = os.path.abspath(OUTPUT_DIR)
+def setup_driver():
+    """Selenium WebDriver'ı ayarlar ve başlatır."""
+    print("DEBUG: Selenium WebDriver başlatılıyor...")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_experimental_option("prefs", {"download.default_directory": download_dir})
+    chrome_options.add_experimental_option("prefs", {"download.default_directory": DOWNLOAD_DIR})
+    service = Service()
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    return driver
+
+def login(driver):
+    """Verilen driver ile TİTCK sitesine giriş yapar."""
+    username = os.getenv("TITCK_USERNAME")
+    password = os.getenv("TITCK_PASSWORD")
+    if not (username and password):
+        print("UYARI: TITCK_USERNAME ve TITCK_PASSWORD secret'ları bulunamadı. Giriş yapılamıyor.")
+        return False
     
-    driver = None
     try:
-        print("DEBUG: Selenium WebDriver başlatılıyor...")
-        service = Service()
-        driver = webdriver.Chrome(service=service, options=chrome_options)
-        
         print(f"DEBUG: Selenium ile login sayfasına gidiliyor: {LOGIN_URL}")
         driver.get(LOGIN_URL)
-        time.sleep(3)
         
-        driver.find_element(By.NAME, "username").send_keys(username)
-        driver.find_element(By.NAME, "password").send_keys(password)
-        login_button = driver.find_element(By.XPATH, "//button[contains(., 'Giriş')] | //input[@type='submit']")
-        login_button.click()
-        print("DEBUG: Giriş yapıldı, yönlendirme bekleniyor...")
-        time.sleep(5)
+        # Akıllı Bekleme: Elementler görünür olana kadar 10 saniye bekle
+        wait = WebDriverWait(driver, 10)
         
-        if "login" in driver.current_url.lower():
-            print("HATA: Giriş başarısız. Sayfa hala login ekranında."); driver.quit(); return False
-        print("Giriş başarılı.")
+        print("DEBUG: Kullanıcı adı alanı bekleniyor ve dolduruluyor...")
+        user_field = wait.until(EC.visibility_of_element_located((By.ID, "username")))
+        user_field.send_keys(username)
 
-        # --- YENİ MANTIK: İŞİ SELENIUM BİTİRİYOR ---
-        print(f"DEBUG: Korumalı sayfaya gidiliyor: {source['page_url']}")
-        driver.get(source['page_url'])
-        time.sleep(3)
+        print("DEBUG: Şifre alanı bekleniyor ve dolduruluyor...")
+        pass_field = wait.until(EC.visibility_of_element_located((By.ID, "password")))
+        pass_field.send_keys(password)
         
-        # Sayfadaki .xlsx linkini Selenium ile bul
-        excel_link_element = driver.find_element(By.XPATH, "//a[contains(@href, '.xlsx')]")
+        print("DEBUG: Giriş butonu bekleniyor ve tıklanıyor...")
+        login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
+        login_button.click()
+        
+        print("DEBUG: Giriş sonrası yönlendirme için bekleniyor...")
+        # Başka bir sayfadaki bir elementin yüklenmesini bekleyerek girişin başarılı olduğunu teyit edelim.
+        # Örneğin anasayfadaki "Duyurular" başlığı.
+        WebDriverWait(driver, 15).until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'Duyurular')]")))
+        
+        print(f"DEBUG: Giriş sonrası mevcut URL: {driver.current_url}")
+        if "login" in driver.current_url.lower():
+            print("HATA: Giriş başarısız. Sayfa hala login ekranında.")
+            return False
+            
+        print("Giriş başarılı.")
+        return True
+
+    except Exception as e:
+        print(f"HATA: Giriş işlemi sırasında bir hata oluştu: {e}")
+        driver.save_screenshot('login_error.png')
+        return False
+
+def process_source_with_selenium(driver, source):
+    """Verilen driver'ı kullanarak tek bir kaynağı işler."""
+    try:
+        print(f"\n--- {source['name']} Veri Kaynağı İşleniyor ---")
+        output_xlsx = os.path.join(DOWNLOAD_DIR, f"{source['name']}.xlsx")
+        output_csv = os.path.join(DOWNLOAD_DIR, f"{source['name']}.csv")
+        last_known_file_record = os.path.join(DOWNLOAD_DIR, f"last_known_file_{source['name']}.txt")
+        
+        print(f"DEBUG: Sayfaya gidiliyor: {source['page_url']}")
+        driver.get(source['page_url'])
+        
+        wait = WebDriverWait(driver, 10)
+        excel_link_element = wait.until(EC.visibility_of_element_located((By.XPATH, "//a[contains(@href, '.xlsx')]")))
+        
         file_name = os.path.basename(excel_link_element.get_attribute('href'))
         print(f"Tespit edilen dosya: {file_name}")
 
         last_known_name = ""
-        if os.path.exists(source['last_known_file_record']):
-            with open(source['last_known_file_record'], 'r') as f: last_known_name = f.read().strip()
+        if os.path.exists(last_known_file_record):
+            with open(last_known_file_record, 'r') as f: last_known_name = f.read().strip()
 
         if file_name != last_known_name:
             print(f"Yeni bir {source['name']} dosyası tespit edildi.")
-            # İndirmeyi başlatmak için linke tıkla
-            print(f"DEBUG: Selenium dosyayı indirmek için linke tıklıyor...")
+            
+            # Eski dosyaları temizle (varsa)
+            if os.path.exists(output_xlsx): os.remove(output_xlsx)
+            if os.path.exists(output_csv): os.remove(output_csv)
+
+            print("DEBUG: Dosyayı indirmek için linke tıklanıyor...")
             excel_link_element.click()
-            # Dosya indirmesinin tamamlanması için uzun bir bekleme süresi
+            
             print("DEBUG: Dosya indirmesi için 30 saniye bekleniyor...")
             time.sleep(30)
             
-            # Selenium dosyayı 'data' klasörüne indirdi. Şimdi onu yeniden adlandıralım.
-            # Not: İndirilen dosyanın adının 'file_name' ile aynı olduğunu varsayıyoruz.
-            downloaded_file_path = os.path.join(download_dir, file_name)
-            if os.path.exists(downloaded_file_path):
-                 os.rename(downloaded_file_path, source['output_xlsx'])
-                 print(f"İndirilen dosya yeniden adlandırıldı: {source['output_xlsx']}")
-            else:
-                 print(f"HATA: Beklenen dosya indirme klasöründe bulunamadı: {downloaded_file_path}")
-                 return False
+            # İndirilen dosyayı bul ve doğru isme taşı
+            downloaded_files = [f for f in os.listdir(DOWNLOAD_DIR) if f.endswith('.xlsx') and f not in [os.path.basename(s['output_xlsx']) for s in DATA_SOURCES]]
+            if not downloaded_files:
+                print("HATA: Dosya indirilemedi veya indirme klasöründe bulunamadı.")
+                return False
+            
+            downloaded_file_path = os.path.join(DOWNLOAD_DIR, downloaded_files[0])
+            shutil.move(downloaded_file_path, output_xlsx)
+            print(f"İndirilen dosya taşındı ve yeniden adlandırıldı: {output_xlsx}")
 
-            if not convert_xlsx_to_csv(source['output_xlsx'], source['output_csv'], source['skiprows']): return False
-            with open(source['last_known_file_record'], 'w') as f: f.write(file_name)
+            # CSV'ye dönüştür
+            df = pd.read_excel(output_xlsx, skiprows=source['skiprows'])
+            df.dropna(how='all', inplace=True); df.to_csv(output_csv, index=False, encoding='utf-8-sig')
+            print(f"CSV oluşturuldu: {output_csv}")
+
+            with open(last_known_file_record, 'w') as f: f.write(file_name)
             print(f"{source['name']} başarıyla güncellendi.")
             return True
         else:
             print(f"{source['name']} listesi güncel.")
             return False
-
+            
     except Exception as e:
-        print(f"HATA: Selenium ile özel kaynak işlenirken bir hata oluştu: {e}")
-        if driver: driver.save_screenshot('selenium_error.png')
+        print(f"HATA: {source['name']} işlenirken bir hata oluştu: {e}")
+        driver.save_screenshot(f"{source['name']}_error.png")
         return False
-    finally:
-        if driver: driver.quit(); print("DEBUG: Selenium WebDriver kapatıldı.")
+
+def set_github_action_output(name, value):
+    github_output_file = os.getenv('GITHUB_OUTPUT')
+    if github_output_file:
+        with open(github_output_file, 'a') as f: f.write(f"{name}={value}\n")
+    print(f"DEBUG: GHA Çıktısı Ayarlanıyor -> {name}={value}")
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     any_update_done = False
     updated_sources = []
     
-    # Halka açık kaynakları işle (bekleme süreleri ile)
-    for source in PUBLIC_DATA_SOURCES:
-        time.sleep(3)
-        if process_data_source(source):
+    driver = setup_driver()
+    is_logged_in = False
+    
+    for source in DATA_SOURCES:
+        # Özel kaynak için önce giriş yap
+        if source['is_private'] and not is_logged_in:
+            is_logged_in = login(driver)
+            if not is_logged_in:
+                print("UYARI: Giriş yapılamadığı için özel kaynak atlanıyor.")
+                continue # Döngünün bir sonraki adımına geç
+        
+        # Kaynağı işle
+        if process_source_with_selenium(driver, source):
             any_update_done = True
             updated_sources.append(source['name'])
-
-    # Şifre korumalı kaynağı SADECE SELENIUM ile işle
-    time.sleep(3)
-    if process_private_source_with_selenium(PRIVATE_DATA_SOURCE):
-        any_update_done = True
-        updated_sources.append(PRIVATE_DATA_SOURCE['name'])
+        
+        time.sleep(3) # Her işlem arasında nezaketen bekle
+    
+    if driver:
+        driver.quit()
+        print("DEBUG: Ana işlem sonunda WebDriver kapatıldı.")
 
     summary = f"Otomatik Veri Güncellemesi: {', '.join(updated_sources)}" if any_update_done else 'Veriler güncel, herhangi bir değişiklik yapılmadı.'
     set_github_action_output('updated', str(any_update_done).lower())
