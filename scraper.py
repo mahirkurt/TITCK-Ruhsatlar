@@ -4,22 +4,20 @@ import os
 import re
 import time
 import sys
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
+# Selenium yerine undetected_chromedriver'ı içe aktarıyoruz
+import undetected_chromedriver as uc
 
-# --- Ayarlar ---
+# --- Ayarlar ve Diğer Fonksiyonlar (Değişiklik yok) ---
 MAIN_URL = "https://www.titck.gov.tr/kubkt"
 API_URL = "https://www.titck.gov.tr/getkubktviewdatatable"
-HEADERS = { # Bu artık sadece API isteği için kullanılacak
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
     "X-Requested-With": "XMLHttpRequest",
     "Referer": MAIN_URL
 }
 KUB_FOLDER = "KUB_Arsivi"
 KT_FOLDER = "KT_Arsivi"
 
-# --- Diğer Fonksiyonlar (Değişiklik yok) ---
 def sanitize_filename(filename):
     return re.sub(r'[\\/*?:"<>|%]', "_", filename)
 
@@ -45,53 +43,48 @@ def download_pdf(session, url, folder, filename):
     except requests.exceptions.RequestException as e:
         print(f"   !!! Hata: Dosya indirilemedi. URL: {url}, Hata: {e}")
 
-# --- ANA SCRAPER FONKSİYONU (SELENIUM İLE GÜNCELLENDİ) ---
+# --- ANA SCRAPER FONKSİYONU (UNDETECTED_CHROMEDRIVER İLE GÜNCELLENDİ) ---
 def run_scraper():
-    print("1/4: Selenium ile sanal tarayıcı başlatılıyor...")
-    chrome_options = Options()
-    chrome_options.add_argument("--headless") # Tarayıcının arayüzünü gösterme (sunucu için gerekli)
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    driver = webdriver.Chrome(options=chrome_options)
+    print("1/4: 'Görünmez' sanal tarayıcı (undetected-chromedriver) başlatılıyor...")
+    options = uc.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    
+    # Normal Selenium yerine uc.Chrome() kullanıyoruz
+    driver = uc.Chrome(options=options, use_subprocess=True)
 
     try:
         print("2/4: Ana sayfaya gidiliyor ve JavaScript'in yüklenmesi bekleniyor...")
         driver.get(MAIN_URL)
-        # Sayfanın tam yüklenmesi için birkaç saniye bekle
-        time.sleep(5)
+        time.sleep(7) # Bekleme süresini biraz artırmak işe yarayabilir
 
-        # Yüklenmiş sayfanın HTML'ini al
         page_html = driver.page_source
         soup = BeautifulSoup(page_html, 'html.parser')
-
-        # Şimdi token'ı bu tam yüklenmiş HTML'de ara
         token_input = soup.find('input', {'name': '_token'})
 
         if not token_input:
-            print("KRİTİK HATA: Selenium ile bile CSRF token'ı bulunamadı!")
-            print("Sayfa yapısı değişmiş veya yüklenememiş olabilir.")
-            print("--- Selenium'dan Alınan HTML'in Başı ---")
-            print(soup.prettify()[:1500])
-            print("------------------------------------")
+            print("KRİTİK HATA: Görünmez tarayıcı ile bile CSRF token'ı bulunamadı!")
+            print("Sitenin koruması çok yüksek veya geçici bir sorun var.")
+            print("--- Alınan HTML'in Başı ---")
+            print(soup.prettify()[:2000]) # Daha fazla HTML görelim
+            print("--------------------------")
             sys.exit(1)
         
         csrf_token = token_input['value']
-        print("Token başarıyla alındı.")
+        print("Token başarıyla alındı!")
 
-        # Selenium tarayıcısından çerezleri alıp requests session'ına aktar
-        # Bu sayede aynı oturumdan devam edebiliriz
         session = requests.Session()
         session.headers.update(HEADERS)
         for cookie in driver.get_cookies():
             session.cookies.set(cookie['name'], cookie['value'])
 
     finally:
-        # Tarayıcıyı kapatmayı unutma
         driver.quit()
 
-    # Adım 3 ve 4: Token ve çerezlerle API isteğini requests ile yap (daha hızlı)
     payload = {'length': '-1', '_token': csrf_token}
     print("3/4: Tüm ilaç listesi çekiliyor...")
+    # ... (Kodun geri kalanı tamamen aynı)
     api_response = session.post(API_URL, data=payload)
     api_response.raise_for_status()
     drug_list = api_response.json().get('data', [])
