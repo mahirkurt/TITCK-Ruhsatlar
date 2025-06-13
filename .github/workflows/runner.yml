@@ -1,46 +1,42 @@
 name: TİTCK Arşivleyici
 
 on:
-  # Bu workflow'u manuel olarak "Run" butonuyla başlatabilmek için
   workflow_dispatch:
-  
-  # Zamanlanmış görev: Her hafta Pazartesi günü UTC saatiyle 03:00'te çalışır.
-  # (Türkiye saati ile sabah 06:00'ya denk gelir)
   schedule:
     - cron: '0 3 * * 1'
 
 jobs:
   build:
-    runs-on: ubuntu-latest # Robotun işletim sistemi (Linux)
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. Adım: Repodaki kodları robotun çalışma alanına indirir.
       - name: Repoyu Kopyala
         uses: actions/checkout@v4
 
-      # 2. Adım: Python'ı kurar.
       - name: Python Kurulumu
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      # 3. Adım: Python kütüphanelerini yükler.
+      # YENİ ADIM: Chrome Tarayıcısını kuruyoruz
+      - name: Google Chrome Kurulumu
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      # YENİ ADIM: Python kütüphanelerini yüklüyoruz (selenium eklendi)
       - name: Kütüphaneleri Yükle
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+          pip install requests beautifulsoup4 selenium
 
-      # 4. Adım: Bizim yazdığımız Python script'ini çalıştırır.
-      # Bu adımda PDF'ler indirilir ve KUB_Arsivi/KT_Arsivi klasörleri oluşur.
       - name: Scraper'ı Çalıştır
         run: python scraper.py
 
-      # 5. Adım: İndirilen yeni dosyaları repoya commit'ler ve push'lar.
       - name: Değişiklikleri Repoya Kaydet
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add .
-          # Eğer değişiklik varsa commit at, yoksa hata verme.
           git diff-index --quiet HEAD || git commit -m "TİTCK veritabanı otomatik olarak güncellendi - $(date)"
           git push
