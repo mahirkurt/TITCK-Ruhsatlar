@@ -1,52 +1,61 @@
+# Workflow'un Adı: GitHub Actions arayüzünde görünecek olan isim.
 name: TİTCK İlaç Listesi Güncelleyici
 
+# Workflow'u Tetikleyecek Olaylar:
 on:
-  # Zamanlanmış görev: Her gün sabah 10:00 ve akşam 22:00'de (UTC+3) çalışır.
+  # 1. Zamanlanmış Görev: Belirtilen cron zamanlamasına göre otomatik çalışır.
   # Cron zamanlaması UTC'ye göredir. Türkiye saati (UTC+3) için 3 saat geri alınır.
-  # 07:00 UTC -> 10:00 TR, 19:00 UTC -> 22:00 TR
+  # '0 7,19 * * *' -> Her gün 07:00 ve 19:00 UTC'de, yani 10:00 ve 22:00 (TSİ) çalışır.
   schedule:
     - cron: '0 7,19 * * *'
   
-  # Manuel çalıştırma: GitHub arayüzündeki "Actions" sekmesinden manuel olarak tetiklemeyi sağlar.
+  # 2. Manuel Tetikleme: GitHub arayüzündeki "Actions" sekmesinden "Run workflow" butonu ile
+  # manuel olarak tetiklemeyi sağlar. Bu, test ve anlık kontrol için çok kullanışlıdır.
   workflow_dispatch:
 
+# Workflow'un İşleri (Jobs):
 jobs:
+  # 'update-data' adında bir iş tanımlıyoruz.
   update-data:
+    # İşin çalışacağı sanal makine tipi. 'ubuntu-latest' en yaygın ve stabil seçimdir.
     runs-on: ubuntu-latest
     
+    # İşin Adımları (Steps):
     steps:
-      # 1. Adım: Repoyu Klonla
-      # Action'ın çalışacağı sanal makineye repodaki kodları çeker.
+      # Adım 1: Repoyu Klonla
+      # Sanal makineye reponuzdaki kodları indirir. Dosyalarınıza erişmek için bu adım ZORUNLUDUR ve ilk sırada olmalıdır.
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Adım: Python Ortamını Kur
+      # Adım 2: Python Ortamını Kur
+      # Belirtilen sürümde Python'ı kurar ve pip bağımlılıkları için önbellekleme (cache) mekanizmasını aktif eder.
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10' # Kullanmak istediğiniz Python sürümü
-          cache: 'pip' # Bağımlılıkları cache'leyerek sonraki çalışmaları hızlandır
+          python-version: '3.10'
+          cache: 'pip'
 
-      # 3. Adım: Python Bağımlılıklarını Yükle
+      # Adım 3: Python Bağımlılıklarını Yükle
+      # requirements.txt dosyasında listelenen tüm kütüphaneleri yükler.
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4 pandas openpyxl
+          pip install -r requirements.txt
 
-      # 4. Adım: Güncelleme Script'ini Çalıştır
+      # Adım 4: Güncelleme Script'ini Çalıştır
+      # Ana işi yapan Python script'ini çalıştırır. 'id' ataması, bu adımın çıktısını sonraki adımlarda kullanmamızı sağlar.
       - name: Run update script
-        id: run_script # Bu adıma bir ID veriyoruz ki çıktısını kullanabilelim
+        id: run_script
         run: python update_list.py
 
-      # 5. Adım: Değişiklikleri Repoya Commit'le ve Push'la
-      # Bu adım, SADECE bir güncelleme olduğunda çalışır.
-      # `run_script` adımının 'updated' çıktısı 'true' ise bu adım tetiklenir.
+      # Adım 5: Değişiklikleri Repoya Yükle
+      # Bu adım, SADECE bir önceki 'run_script' adımından 'updated' çıktısı 'true' olarak gelirse çalışır.
+      # Bu, gereksiz commit'leri önler ve sadece veri güncellendiğinde repoya kayıt düşülmesini sağlar.
       - name: Commit and push if files changed
         if: steps.run_script.outputs.updated == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add data/
-          # Commit mesajına güncel tarihi ekleyelim
-          git commit -m "Veri Güncellemesi: $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit -m "Otomatik Veri Güncellemesi: $(date +'%Y-%m-%d %H:%M:%S')"
           git push
