@@ -1,15 +1,34 @@
 import os
 import re
-import time # Bekleme yapmak için time modülünü ekliyoruz
+import time
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 
-# --- SABİTLER ve VERİ KAYNAKLARI (Değişiklik yok) ---
+# --- SABİTLER ve VERİ KAYNAKLARI ---
 BASE_URL = "https://www.titck.gov.tr"
-HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
-OUTPUT_DIR = "data"
 LOGIN_URL = f"{BASE_URL}/login"
+OUTPUT_DIR = "data"
+
+# ❗️❗️ GÜNCELLENEN BÖLÜM ❗️❗️
+# HEADERS sabitini, gerçek bir tarayıcıyı taklit edecek şekilde çok daha kapsamlı hale getiriyoruz.
+HEADERS = {
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'Accept-Encoding': 'gzip, deflate, br',
+    'Accept-Language': 'en-US,en;q=0.9,tr;q=0.8',
+    'Connection': 'keep-alive',
+    'Sec-Ch-Ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
+    'Sec-Ch-Ua-Mobile': '?0',
+    'Sec-Ch-Ua-Platform': '"Windows"',
+    'Sec-Fetch-Dest': 'document',
+    'Sec-Fetch-Mode': 'navigate',
+    'Sec-Fetch-Site': 'none',
+    'Sec-Fetch-User': '?1',
+    'Upgrade-Insecure-Requests': '1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+}
+
+# Veri kaynakları listeleri öncekiyle aynı
 PUBLIC_DATA_SOURCES = [
     {"name": "Ruhsatli_Urunler", "page_url": f"{BASE_URL}/dinamikmodul/85", "output_xlsx": os.path.join(OUTPUT_DIR, "ruhsatli_ilaclar_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "ruhsatli_ilaclar_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_ruhsat.txt"), "skiprows": 4},
     {"name": "Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/100", "output_xlsx": os.path.join(OUTPUT_DIR, "ilac_fiyat_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "ilac_fiyat_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_fiyat.txt"), "skiprows": 3},
@@ -19,8 +38,8 @@ PUBLIC_DATA_SOURCES = [
 ]
 PRIVATE_DATA_SOURCE = {"name": "Detayli_Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/88", "output_xlsx": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.xlsx"), "output_csv": os.path.join(OUTPUT_DIR, "detayli_ilac_fiyat_listesi.csv"), "last_known_file_record": os.path.join(OUTPUT_DIR, "last_known_file_detayli_fiyat.txt"), "skiprows": 3}
 
-# Diğer tüm fonksiyonlar (process_data_source, process_private_source vb.) öncekiyle tamamen aynı kalıyor.
-# Sadece main() fonksiyonunu güncelliyoruz.
+# Script'in geri kalan tüm fonksiyonları (main, process_data_source vb.) bir önceki adımla tamamen aynıdır.
+# Değişen tek şey yukarıdaki HEADERS sabitidir.
 def set_github_action_output(name, value):
     github_output_file = os.getenv('GITHUB_OUTPUT')
     if github_output_file:
@@ -112,43 +131,31 @@ def process_private_source(source):
         except Exception as e:
             print(f"HATA: Özel kaynak işlenirken kritik bir hata oluştu: {e}")
             return False
-
-# ----- GÜNCELLENEN ANA FONKSİYON -----
 def main():
     print("--- Ana Script Başlatıldı ---")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     any_update_done = False
     updated_sources = []
-    
     print("\n>>> Halka Açık Kaynaklar Döngüsü Başlatılıyor...")
     for source in PUBLIC_DATA_SOURCES:
-        # ❗️❗️ YENİ EKLENEN SATIR ❗️❗️
-        # Her bir kaynak arasında 5 saniye bekle
         print(f"DEBUG: Rate limiting'i önlemek için 5 saniye bekleniyor...")
         time.sleep(5)
-        
         if process_data_source(source):
             any_update_done = True
             updated_sources.append(source['name'])
     print("<<< Halka Açık Kaynaklar Döngüsü Tamamlandı.")
-    
-    # ❗️❗️ YENİ EKLENEN SATIR ❗️❗️
-    # Özel kaynağa geçmeden önce de bir bekleme ekleyelim
     print(f"DEBUG: Özel kaynağa geçmeden önce 5 saniye bekleniyor...")
     time.sleep(5)
-    
     print("\n>>> Şifre Korumalı Kaynak İşlemi Başlatılıyor...")
     if process_private_source(PRIVATE_DATA_SOURCE):
         any_update_done = True
         updated_sources.append(PRIVATE_DATA_SOURCE['name'])
     print("<<< Şifre Korumalı Kaynak İşlemi Tamamlandı.")
-    
     print("\n--- Sonuçlar Bildiriliyor ---")
     summary = f"Otomatik Veri Güncellemesi: {', '.join(updated_sources)}" if any_update_done else 'Veriler güncel, herhangi bir değişiklik yapılmadı.'
     set_github_action_output('updated', str(any_update_done).lower())
     set_github_action_output('summary', summary)
     print("--- Ana Script Tamamlandı ---")
-
 
 if __name__ == "__main__":
     main()
