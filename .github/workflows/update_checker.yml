@@ -15,9 +15,6 @@ jobs:
     
     steps:
       - name: Checkout Repository
-        # Bu adım, repoyu sanal makineye çeker.
-        # fetch-depth: 0, tüm commit geçmişini çekerek rebase/merge işlemlerinin
-        # sorunsuz çalışmasını sağlar.
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -33,27 +30,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # ❗️ DEĞİŞEN ADIM BURASI ❗️
       - name: Run update script
         id: run_script
+        # env bloğu ile GitHub Secret'larını script'e güvenli bir şekilde aktarıyoruz.
+        env:
+          TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
+          TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
         run: python update_list.py
 
-      # ❗️ DEĞİŞEN ADIM BURASI ❗️
       - name: Commit and push if files changed
         if: steps.run_script.outputs.updated == 'true'
         run: |
-          # Git kullanıcı ayarlarını yap
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          # Script'in oluşturduğu yeni dosyaları "staging" alanına ekle
           git add data/
-          
-          # Değişiklikleri yerel olarak commit'le
           git commit -m "${{ steps.run_script.outputs.summary }}"
-          
-          # Push yapmadan önce sunucudaki olası yeni değişiklikleri çek ve kendi commit'ini onların üzerine koy (rebase)
-          # "rejected" hatasını çözen anahtar komut budur.
           git pull --rebase
-          
-          # Şimdi birleştirilmiş geçmişi sunucuya gönder
           git push
