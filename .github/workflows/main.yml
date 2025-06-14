@@ -1,7 +1,7 @@
 # Dosya Yolu: .github/workflows/main.yml
 
 # İş akışının GitHub arayüzünde görünecek adı
-name: TİTCK Veri İndirme ve İşleme Otomasyonu
+name: TİTCK Veri Otomasyonu (Self-Hosted Runner)
 
 # Bu iş akışını neyin tetikleyeceğini belirler
 on:
@@ -14,61 +14,53 @@ on:
   # "Run workflow" butonu ile de istediğiniz zaman çalıştırabilirsiniz.
   workflow_dispatch:
 
-# İş akışında çalışacak işler (jobs)
 jobs:
   # "update-data" adında bir iş tanımlıyoruz
   update-data:
-    # Bu işin çalışacağı sanal makine ortamı
-    runs-on: ubuntu-latest
+    # --- EN ÖNEMLİ DEĞİŞİKLİK BURADA ---
+    # Artık GitHub'ın sanal makinesini değil, bizim kendi
+    # bilgisayarımızı kullanmasını söylüyoruz.
+    runs-on: self-hosted
+    # ------------------------------------
 
     # İşin adımları (sırayla çalıştırılır)
     steps:
-      # 1. Adım: Depodaki kodları sanal makineye klonla
+      # 1. Adım: Depodaki kodları bilgisayarınızdaki runner çalışma alanına klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
-      # 2. Adım: Python ortamını kur
-      - name: Python 3.9 Kurulumu
+      # 2. Adım: (İsteğe bağlı ama önerilir) Belirli bir Python versiyonunu kullan
+      - name: Python 3.9 Ortamını Ayarla
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
       # 3. Adım: Gerekli Python kütüphanelerini yükle
+      # Bu komutlar bilgisayarınızda, runner'ın çalışma dizininde çalıştırılır.
       - name: Bağımlılıkları Yükle (requirements.txt)
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       # 4. Adım: Playwright'in ihtiyaç duyduğu tarayıcıları kur
-      # Bu adım olmadan downloader.py çalışmaz.
+      # Bilgisayarınızda kurulu olsalar bile bu adımı burada tutmak,
+      # ortamın her zaman tutarlı olmasını sağlar.
       - name: Playwright Tarayıcılarını Kur
-        run: playwright install --with-deps
+        run: python -m playwright install --with-deps
 
       # 5. Adım: Şifreli Dosyayı İndir
       - name: Adım 1 - Güvenli Dosyayı İndir (downloader.py)
-        id: download_step # Hata kontrolü için bu adıma bir ID veriyoruz
         env:
-          # GitHub Secrets'ta tanımladığımız gizli bilgileri betiğe aktar
+          # GitHub Secrets'ta tanımladığımız gizli bilgileri güvenle aktar
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
         run: python downloader.py
-
-      # 6. Adım: Hata Durumunda Ekran Görüntüsünü Kaydet
-      - name: Hata Durumunda Ekran Görüntüsünü Yükle
-        # Sadece bir önceki 'download_step' adlı adım başarısız olduğunda çalışır
-        if: failure() && steps.download_step.outcome == 'failure'
-        uses: actions/upload-artifact@v4
-        with:
-          # İndireceğiniz dosyanın adı bu olacak
-          name: hata-ekran-goruntusu
-          # Sanal makinede kaydedilen ekran görüntüsünün adı
-          path: debug_screenshot.png
       
-      # 7. Adım: Tüm Ham Verileri Temizle
+      # 6. Adım: Tüm Ham Verileri Temizle
       - name: Adım 2 - Verileri Temizle (data_cleaner.py)
         run: python data_cleaner.py
 
-      # 8. Adım: İşlenmiş Verileri Depoya Kaydet
+      # 7. Adım: İşlenmiş Verileri Depoya Kaydet
       - name: Adım 3 - Değişiklikleri Depoya Gönder (Commit & Push)
         run: |
           # Git için bot kimliğini yapılandır
@@ -84,6 +76,6 @@ jobs:
           else
             # Değişiklik varsa, bugünün tarihiyle commit at ve ana dala gönder
             TODAY=$(date -u +"%Y-%m-%d")
-            git commit -m "Otomatik Veri Güncelleme: $TODAY"
+            git commit -m "Otomatik Veri Güncelleme (Self-Hosted): $TODAY"
             git push
           fi

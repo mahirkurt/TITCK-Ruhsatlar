@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 21,
+  "agentName": "LENOVO",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus26.actions.githubusercontent.com/yFgcBVS7pwl6ngcHZopH9zgBGgPpDI85expAiCYiUkZ3ScERDH/",
+  "gitHubUrl": "https://github.com/mahirkurt/TITCK-Ruhsatlar",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
