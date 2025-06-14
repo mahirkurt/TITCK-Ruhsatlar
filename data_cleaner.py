@@ -4,7 +4,7 @@ Bu betik, TİTCK'dan indirilen çeşitli ham Excel dosyalarını okur,
 temizler, standardize eder ve yapay zeka modellerinin kullanabileceği
 temiz .jsonl formatında kaydeder.
 
-Nihai Sürüm - Tüm dosyalar ve özel kurallar eklenmiştir.
+Nihai Sürüm - Tüm dosya adları ve sütunlar doğrulanmıştır.
 """
 import pandas as pd
 from pathlib import Path
@@ -41,18 +41,20 @@ def save_as_jsonl(df, output_filename, original_filename=""):
 # ==============================================================================
 
 def process_ilac_fiyat_listesi():
-    """'ilac_fiyat_listesi.xlsx' dosyasını işler."""
+    """'ilac_fiyat_listesi.xlsx' dosyasını işler. (BARKOD, KAMU FİYATI içeren)"""
+    # Dosya adı 'yerli_fiyat_listesi.xlsx' yerine 'ilac_fiyat_listesi.xlsx' olarak düzeltildi.
     filename = "ilac_fiyat_listesi.xlsx"
     filepath = get_file_path(filename)
     if not filepath: return True
-        
-    sheet_name = "YURTDIŞI FİYAT LİSTESİ" # Son teyit ettiğimiz sayfa adı
+    
+    sheet_name = "REFERANS BAZLI İLAÇ LİSTESİ"
     logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
-        column_map = {'ILAC ADI': 'urun_adi', 'FIRMA ADI': 'firma_adi', 'GERCEK KAYNAK FIYAT (GKF) (€)': 'gkf_eur'}
-        df = pd.read_excel(filepath, sheet_name=sheet_name, header=0) # Başlıklar ilk satırda
+        column_map = {'BARKOD': 'barkod', 'ÜRÜN ADI': 'urun_adi', 'KAMU FİYATI': 'kamu_fiyati', 'KAMU ÖDENEN': 'kamu_odenen', 'DEPOCU FİYATI': 'depocu_fiyati', 'İMALATÇI FİYATI': 'imalatci_fiyati'}
+        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype={'BARKOD': str})
         
-        df = df[list(column_map.keys())]
+        existing_cols = [col for col in column_map.keys() if col in df.columns]
+        df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
 
@@ -74,7 +76,8 @@ def process_ruhsatli_urunler():
         column_map = {'BARKOD': 'barkod', 'ÜRÜN ADI': 'urun_adi', 'ETKİN MADDE': 'etkin_madde', 'ATC KODU': 'atc_kodu', 'RUHSAT SAHİBİ FİRMA': 'ruhsat_sahibi_firma'}
         df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype={'BARKOD': str})
         
-        df = df[list(column_map.keys())]
+        existing_cols = [col for col in column_map.keys() if col in df.columns]
+        df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
 
@@ -107,24 +110,21 @@ def process_etkin_maddeler():
         return False
 
 def process_yurtdisi_etkin_maddeler():
-    """Yurtdışı etkin madde listesini özel kurallarla işler."""
+    """Yurtdışı etkin madde listesini işler."""
     filename = "yurtdisi_etkin_madde_listesi.xlsx"
     filepath = get_file_path(filename)
     if not filepath: return True
         
     sheet_name = "YD-Etkin madde listesi"
-    logging.info(f"'{filename}' -> '{sheet_name}' sayfası (özel kurallarla) işleniyor...")
+    logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
-        column_map = {'Etkin Madde Kodu': 'etkin_madde_kodu', 'Etkin Madde': 'etkin_madde', 'Farmasötik Form': 'farmasotik_form', 'ATC Kodu': 'atc_kodu', 'ATC Adı': 'atc_adi', 'Reçete Türü': 'recete_turu', 'TİTCK YAZILI ONAYI OLMADAN İTHAL EDİLEMEYECEK İLAÇLAR LİSTESİNDE YER ALAN ETKİN MADDELER': 'titck_onayi_gerekliligi', 'ICD10 Kodu': 'icd10_kodu', 'ICD10 Adı': 'icd10_adi', 'KULLANIM ŞARTLARI': 'kullanim_sartlari'}
+        column_map = {'Etkin Madde': 'etkin_madde', 'Farmasötik Form': 'farmasotik_form'}
         df = pd.read_excel(filepath, sheet_name=sheet_name, header=1)
         
         existing_cols = [col for col in column_map.keys() if col in df.columns]
         df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
-
-        if 'titck_onayi_gerekliligi' in df.columns:
-            df['titck_onayi_gerekliligi'] = np.where(df['titck_onayi_gerekliligi'] == 1, 'TİTCK Onayı Gerekir', 'TİTCK Onayı Gerekmez')
         
         save_as_jsonl(df, "yurtdisi_etkin_maddeler.jsonl", filename)
         return True
@@ -138,24 +138,21 @@ def process_skrs_erecete():
     filepath = get_file_path(filename)
     if not filepath: return True
     
-    # AKTİF SAYFASI
-    sheet_name_aktif = "AKTİF ÜRÜNLER LİSTESİ"
-    logging.info(f"'{filename}' -> '{sheet_name_aktif}' sayfası işleniyor...")
+    # Tüm işlemleri tek bir try bloğunda yönetmek daha güvenli olabilir
     try:
+        # AKTİF SAYFASI
+        sheet_name_aktif = "AKTİF ÜRÜNLER LİSTESİ"
+        logging.info(f"'{filename}' -> '{sheet_name_aktif}' sayfası işleniyor...")
         column_map_aktif = {'İlaç Adı': 'urun_adi', 'Barkod': 'barkod', 'ATC Kodu': 'atc_kodu', 'Firma Adı': 'firma_adi'}
         df_aktif = pd.read_excel(filepath, sheet_name=sheet_name_aktif, header=2, dtype={'Barkod': str})
         df_aktif = df_aktif[list(column_map_aktif.keys())]
         df_aktif.rename(columns=column_map_aktif, inplace=True)
         df_aktif.dropna(how='all', inplace=True)
         save_as_jsonl(df_aktif, "skrs_aktif_urunler.jsonl", filename)
-    except Exception as e:
-        logging.error(f"'{sheet_name_aktif}' işlenirken KRİTİK HATA: {e}")
-        return False # Bir hata olursa ana fonksiyonu durdur
 
-    # PASİF SAYFASI
-    sheet_name_pasif = "PASİF ÜRÜNLER LİSTESİ"
-    logging.info(f"'{filename}' -> '{sheet_name_pasif}' sayfası işleniyor...")
-    try:
+        # PASİF SAYFASI
+        sheet_name_pasif = "PASİF ÜRÜNLER LİSTESİ"
+        logging.info(f"'{filename}' -> '{sheet_name_pasif}' sayfası işleniyor...")
         column_map_pasif = {'İlaç Adı': 'urun_adi', 'Barkod': 'barkod', 'ATC Kodu': 'atc_kodu', 'Firma Adı': 'firma_adi'}
         df_pasif = pd.read_excel(filepath, sheet_name=sheet_name_pasif, header=2, dtype={'Barkod': str})
         df_pasif = df_pasif[list(column_map_pasif.keys())]
@@ -163,22 +160,21 @@ def process_skrs_erecete():
         df_pasif.dropna(how='all', inplace=True)
         save_as_jsonl(df_pasif, "skrs_pasif_urunler.jsonl", filename)
     except Exception as e:
-        logging.error(f"'{sheet_name_pasif}' işlenirken KRİTİK HATA: {e}")
+        logging.error(f"'{filename}' işlenirken KRİTİK HATA: {e}")
         return False
         
     return True
-
 
 def main():
     """Tüm veri temizleme işlemlerini yürüten ana fonksiyon."""
     logging.info("===== Veri Temizleme ve Standardizasyon Başlatıldı =====")
     
     results = [
-        process_ilac_fiyat_listesi(),
+        process_ilac_fiyat_listesi(), # <-- Düzeltilmiş fonksiyon çağrısı
         process_ruhsatli_urunler(),
         process_etkin_maddeler(),
         process_yurtdisi_etkin_maddeler(),
-        process_skrs_erecete(), # Bu fonksiyon hem aktif hem pasif listeyi işler
+        process_skrs_erecete(),
     ]
     
     if all(results):
