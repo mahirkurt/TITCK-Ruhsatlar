@@ -1,10 +1,11 @@
-# Dosya Adı: downloader.py (Zaman Aşımı Hatası Düzeltilmiş Hali)
+# Dosya Adı: downloader.py (Stealth modu eklenmiş nihai hali)
 
 import os
 import sys
 import requests
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+from playwright_stealth import stealth_sync # <-- YENİ EKLENDİ
 
 # --- KULLANICI AYARLARI ---
 LOGIN_URL = "https://www.titck.gov.tr/giris"
@@ -26,20 +27,18 @@ def main():
         sys.exit(1)
 
     with sync_playwright() as p:
-        print("Tarayıcı başlatılıyor...")
-        # YERELDE TEST EDERKEN NELER OLDUĞUNU GÖRMEK İÇİN headless=False YAPABİLİRSİNİZ
+        print("Tarayıcı başlatılıyor (Stealth Modu Aktif)...")
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
+
+        stealth_sync(page) # <-- YENİ EKLENDİ: Tarayıcı izlerini gizle
+
         try:
             print(f"Giriş sayfasına gidiliyor: {LOGIN_URL}")
-            page.goto(LOGIN_URL)
+            page.goto(LOGIN_URL, timeout=90000) # Timeout süresini biraz artırdık
             
-            # --- YENİ EKLENEN SABIRLI BEKLEME ADIMI ---
-            # Giriş formunun yüklenmesi için kullanıcı adı alanının görünür olmasını bekle.
-            # Bu, aradaki "Checking browser..." gibi güvenlik sayfalarını atlatır.
             print("Giriş formunun yüklenmesi bekleniyor (60 saniyeye kadar)...")
             page.wait_for_selector("#kullaniciAdi", timeout=60000)
-            # -----------------------------------------
 
             print("Kullanıcı adı ve şifre giriliyor...")
             page.fill("#kullaniciAdi", USERNAME)
@@ -70,8 +69,8 @@ def main():
             print("Tarayıcı kapatıldı.")
 
         except PlaywrightTimeoutError:
-            print(f"HATA: Belirtilen seçici veya sayfa zaman aşımına uğradı. Seçicileri veya URL'leri kontrol edin.")
-            page.screenshot(path="debug_screenshot.png") # Hata anının ekran görüntüsünü al
+            print(f"HATA: Belirtilen seçici veya sayfa zaman aşımına uğradı. Anti-bot koruması hala aktif olabilir.")
+            page.screenshot(path="debug_screenshot.png")
             print("Hata anının ekran görüntüsü 'debug_screenshot.png' olarak kaydedildi.")
             browser.close()
             sys.exit(1)
