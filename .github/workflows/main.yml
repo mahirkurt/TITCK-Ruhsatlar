@@ -1,52 +1,80 @@
 # Dosya Yolu: .github/workflows/main.yml
 
-name: TİTCK Veri Otomasyonu
+# İş akışının GitHub arayüzünde görünecek adı
+name: TİTCK Veri İndirme ve İşleme Otomasyonu
 
+# Bu iş akışını neyin tetikleyeceğini belirler
 on:
   schedule:
-    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
+    # Zamanlanmış görev: Cron sözdizimi ile her gün 03:00 UTC'de çalışır.
+    # (Bu, Türkiye saati ile yazın 06:00, kışın 05:00'e denk gelir.)
+    - cron: '0 3 * * *'
+  
+  # Manuel tetikleme: GitHub arayüzündeki "Actions" sekmesinden
+  # "Run workflow" butonu ile de istediğiniz zaman çalıştırabilirsiniz.
   workflow_dispatch:
 
+# İş akışında çalışacak işler (jobs)
 jobs:
+  # "update-data" adında bir iş tanımlıyoruz
   update-data:
+    # Bu işin çalışacağı sanal makine ortamı
     runs-on: ubuntu-latest
+
+    # İşin adımları (sırayla çalıştırılır)
     steps:
+      # 1. Adım: Depodaki kodları sanal makineye klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
+      # 2. Adım: Python ortamını kur
       - name: Python 3.9 Kurulumu
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
-      - name: Bağımlılıkları Yükle
+      # 3. Adım: Gerekli Python kütüphanelerini yükle
+      - name: Bağımlılıkları Yükle (requirements.txt)
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # 4. Adım: Playwright'in ihtiyaç duyduğu tarayıcıları kur (EN ÖNEMLİ ADIM)
+      # Bu adım olmadan downloader.py çalışmaz.
       - name: Playwright Tarayıcılarını Kur
         run: playwright install --with-deps
 
-      - name: 1. Adım - Şifreli Fiyat Listesini İndir
+      # 5. Adım: Şifreli Fiyat Listesini İndir
+      - name: Güvenli Dosyayı İndir (downloader.py)
         env:
+          # GitHub Secrets'ta tanımladığımız gizli bilgileri betiğe aktar
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
         run: python downloader.py
       
-      # KULLANICI NOTU: Diğer halka açık dosyaları da indirmek için
-      # benzer bir public_downloader.py betiği oluşturup buraya ekleyebilirsiniz.
+      # NOT: Diğer halka açık dosyaları da indirmek için (ruhsatlı ilaçlar vb.)
+      # basit bir 'public_downloader.py' betiği oluşturup bu adımdan sonra
+      # çalıştırabilirsiniz. Şimdilik bu dosyaların zaten repoda olduğunu varsayıyoruz.
 
-      - name: 2. Adım - Tüm Ham Verileri Temizle
+      # 6. Adım: Tüm Ham Verileri Temizle ve Standardize Et
+      - name: Verileri Temizle (data_cleaner.py)
         run: python data_cleaner.py
 
-      - name: 3. Adım - İşlenmiş Verileri Depoya Gönder
+      # 7. Adım: İşlenmiş Verileri Depoya Kaydet
+      - name: Değişiklikleri Depoya Gönder (Commit & Push)
         run: |
+          # Git için bot kimliğini yapılandır
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Sadece 'islenmis_veriler' klasöründeki değişiklikleri ekle
           git add islenmis_veriler/
+          
+          # Eğer izlenen dosyalarda bir değişiklik yoksa, hiçbir şey yapma
           if [[ -z $(git status --porcelain) ]]; then
             echo "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
           else
+            # Değişiklik varsa, bugünün tarihiyle commit at ve ana dala gönder
             TODAY=$(date -u +"%Y-%m-%d")
             git commit -m "Otomatik Veri Güncelleme: $TODAY"
             git push
