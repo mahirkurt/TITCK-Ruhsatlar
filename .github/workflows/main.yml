@@ -1,4 +1,4 @@
-# Dosya Yolu: .github/workflows/main.yml
+# Dosya Yolu: .github/workflows/main.yml (Windows Self-Hosted Runner Uyumlu Nihai Sürüm)
 
 name: TİTCK Veri Otomasyonu (Self-Hosted Runner)
 
@@ -21,12 +21,11 @@ jobs:
           python-version: '3.9'
 
       - name: Bağımlılıkları Yükle (requirements.txt)
+        # "shell: bash" satırları kaldırıldı. Artık varsayılan olan PowerShell kullanılacak.
         run: python -m pip install -r requirements.txt
-        shell: bash # Bu ve sonraki basit komutlar için bash kullanmak daha tutarlı olabilir
         
       - name: Playwright Tarayıcılarını Kur
         run: python -m playwright install --with-deps
-        shell: bash
 
       - name: Adım 1 - Güvenli Dosyayı İndir (downloader.py)
         id: download_step
@@ -34,7 +33,6 @@ jobs:
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
         run: python downloader.py
-        shell: bash
 
       - name: Hata Durumunda Ekran Görüntüsünü Yükle
         if: failure() && steps.download_step.outcome == 'failure'
@@ -45,29 +43,20 @@ jobs:
       
       - name: Adım 2 - Verileri Temizle (data_cleaner.py)
         run: python data_cleaner.py
-        shell: bash
 
-      # --- DÜZELTİLEN ADIM BURASI ---
       - name: Adım 3 - Değişiklikleri Depoya Gönder (Commit & Push)
-        # Windows runner'ı varsayılan olarak PowerShell kullandığı için
-        # bu adımı PowerShell sözdiziminde yazıyoruz.
+        # Bu adım zaten doğru şekilde PowerShell için yazılmıştı.
         shell: powershell
         run: |
-          # Git için bot kimliğini yapılandır
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          # Sadece 'islenmis_veriler' klasöründeki değişiklikleri ekle
           git add islenmis_veriler/
           
-          # Değişiklik olup olmadığını kontrol et
           $gitStatus = git status --porcelain
           
           if ([string]::IsNullOrWhiteSpace($gitStatus)) {
-              # Eğer değişiklik yoksa, mesaj yaz ve çık
               Write-Host "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
           } else {
-              # Değişiklik varsa, commit at ve gönder
               Write-Host "Değişiklikler bulundu, commit atılıyor ve gönderiliyor..."
               $TODAY = Get-Date -UFormat "%Y-%m-%d"
               git commit -m "Otomatik Veri Güncelleme (Self-Hosted): $TODAY"
