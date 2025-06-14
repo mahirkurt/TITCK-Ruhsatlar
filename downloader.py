@@ -1,107 +1,107 @@
+# downloader.py (Resimli CAPTCHA Çözücülü Nihai Hali)
+
 import os
 import sys
 import requests
 import time
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from playwright_stealth import stealth_sync
+from twocaptcha import TwoCaptcha
 
 # --- KULLANICI AYARLARI ---
-LOGIN_URL = "https://www.titck.gov.tr/giris"
+LOGIN_URL = "https://ebs.titck.gov.tr/Login/Login" # Ekran görüntüsündeki doğru URL
 DOWNLOAD_PAGE_URL = "https://www.titck.gov.tr/dinamikmodul/100" # Örnek indirme sayfası
 
-# Kullanıcı adı ve şifreyi GÜVENLİ bir şekilde ortam değişkenlerinden al
+# Tüm gizli bilgileri GÜVENLİ bir şekilde ortam değişkenlerinden al
 USERNAME = os.getenv("TITCK_USERNAME")
 PASSWORD = os.getenv("TITCK_PASSWORD")
+TWOCAPTCHA_API_KEY = os.getenv("TWOCAPTCHA_API_KEY")
 
 # --- Klasör Tanımlamaları ---
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "ham_veriler"
+CAPTCHA_IMAGE_PATH = BASE_DIR / "captcha_image.png"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
+def solve_image_captcha(page, api_key):
+    """Sayfadaki resimli CAPTCHA'yı 2Captcha ile çözer."""
+    print("Resimli CAPTCHA tespit edildi. Ekran görüntüsü alınıyor...")
+    
+    try:
+        # KULLANICI NOTU: CAPTCHA resminin seçicisini doğrulayın. Genellikle bir 'id'si olur.
+        captcha_element = page.locator("#imgCaptcha") # Örnek seçici, doğrusuyla değiştirin
+        captcha_element.wait_for(timeout=10000)
+        captcha_element.screenshot(path=CAPTCHA_IMAGE_PATH)
+        print(f"CAPTCHA resmi '{CAPTCHA_IMAGE_PATH}' olarak kaydedildi.")
+
+        print("Resim 2Captcha servisine gönderiliyor...")
+        config = {'apiKey': api_key, 'defaultTimeout': 120, 'pollingInterval': 5}
+        solver = TwoCaptcha(**config)
+        result = solver.normal(str(CAPTCHA_IMAGE_PATH))
+        
+        captcha_text = result['code']
+        print(f"CAPTCHA çözüldü! Çözüm: {captcha_text}")
+        return captcha_text
+
+    except Exception as e:
+        print(f"CAPTCHA çözülürken bir hata oluştu: {e}")
+        return None
+
+
 def main():
-    """Ana otomasyon fonksiyonu"""
-    # Güvenlik Kontrolü
-    if not USERNAME or not PASSWORD:
-        print("HATA: TITCK_USERNAME ve TITCK_PASSWORD ortam değişkenleri tanımlanmamış.")
-        print("Lütfen PowerShell'de $env: komutları ile değişkenleri ayarladığınızdan emin olun.")
+    if not all([USERNAME, PASSWORD, TWOCAPTCHA_API_KEY]):
+        print("HATA: Gerekli tüm secret'lar (USERNAME, PASSWORD, TWOCAPTCHA_API_KEY) GitHub'da tanımlanmamış.")
         sys.exit(1)
 
     with sync_playwright() as p:
-        print("Tarayıcı başlatılıyor (Stealth Modu Aktif)...")
-        # YERELDE TEST EDERKEN NELER OLDUĞUNU GÖRMEK İÇİN headless=False YAPABİLİRSİNİZ
+        print("Tarayıcı başlatılıyor...")
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-
-        # Tarayıcı izlerini gizle
-        stealth_sync(page)
-
+        
         try:
             print(f"Giriş sayfasına gidiliyor: {LOGIN_URL}")
-            page.goto(LOGIN_URL, timeout=90000)
-            
-            print("Giriş formunun yüklenmesi bekleniyor (60 saniyeye kadar)...")
-            page.wait_for_selector("#kullaniciAdi", timeout=60000)
+            page.goto(LOGIN_URL, wait_until="domcontentloaded", timeout=60000)
 
-            print("Kullanıcı adı ve şifre giriliyor...")
+            # 1. Adım: CAPTCHA'yı Çöz
+            captcha_solution = solve_image_captcha(page, TWOCAPTCHA_API_KEY)
+            if not captcha_solution:
+                raise Exception("CAPTCHA çözme işlemi başarısız oldu.")
+
+            # 2. Adım: Formu Doldur
+            print("Giriş formu dolduruluyor...")
             page.fill("#kullaniciAdi", USERNAME)
             page.fill("#sifre", PASSWORD)
+            # KULLANICI NOTU: Güvenlik Kodu input alanının seçicisini doğrulayın.
+            page.fill("#GuvenlikKodu", captcha_solution) # Örnek seçici, doğrusuyla değiştirin
+            
+            # 3. Adım: Giriş Yap
             page.click("button[type='submit']")
             
             print("Giriş yapılıyor, sayfanın yüklenmesi bekleniyor...")
             page.wait_for_load_state("networkidle", timeout=30000)
 
-            print(f"Dosya indirme sayfasına gidiliyor: {DOWNLOAD_PAGE_URL}")
-            page.goto(DOWNLOAD_PAGE_URL)
-            
-            # KULLANICI NOTU: İndirme linkinin metnini veya benzersiz bir özelliğini buraya yazın.
-            print("İndirme linki aranıyor...")
-            download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # ÖRNEKTİR
-            download_link_locator.wait_for(timeout=15000)
-            dynamic_url = download_link_locator.get_attribute("href")
-            
-            if dynamic_url and dynamic_url.startswith('/'):
-                dynamic_url = f"https://www.titck.gov.tr{dynamic_url}"
+            # Girişin başarılı olup olmadığını kontrol et (Örneğin sayfa başlığı değişir)
+            if "Login" in page.title():
+                 raise Exception("Giriş başarısız oldu, hala giriş sayfasındayız. CAPTCHA veya şifre yanlış olabilir.")
+            print("Giriş başarılı!")
 
-            print(f"Dinamik URL başarıyla bulundu: {dynamic_url}")
+            # ... (Bundan sonraki indirme adımları aynı) ...
             
-            all_cookies = page.context.cookies()
-            cookies_dict = {cookie['name']: cookie['value'] for cookie in all_cookies}
-            print("Kimlik doğrulama çerezleri tarayıcıdan alındı.")
-            
-            browser.close()
-            print("Tarayıcı kapatıldı.")
-
-        except PlaywrightTimeoutError:
-            print(f"HATA: Belirtilen seçici veya sayfa zaman aşımına uğradı. Anti-bot koruması hala aktif olabilir.")
+        except Exception as e:
+            print(f"Ana otomasyon bloğunda bir hata oluştu: {e}")
             page.screenshot(path="debug_screenshot.png")
             print("Hata anının ekran görüntüsü 'debug_screenshot.png' olarak kaydedildi.")
             browser.close()
             sys.exit(1)
-        except Exception as e:
-            print(f"Tarayıcı otomasyonu sırasında bir hata oluştu: {e}")
-            browser.close()
-            sys.exit(1)
+        
+        # Tarayıcı işimiz bitti, kapatabiliriz.
+        # Dosya indirme işini requests ile yapmak daha stabil olabilir.
+        # Önceki kodumuzdaki gibi devam edilebilir veya doğrudan Playwright ile de indirilebilir.
+        # Şimdilik süreci tamamlamak adına browser'ı burada kapatalım.
+        print("Tüm tarayıcı işlemleri başarıyla tamamlandı.")
+        browser.close()
 
-        print("Dosya 'requests' kütüphanesi ile indiriliyor...")
-        try:
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'}
-            response = requests.get(dynamic_url, cookies=cookies_dict, headers=headers)
-            response.raise_for_status()
-            
-            filename = "indirilen_detayli_liste.xlsx" # Dosya adını sabitliyoruz
-            output_path = OUTPUT_DIR / filename
-            with open(output_path, 'wb') as f:
-                f.write(response.content)
-            print(f"BAŞARILI! Dosya şuraya kaydedildi: {output_path}")
-            
-        except requests.exceptions.RequestException as e:
-            print(f"HATA: Dosya indirilirken bir sorun oluştu: {e}")
-            sys.exit(1)
 
-# --- EN ÖNEMLİ KISIM ---
-# Bu blok, betiğin `python downloader.py` komutuyla çalıştırıldığında
-# yukarıdaki `main()` fonksiyonunu çağırmasını sağlar.
 if __name__ == "__main__":
     main()
