@@ -6,3 +6,4 @@ playwright
 requests
 playwright-stealth
 2captcha-python
+setuptools
