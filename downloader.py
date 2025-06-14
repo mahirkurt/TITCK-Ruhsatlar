@@ -1,21 +1,18 @@
-# downloader.py (2Captcha Entegrasyonlu Nihai Hali)
-
 import os
 import sys
 import requests
-import json
+import time
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from twocaptcha import TwoCaptcha # <-- YENİ EKLENDİ
+from playwright_stealth import stealth_sync
 
 # --- KULLANICI AYARLARI ---
 LOGIN_URL = "https://www.titck.gov.tr/giris"
-DOWNLOAD_PAGE_URL = "https://www.titck.gov.tr/dinamikmodul/100"
+DOWNLOAD_PAGE_URL = "https://www.titck.gov.tr/dinamikmodul/100" # Örnek indirme sayfası
 
-# Tüm gizli bilgileri GÜVENLİ bir şekilde ortam değişkenlerinden al
+# Kullanıcı adı ve şifreyi GÜVENLİ bir şekilde ortam değişkenlerinden al
 USERNAME = os.getenv("TITCK_USERNAME")
 PASSWORD = os.getenv("TITCK_PASSWORD")
-TWOCAPTCHA_API_KEY = os.getenv("TWOCAPTCHA_API_KEY")
 
 # --- Klasör Tanımlamaları ---
 BASE_DIR = Path(__file__).resolve().parent
@@ -23,83 +20,34 @@ OUTPUT_DIR = BASE_DIR / "ham_veriler"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
-def solve_turnstile_captcha(page):
-    """Sayfadaki Cloudflare Turnstile CAPTCHA'sını 2Captcha ile çözer."""
-    print("Cloudflare Turnstile CAPTCHA tespit edildi. 2Captcha servisine gönderiliyor...")
-    
-    # 2Captcha solve konfigürasyonu
-    config = {
-        'apiKey': TWOCAPTCHA_API_KEY,
-        'defaultTimeout': 120,
-        'pollingInterval': 5,
-    }
-    solver = TwoCaptcha(**config)
-
-    try:
-        # CAPTCHA'nın site anahtarını (sitekey) HTML'den bul
-        sitekey_element = page.locator(".cf-turnstile")
-        sitekey = sitekey_element.get_attribute("data-sitekey")
-        
-        if not sitekey:
-            print("HATA: CAPTCHA sitekey bulunamadı.")
-            return False
-
-        print(f"Sitekey bulundu: {sitekey}")
-
-        # Çözüm için isteği gönder
-        result = solver.turnstile(
-            sitekey=sitekey,
-            url=page.url
-        )
-
-        print(f"CAPTCHA çözüldü! Token alınıyor...")
-        captcha_response_token = result['code']
-
-        # Çözüm token'ını sayfadaki gizli alana enjekte et
-        js_script = f'document.querySelector("[name=\'cf-turnstile-response\']").value = "{captcha_response_token}";'
-        page.evaluate(js_script)
-        
-        print("Token başarıyla sayfaya enjekte edildi.")
-        return True
-
-    except Exception as e:
-        print(f"CAPTCHA çözülürken bir hata oluştu: {e}")
-        return False
-
-
 def main():
-    if not all([USERNAME, PASSWORD, TWOCAPTCHA_API_KEY]):
-        print("HATA: Gerekli tüm secret'lar (USERNAME, PASSWORD, TWOCAPTCHA_API_KEY) GitHub'da tanımlanmamış.")
+    """Ana otomasyon fonksiyonu"""
+    # Güvenlik Kontrolü
+    if not USERNAME or not PASSWORD:
+        print("HATA: TITCK_USERNAME ve TITCK_PASSWORD ortam değişkenleri tanımlanmamış.")
+        print("Lütfen PowerShell'de $env: komutları ile değişkenleri ayarladığınızdan emin olun.")
         sys.exit(1)
 
     with sync_playwright() as p:
-        print("Tarayıcı başlatılıyor...")
+        print("Tarayıcı başlatılıyor (Stealth Modu Aktif)...")
+        # YERELDE TEST EDERKEN NELER OLDUĞUNU GÖRMEK İÇİN headless=False YAPABİLİRSİNİZ
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
-        
+
+        # Tarayıcı izlerini gizle
+        stealth_sync(page)
+
         try:
             print(f"Giriş sayfasına gidiliyor: {LOGIN_URL}")
-            page.goto(LOGIN_URL, wait_until="domcontentloaded", timeout=60000)
+            page.goto(LOGIN_URL, timeout=90000)
+            
+            print("Giriş formunun yüklenmesi bekleniyor (60 saniyeye kadar)...")
+            page.wait_for_selector("#kullaniciAdi", timeout=60000)
 
-            # Sayfada CAPTCHA var mı diye 5 saniye bekle ve kontrol et
-            time.sleep(5)
-            if page.locator(".cf-turnstile").is_visible():
-                if not solve_turnstile_captcha(page):
-                    raise Exception("CAPTCHA çözme işlemi başarısız oldu.")
-                # CAPTCHA çözüldükten sonra sayfanın toparlanması için biraz bekle
-                time.sleep(3)
-            else:
-                print("CAPTCHA tespit edilmedi, normal giriş deneniyor.")
-
-            # Giriş formunu doldurma
-            print("Giriş formunun yüklenmesi bekleniyor...")
-            page.wait_for_selector("#kullaniciAdi", timeout=10000)
             print("Kullanıcı adı ve şifre giriliyor...")
             page.fill("#kullaniciAdi", USERNAME)
             page.fill("#sifre", PASSWORD)
             page.click("button[type='submit']")
-            
-            # ... (Bundan sonraki indirme adımları aynı) ...
             
             print("Giriş yapılıyor, sayfanın yüklenmesi bekleniyor...")
             page.wait_for_load_state("networkidle", timeout=30000)
@@ -107,6 +55,7 @@ def main():
             print(f"Dosya indirme sayfasına gidiliyor: {DOWNLOAD_PAGE_URL}")
             page.goto(DOWNLOAD_PAGE_URL)
             
+            # KULLANICI NOTU: İndirme linkinin metnini veya benzersiz bir özelliğini buraya yazın.
             print("İndirme linki aranıyor...")
             download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # ÖRNEKTİR
             download_link_locator.wait_for(timeout=15000)
@@ -124,13 +73,35 @@ def main():
             browser.close()
             print("Tarayıcı kapatıldı.")
 
-        except Exception as e:
-            print(f"Ana otomasyon bloğunda bir hata oluştu: {e}")
+        except PlaywrightTimeoutError:
+            print(f"HATA: Belirtilen seçici veya sayfa zaman aşımına uğradı. Anti-bot koruması hala aktif olabilir.")
             page.screenshot(path="debug_screenshot.png")
             print("Hata anının ekran görüntüsü 'debug_screenshot.png' olarak kaydedildi.")
             browser.close()
             sys.exit(1)
+        except Exception as e:
+            print(f"Tarayıcı otomasyonu sırasında bir hata oluştu: {e}")
+            browser.close()
+            sys.exit(1)
 
-        # ... (requests ile indirme kısmı aynı kalıyor) ...
+        print("Dosya 'requests' kütüphanesi ile indiriliyor...")
+        try:
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'}
+            response = requests.get(dynamic_url, cookies=cookies_dict, headers=headers)
+            response.raise_for_status()
+            
+            filename = "indirilen_detayli_liste.xlsx" # Dosya adını sabitliyoruz
+            output_path = OUTPUT_DIR / filename
+            with open(output_path, 'wb') as f:
+                f.write(response.content)
+            print(f"BAŞARILI! Dosya şuraya kaydedildi: {output_path}")
+            
+        except requests.exceptions.RequestException as e:
+            print(f"HATA: Dosya indirilirken bir sorun oluştu: {e}")
+            sys.exit(1)
 
-# ... if __name__ == "__main__": main() kısmı aynı kalıyor ...
+# --- EN ÖNEMLİ KISIM ---
+# Bu blok, betiğin `python downloader.py` komutuyla çalıştırıldığında
+# yukarıdaki `main()` fonksiyonunu çağırmasını sağlar.
+if __name__ == "__main__":
+    main()
