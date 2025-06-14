@@ -1,4 +1,4 @@
-# downloader.py (Opsiyonel CAPTCHA Çözücülü Nihai Hali)
+# downloader.py (Son Bekleme Mantığı Eklenmiş Nihai Hali)
 
 import os
 import sys
@@ -6,7 +6,6 @@ import requests
 import time
 from pathlib import Path
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
-from twocaptcha import TwoCaptcha
 
 # --- KULLANICI AYARLARI ---
 LOGIN_URL = "https://ebs.titck.gov.tr/Login/Login" # Doğru giriş URL'si
@@ -15,71 +14,45 @@ DOWNLOAD_PAGE_URL = "https://www.titck.gov.tr/dinamikmodul/100" # Örnek
 # Gizli bilgileri ortam değişkenlerinden al
 USERNAME = os.getenv("TITCK_USERNAME")
 PASSWORD = os.getenv("TITCK_PASSWORD")
-TWOCAPTCHA_API_KEY = os.getenv("TWOCAPTCHA_API_KEY")
 
 # --- Klasör Tanımlamaları ---
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "ham_veriler"
-CAPTCHA_IMAGE_PATH = BASE_DIR / "captcha_image.png"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
 
-def solve_image_captcha(page, api_key):
-    """Sayfadaki resimli CAPTCHA'yı 2Captcha ile çözer."""
-    print("Resimli CAPTCHA tespit edildi. Çözüm deneniyor...")
-    try:
-        captcha_element = page.locator("#imgCaptcha")
-        captcha_element.wait_for(timeout=10000)
-        captcha_element.screenshot(path=CAPTCHA_IMAGE_PATH)
-        
-        print("Resim 2Captcha servisine gönderiliyor...")
-        config = {'apiKey': api_key, 'defaultTimeout': 120, 'pollingInterval': 5}
-        solver = TwoCaptcha(**config)
-        result = solver.normal(str(CAPTCHA_IMAGE_PATH))
-        
-        captcha_text = result['code']
-        print(f"CAPTCHA çözüldü! Çözüm: {captcha_text}")
-        return captcha_text
-    except Exception as e:
-        print(f"CAPTCHA çözülürken bir hata oluştu: {e}")
-        return None
-
-
 def main():
-    if not all([USERNAME, PASSWORD]):
-        print("HATA: TITCK_USERNAME ve TITCK_PASSWORD secret'ları tanımlanmamış.")
+    if not USERNAME or not PASSWORD:
+        print("HATA: TITCK_USERNAME ve TITCK_PASSWORD ortam değişkenleri tanımlanmamış.")
         sys.exit(1)
 
     with sync_playwright() as p:
         print("Tarayıcı başlatılıyor...")
+        # TEST İÇİN BU SATIRI headless=False YAPABİLİRSİNİZ
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
         
         try:
             print(f"Giriş sayfasına gidiliyor: {LOGIN_URL}")
             page.goto(LOGIN_URL, wait_until="domcontentloaded", timeout=60000)
-            time.sleep(3) # Sayfanın tam oturması için kısa bir bekleme
+            time.sleep(3) # Sayfanın oturması için kısa bir bekleme
 
-            # --- OPSİYONEL CAPTCHA KONTROLÜ ---
-            # Sayfada CAPTCHA elementi var mı ve görünür mü diye kontrol et
+            # CAPTCHA kontrolü
             captcha_input_locator = page.locator("#GuvenlikKodu")
-            if captcha_input_locator.is_visible():
-                print("Giriş sayfasında CAPTCHA alanı bulundu.")
-                if not TWOCAPTCHA_API_KEY:
-                    raise Exception("CAPTCHA bulundu fakat TWOCAPTCHA_API_KEY secret'ı tanımlanmamış.")
-                
-                captcha_solution = solve_image_captcha(page, TWOCAPTCHA_API_KEY)
-                if not captcha_solution:
-                    raise Exception("CAPTCHA çözme işlemi başarısız oldu.")
-                
-                print("Güvenlik kodu giriliyor...")
-                captcha_input_locator.fill(captcha_solution)
+            if captcha_input_locator.is_visible(timeout=5000): # 5 saniye içinde görünürse
+                raise Exception("HATA: Sayfada beklenmedik bir şekilde CAPTCHA bulundu. Site güvenliği değişmiş olabilir.")
             else:
                 print("CAPTCHA alanı bulunamadı. Normal giriş deneniyor.")
 
-            # --- NORMAL GİRİŞ ADIMLARI ---
-            print("Kullanıcı adı ve şifre giriliyor...")
-            page.fill("#kullaniciAdi", USERNAME)
+            # --- NİHAİ DÜZELTME: DOLDURMADAN ÖNCE BEKLEME ---
+            print("Giriş formunun etkileşime hazır olması bekleniyor...")
+            kullanici_adi_input = page.locator("#kullaniciAdi")
+            # Doldurmadan önce, alanın sayfada gerçekten görünür olmasını bekle.
+            kullanici_adi_input.wait_for(state="visible", timeout=30000)
+            print("Form hazır. Kullanıcı adı ve şifre giriliyor...")
+            # ----------------------------------------------------
+
+            kullanici_adi_input.fill(USERNAME)
             page.fill("#sifre", PASSWORD)
             
             print("Giriş butonuna tıklanıyor...")
@@ -90,11 +63,17 @@ def main():
 
             # Girişin başarılı olup olmadığını kontrol et
             if "Login" in page.title() or "Giriş" in page.title():
-                 raise Exception("Giriş başarısız oldu, hala giriş sayfasındayız. Bilgiler veya CAPTCHA çözümü yanlış olabilir.")
+                 raise Exception("Giriş başarısız oldu, hala giriş sayfasındayız. Kullanıcı adı/şifre hatalı olabilir.")
             print("Giriş başarılı!")
 
             # ... İndirme adımları buraya eklenecek ...
-            # Önceki kodumuzdaki gibi devam edilebilir.
+            # Örnek:
+            print(f"Dosya indirme sayfasına gidiliyor: {DOWNLOAD_PAGE_URL}")
+            page.goto(DOWNLOAD_PAGE_URL)
+            print("İndirme linki aranıyor...")
+            download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # ÖRNEKTİR
+            download_link_locator.wait_for(timeout=15000)
+            # ... geri kalan indirme ve kaydetme kodları ...
             
             print("Tüm işlemler başarıyla tamamlandı.")
             browser.close()
