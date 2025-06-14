@@ -1,36 +1,73 @@
-# Dosya Yolu: .github/workflows/main.yml (İzinler Düzeltilmiş Nihai Sürüm)
+# Dosya Yolu: .github/workflows/main.yml (Nihai ve Basitleştirilmiş Sürüm)
 
+# İş akışının GitHub arayüzünde görünecek adı
 name: Veri Temizleme Otomasyonu
 
+# Bu iş akışını neyin tetikleyeceğini belirler
 on:
+  # 1. Ana dala (main/master) bir push yapıldığında çalışır.
+  # Yani, ham verileri güncellediğinizde otomatik olarak tetiklenir.
   push:
     branches:
       - main
       - master
-  workflow_dispatch:
-  schedule:
-    - cron: '0 3 * * *'
 
-# --- YENİ EKLENEN İZİN BLOĞU ---
-# Bu blok, iş akışına deponun içeriğini değiştirme (yazma) yetkisi verir.
+  # 2. Manuel olarak da çalıştırabilmek için
+  workflow_dispatch:
+  
+  # 3. Zamanlanmış görev (isteğe bağlı)
+  schedule:
+    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
+
+# İş akışına deponun içeriğini değiştirme (yazma) izni verir.
+# Bu, oluşturulan temiz verileri depoya geri push'lamak için gereklidir.
 permissions:
   contents: write
-# ---------------------------------
 
 jobs:
+  # "clean-data" adında bir iş tanımlıyoruz
   clean-data:
+    # GitHub'ın standart, hızlı ve ücretsiz Linux sanal makinesini kullanıyoruz.
     runs-on: ubuntu-latest
     name: Veri Dosyalarını Temizle ve Güncelle
 
     steps:
+      # Adım 1: Depodaki kodları ve verileri sanal makineye klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
+      # Adım 2: Python ortamını kur
       - name: Python 3.9 Kurulumu
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
+      # Adım 3: Gerekli Python kütüphanelerini yükle
       - name: Bağımlılıkları Yükle
-        # requirements.txt dosyanızın sadece pandas ve openpyxl içerdiğini varsayıyoruz
-        run: pip
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      # Adım 4: Veri Temizleme Betiğini Çalıştır
+      - name: data_cleaner.py Çalıştır
+        run: python data_cleaner.py
+
+      # Adım 5: İşlenmiş Verileri Depoya Kaydet
+      - name: Değişiklikleri Depoya Gönder
+        run: |
+          # Git için bot kimliğini yapılandır
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Sadece 'islenmis_veriler' klasöründeki değişiklikleri ekle
+          git add islenmis_veriler/
+          
+          # Eğer izlenen dosyalarda bir değişiklik yoksa, hiçbir şey yapma
+          if [[ -z $(git status --porcelain) ]]; then
+            echo "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
+          else
+            # Değişiklik varsa, bugünün tarihiyle commit at ve ana dala gönder
+            TODAY=$(date -u +"%Y-%m-%d")
+            git commit -m "Otomatik Veri Temizleme: $TODAY"
+            git push
+          fi
