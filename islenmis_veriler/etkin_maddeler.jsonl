@@ -10,7 +10,7 @@
 {"etkin_madde_adi":"acetylsalicylic acid","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"acetylsalicylic acid; clopidogrel","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"aciclovir sodium","basvuru_dosyasi_sayisi":2}
-{"etkin_madde_adi":"aciclovir; hydrocortisone ","basvuru_dosyasi_sayisi":2}
+{"etkin_madde_adi":"aciclovir; hydrocortisone","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"acitretine","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"aclidinium bromide","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"adalimumab","basvuru_dosyasi_sayisi":3}
@@ -128,7 +128,7 @@
 {"etkin_madde_adi":"brivaracetam","basvuru_dosyasi_sayisi":5}
 {"etkin_madde_adi":"budesonide","basvuru_dosyasi_sayisi":5}
 {"etkin_madde_adi":"budesonide micronized","basvuru_dosyasi_sayisi":3}
-{"etkin_madde_adi":"budesonide; formoterol fumarate ","basvuru_dosyasi_sayisi":1}
+{"etkin_madde_adi":"budesonide; formoterol fumarate","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"budesonide; formoterol fumarate dihydrate","basvuru_dosyasi_sayisi":4}
 {"etkin_madde_adi":"budesonide; formoterol fumarate dihydrate; glycopyrronium bromide","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"bupivacaine hydrochloride","basvuru_dosyasi_sayisi":1}
@@ -233,7 +233,7 @@
 {"etkin_madde_adi":"desvenlafaxine succinate","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"desvenlafaxine succinate monohydrate","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"deucravacitinib","basvuru_dosyasi_sayisi":1}
-{"etkin_madde_adi":"dexamethasone sodium phosphate ","basvuru_dosyasi_sayisi":2}
+{"etkin_madde_adi":"dexamethasone sodium phosphate","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"dexamethasone; tobramycin","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"dexibuprofen; paracetamol","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"dexketoprofen trometamol","basvuru_dosyasi_sayisi":2}
@@ -337,7 +337,7 @@
 {"etkin_madde_adi":"fluticasone propionate; azelastine hydrochloride","basvuru_dosyasi_sayisi":3}
 {"etkin_madde_adi":"folic acid","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"folic acid hydrate","basvuru_dosyasi_sayisi":2}
-{"etkin_madde_adi":"formoterol ","basvuru_dosyasi_sayisi":2}
+{"etkin_madde_adi":"formoterol","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"formoterol fumarate dihydrate","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"formoterol fumarate dihydrate; beclometasone dipropionate","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"formoterol fumarate dihydrate; fluticasone propionate","basvuru_dosyasi_sayisi":1}
@@ -382,7 +382,7 @@
 {"etkin_madde_adi":"human fibrinogen","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"human immunoglobulin","basvuru_dosyasi_sayisi":10}
 {"etkin_madde_adi":"human prothrombin complex","basvuru_dosyasi_sayisi":1}
-{"etkin_madde_adi":"hydrocortisone ","basvuru_dosyasi_sayisi":1}
+{"etkin_madde_adi":"hydrocortisone","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"hydroquinone","basvuru_dosyasi_sayisi":4}
 {"etkin_madde_adi":"hydrotalcite","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"hydrotalcite; simethicone","basvuru_dosyasi_sayisi":2}
@@ -600,7 +600,7 @@
 {"etkin_madde_adi":"ozenoxacin","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"palbociclib","basvuru_dosyasi_sayisi":14}
 {"etkin_madde_adi":"paliperidone palmitate","basvuru_dosyasi_sayisi":8}
-{"etkin_madde_adi":"pantoprazole ","basvuru_dosyasi_sayisi":1}
+{"etkin_madde_adi":"pantoprazole","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"pantoprazole sodium sesquihydrate","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"paracetamol","basvuru_dosyasi_sayisi":7}
 {"etkin_madde_adi":"paracetamol DC 96; dexketoprofen trometamol","basvuru_dosyasi_sayisi":1}
@@ -811,7 +811,8 @@
 {"etkin_madde_adi":"yttrium 90y citrate","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"zilucoplan","basvuru_dosyasi_sayisi":3}
 {"etkin_madde_adi":"zinc oxide; hamamelis virginiana","basvuru_dosyasi_sayisi":2}
-{"etkin_madde_adi":"zinc sulphate ","basvuru_dosyasi_sayisi":2}
+{"etkin_madde_adi":"zinc sulphate","basvuru_dosyasi_sayisi":2}
 {"etkin_madde_adi":"zinc sulphate; magnesium oxide","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"zolbetuximab","basvuru_dosyasi_sayisi":1}
 {"etkin_madde_adi":"zolpidem tartarate","basvuru_dosyasi_sayisi":1}
+{"etkin_madde_adi":null,"basvuru_dosyasi_sayisi":1889}
