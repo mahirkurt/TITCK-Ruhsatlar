@@ -4,7 +4,7 @@ Bu betik, TİTCK'dan indirilen çeşitli ham Excel dosyalarını okur,
 temizler, standardize eder ve yapay zeka modellerinin kullanabileceği
 temiz .jsonl formatında kaydeder.
 
-Nihai Sürüm - Tüm sütun adları ve özel kurallar doğrulanmıştır.
+Nihai Sürüm - Tüm kontroller, düzeltmeler ve özel kurallar eklenmiştir.
 """
 import pandas as pd
 from pathlib import Path
@@ -21,6 +21,7 @@ PROCESSED_DATA_DIR = BASE_DIR / "islenmis_veriler"
 RAW_DATA_DIR.mkdir(exist_ok=True)
 PROCESSED_DATA_DIR.mkdir(exist_ok=True)
 
+# --- Yardımcı Fonksiyonlar ---
 def get_file_path(filename):
     """Dosya yolunu oluşturur ve varlığını kontrol eder."""
     path = RAW_DATA_DIR / filename
@@ -29,41 +30,34 @@ def get_file_path(filename):
         return None
     return path
 
-def save_as_jsonl(df, output_filename):
+def save_as_jsonl(df, output_filename, original_filename=""):
     """DataFrame'i JSONL formatında kaydeder."""
     processed_file_path = PROCESSED_DATA_DIR / output_filename
     df.to_json(processed_file_path, orient='records', lines=True, force_ascii=False)
-    logging.info(f"-> Başarıyla '{output_filename}' olarak kaydedildi. ({len(df)} satır)")
+    logging.info(f"-> '{original_filename}' başarıyla '{output_filename}' olarak kaydedildi. ({len(df)} satır)")
 
 # ==============================================================================
-# İŞLEYİCİ FONKSİYONLAR
+# ÖZEL İŞLEYİCİ FONKSİYONLAR
 # ==============================================================================
 
 def process_ruhsatli_urunler():
     """Ruhsatlı ürünler listesini işler (Başlık Satırı: 2)."""
-    filepath = get_file_path("ruhsatli_ilaclar_listesi.xlsx")
+    filename = "ruhsatli_ilaclar_listesi.xlsx"
+    filepath = get_file_path(filename)
     if not filepath: return True
     
     sheet_name = "RUHSATLI ÜRÜNLER LİSTESİ"
-    logging.info(f"'{filepath.name}' -> '{sheet_name}' sayfası işleniyor...")
+    logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
-        column_map = {
-            'BARKOD': 'barkod', 
-            'ÜRÜN ADI': 'urun_adi', 
-            'ETKİN MADDE': 'etkin_madde', 
-            'ATC KODU': 'atc_kodu', 
-            'RUHSAT SAHİBİ FİRMA': 'ruhsat_sahibi_firma', 
-            'RUHSAT NUMARASI': 'ruhsat_no', 
-            'RUHSAT TARİHİ': 'ruhsat_tarihi'
-        }
-        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype={'BARKOD': str, 'RUHSAT NUMARASI': str})
+        column_map = {'BARKOD': 'barkod', 'ÜRÜN ADI': 'urun_adi', 'ETKİN MADDE': 'etkin_madde', 'ATC KODU': 'atc_kodu', 'RUHSAT SAHİBİ FİRMA': 'ruhsat_sahibi_firma'}
+        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype={'BARKOD': str})
         
         existing_cols = [col for col in column_map.keys() if col in df.columns]
         df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
 
-        save_as_jsonl(df, "ruhsatli_urunler.jsonl")
+        save_as_jsonl(df, "ruhsatli_urunler.jsonl", filename)
         return True
     except Exception as e:
         logging.error(f"'{sheet_name}' işlenirken KRİTİK HATA: {e}")
@@ -71,11 +65,12 @@ def process_ruhsatli_urunler():
 
 def process_etkin_maddeler():
     """Etkin madde listesini işler (Başlık Satırı: 6)."""
-    filepath = get_file_path("etkin_madde_listesi.xlsx")
+    filename = "etkin_madde_listesi.xlsx"
+    filepath = get_file_path(filename)
     if not filepath: return True
 
     sheet_name = "Sheet1"
-    logging.info(f"'{filepath.name}' -> '{sheet_name}' sayfası işleniyor...")
+    logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
         column_map = {'Etkin Madde Adı': 'etkin_madde_adi', 'Sayı': 'basvuru_dosyasi_sayisi'}
         df = pd.read_excel(filepath, sheet_name=sheet_name, header=5, skipfooter=1)
@@ -84,40 +79,31 @@ def process_etkin_maddeler():
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
 
-        save_as_jsonl(df, "etkin_maddeler.jsonl")
+        save_as_jsonl(df, "etkin_maddeler.jsonl", filename)
         return True
     except Exception as e:
         logging.error(f"'{sheet_name}' işlenirken KRİTİK HATA: {e}")
         return False
 
 def process_yurtdisi_etkin_maddeler():
-    """Yurtdışı etkin madde listesini özel kurallarla ve doğru sütun adlarıyla işler."""
-    filepath = get_file_path("yurtdisi_etkin_madde_listesi.xlsx")
+    """Yurtdışı etkin madde listesini özel kurallarla işler."""
+    filename = "yurtdisi_etkin_madde_listesi.xlsx"
+    filepath = get_file_path(filename)
     if not filepath: return True
         
     sheet_name = "YD-Etkin madde listesi"
-    logging.info(f"'{filepath.name}' -> '{sheet_name}' sayfası (özel kurallarla) işleniyor...")
+    logging.info(f"'{filename}' -> '{sheet_name}' sayfası (özel kurallarla) işleniyor...")
     try:
-        # DÜZELTİLMİŞ SÜTUN ADLARI (Ekran Görüntüsüne Göre)
         column_map = {
-            'Etkin Madde Kodu': 'etkin_madde_kodu', 
-            'Etkin Madde': 'etkin_madde', 
-            'Farmasötik Form': 'farmasotik_form', 
-            'ATC Kodu': 'atc_kodu', 
-            'ATC Adı': 'atc_adi', 
-            'Reçete Türü': 'recete_turu', 
-            'TİTCK YAZILI ONAYI OLMADAN İTHAL EDİLEMEYECEK İLAÇLAR LİSTESİNDE YER ALAN ETKİN MADDELER': 'titck_onayi_gerekliligi', 
-            'ICD10 Kodu': 'icd10_kodu', 
-            'ICD10 Adı': 'icd10_adi', 
-            'KULLANIM ŞARTLARI': 'kullanim_sartlari'
+            'Etkin Madde Kodu': 'etkin_madde_kodu', 'Etkin Madde': 'etkin_madde', 
+            'Farmasötik Form': 'farmasotik_form', 'ATC Kodu': 'atc_kodu', 'ATC Adı': 'atc_adi', 
+            'Reçete Türü': 'recete_turu', 'TİTCK YAZILI ONAYI OLMADAN İTHAL EDİLEMEYECEK İLAÇLAR LİSTESİNDE YER ALAN ETKİN MADDELER': 'titck_onayi_gerekliligi', 
+            'ICD10 Kodu': 'icd10_kodu', 'ICD10 Adı': 'icd10_adi', 'KULLANIM ŞARTLARI': 'kullanim_sartlari'
         }
 
         df = pd.read_excel(filepath, sheet_name=sheet_name, header=1)
         
         existing_cols = [col for col in column_map.keys() if col in df.columns]
-        if len(existing_cols) < len(column_map):
-             logging.warning(f"'{sheet_name}' sayfasındaki bazı sütunlar bulunamadı. Lütfen column_map'i kontrol edin.")
-        
         df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
@@ -125,10 +111,8 @@ def process_yurtdisi_etkin_maddeler():
         # Özel Dönüşüm Kuralları
         if 'titck_onayi_gerekliligi' in df.columns:
             df['titck_onayi_gerekliligi'] = np.where(df['titck_onayi_gerekliligi'] == 1, 'TİTCK Onayı Gerekir', 'TİTCK Onayı Gerekmez')
-        
         if 'icd10_adi' in df.columns:
             df['icd10_adi'] = df['icd10_adi'].astype(str).apply(lambda x: '; '.join([name.strip().capitalize() for name in str(x).split(';') if name.strip()]))
-        
         if 'kullanim_sartlari' in df.columns:
             def format_kullanim_sarti(text):
                 if not isinstance(text, str): return ""
@@ -136,7 +120,7 @@ def process_yurtdisi_etkin_maddeler():
                 return text.capitalize() if text else ""
             df['kullanim_sartlari'] = df['kullanim_sartlari'].astype(str).apply(format_kullanim_sarti)
         
-        save_as_jsonl(df, "yurtdisi_etkin_maddeler.jsonl")
+        save_as_jsonl(df, "yurtdisi_etkin_maddeler.jsonl", filename)
         return True
         
     except Exception as e:
@@ -147,11 +131,13 @@ def main():
     """Tüm veri temizleme işlemlerini yürüten ana fonksiyon."""
     logging.info("===== Veri Temizleme ve Standardizasyon Başlatıldı =====")
     
+    # Her bir dosya için ilgili fonksiyonu çağır
     results = [
         process_ruhsatli_urunler(),
         process_etkin_maddeler(),
         process_yurtdisi_etkin_maddeler(),
         # İhtiyaç duyduğunuz diğer dosyalar için benzer fonksiyonlar oluşturup buraya ekleyebilirsiniz.
+        # Örneğin: process_ilac_fiyat_listesi(), process_skrs_aktif_urunler() vb.
     ]
     
     if all(results):
@@ -161,5 +147,7 @@ def main():
         sys.exit(1)
 
 
+# Bu blok, betiğin `python data_cleaner.py` komutuyla çalıştırıldığında
+# yukarıdaki `main()` fonksiyonunu çağırmasını sağlar.
 if __name__ == "__main__":
     main()
