@@ -1,6 +1,6 @@
-requests
-beautifulsoup4
+# Dosya Adı: requirements.txt
+
 pandas
 openpyxl
-selenium
-undetected-chromedriver
+playwright
+requests
