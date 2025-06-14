@@ -46,9 +46,17 @@ def main():
             
             # KULLANICI NOTU: İndirme linkinin metnini veya benzersiz bir özelliğini buraya yazın.
             print("İndirme linki aranıyor...")
-            download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # ÖRNEKTİR
+            download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # <-- SADECE TIRNAK İÇİNİ DEĞİŞTİRİN
+            
             download_link_locator.wait_for(timeout=15000)
+            
+            # Hatanın olduğu satırın doğru hali:
             dynamic_url = download_link_locator.get_attribute("href")
             
             if dynamic_url.startswith('/'):
-                dynamic_url =
+                dynamic_url = f"https://www.titck.gov.tr{dynamic_url}"
+
+            print(f"Dinamik URL başarıyla bulundu: {dynamic_url}")
+            
+            all_cookies = page.context.cookies()
+            cookies_
