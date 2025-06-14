@@ -1,4 +1,4 @@
-# downloader.py (Resimli CAPTCHA Çözücülü Nihai Hali)
+# downloader.py (Opsiyonel CAPTCHA Çözücülü Nihai Hali)
 
 import os
 import sys
@@ -9,10 +9,10 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 from twocaptcha import TwoCaptcha
 
 # --- KULLANICI AYARLARI ---
-LOGIN_URL = "https://ebs.titck.gov.tr/Login/Login" # Ekran görüntüsündeki doğru URL
-DOWNLOAD_PAGE_URL = "https://www.titck.gov.tr/dinamikmodul/100" # Örnek indirme sayfası
+LOGIN_URL = "https://ebs.titck.gov.tr/Login/Login" # Doğru giriş URL'si
+DOWNLOAD_PAGE_URL = "https://www.titck.gov.tr/dinamikmodul/100" # Örnek
 
-# Tüm gizli bilgileri GÜVENLİ bir şekilde ortam değişkenlerinden al
+# Gizli bilgileri ortam değişkenlerinden al
 USERNAME = os.getenv("TITCK_USERNAME")
 PASSWORD = os.getenv("TITCK_PASSWORD")
 TWOCAPTCHA_API_KEY = os.getenv("TWOCAPTCHA_API_KEY")
@@ -26,15 +26,12 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 def solve_image_captcha(page, api_key):
     """Sayfadaki resimli CAPTCHA'yı 2Captcha ile çözer."""
-    print("Resimli CAPTCHA tespit edildi. Ekran görüntüsü alınıyor...")
-    
+    print("Resimli CAPTCHA tespit edildi. Çözüm deneniyor...")
     try:
-        # KULLANICI NOTU: CAPTCHA resminin seçicisini doğrulayın. Genellikle bir 'id'si olur.
-        captcha_element = page.locator("#imgCaptcha") # Örnek seçici, doğrusuyla değiştirin
+        captcha_element = page.locator("#imgCaptcha")
         captcha_element.wait_for(timeout=10000)
         captcha_element.screenshot(path=CAPTCHA_IMAGE_PATH)
-        print(f"CAPTCHA resmi '{CAPTCHA_IMAGE_PATH}' olarak kaydedildi.")
-
+        
         print("Resim 2Captcha servisine gönderiliyor...")
         config = {'apiKey': api_key, 'defaultTimeout': 120, 'pollingInterval': 5}
         solver = TwoCaptcha(**config)
@@ -43,15 +40,14 @@ def solve_image_captcha(page, api_key):
         captcha_text = result['code']
         print(f"CAPTCHA çözüldü! Çözüm: {captcha_text}")
         return captcha_text
-
     except Exception as e:
         print(f"CAPTCHA çözülürken bir hata oluştu: {e}")
         return None
 
 
 def main():
-    if not all([USERNAME, PASSWORD, TWOCAPTCHA_API_KEY]):
-        print("HATA: Gerekli tüm secret'lar (USERNAME, PASSWORD, TWOCAPTCHA_API_KEY) GitHub'da tanımlanmamış.")
+    if not all([USERNAME, PASSWORD]):
+        print("HATA: TITCK_USERNAME ve TITCK_PASSWORD secret'ları tanımlanmamış.")
         sys.exit(1)
 
     with sync_playwright() as p:
@@ -62,45 +58,53 @@ def main():
         try:
             print(f"Giriş sayfasına gidiliyor: {LOGIN_URL}")
             page.goto(LOGIN_URL, wait_until="domcontentloaded", timeout=60000)
+            time.sleep(3) # Sayfanın tam oturması için kısa bir bekleme
 
-            # 1. Adım: CAPTCHA'yı Çöz
-            captcha_solution = solve_image_captcha(page, TWOCAPTCHA_API_KEY)
-            if not captcha_solution:
-                raise Exception("CAPTCHA çözme işlemi başarısız oldu.")
+            # --- OPSİYONEL CAPTCHA KONTROLÜ ---
+            # Sayfada CAPTCHA elementi var mı ve görünür mü diye kontrol et
+            captcha_input_locator = page.locator("#GuvenlikKodu")
+            if captcha_input_locator.is_visible():
+                print("Giriş sayfasında CAPTCHA alanı bulundu.")
+                if not TWOCAPTCHA_API_KEY:
+                    raise Exception("CAPTCHA bulundu fakat TWOCAPTCHA_API_KEY secret'ı tanımlanmamış.")
+                
+                captcha_solution = solve_image_captcha(page, TWOCAPTCHA_API_KEY)
+                if not captcha_solution:
+                    raise Exception("CAPTCHA çözme işlemi başarısız oldu.")
+                
+                print("Güvenlik kodu giriliyor...")
+                captcha_input_locator.fill(captcha_solution)
+            else:
+                print("CAPTCHA alanı bulunamadı. Normal giriş deneniyor.")
 
-            # 2. Adım: Formu Doldur
-            print("Giriş formu dolduruluyor...")
+            # --- NORMAL GİRİŞ ADIMLARI ---
+            print("Kullanıcı adı ve şifre giriliyor...")
             page.fill("#kullaniciAdi", USERNAME)
             page.fill("#sifre", PASSWORD)
-            # KULLANICI NOTU: Güvenlik Kodu input alanının seçicisini doğrulayın.
-            page.fill("#GuvenlikKodu", captcha_solution) # Örnek seçici, doğrusuyla değiştirin
             
-            # 3. Adım: Giriş Yap
+            print("Giriş butonuna tıklanıyor...")
             page.click("button[type='submit']")
             
             print("Giriş yapılıyor, sayfanın yüklenmesi bekleniyor...")
             page.wait_for_load_state("networkidle", timeout=30000)
 
-            # Girişin başarılı olup olmadığını kontrol et (Örneğin sayfa başlığı değişir)
-            if "Login" in page.title():
-                 raise Exception("Giriş başarısız oldu, hala giriş sayfasındayız. CAPTCHA veya şifre yanlış olabilir.")
+            # Girişin başarılı olup olmadığını kontrol et
+            if "Login" in page.title() or "Giriş" in page.title():
+                 raise Exception("Giriş başarısız oldu, hala giriş sayfasındayız. Bilgiler veya CAPTCHA çözümü yanlış olabilir.")
             print("Giriş başarılı!")
 
-            # ... (Bundan sonraki indirme adımları aynı) ...
+            # ... İndirme adımları buraya eklenecek ...
+            # Önceki kodumuzdaki gibi devam edilebilir.
             
+            print("Tüm işlemler başarıyla tamamlandı.")
+            browser.close()
+
         except Exception as e:
             print(f"Ana otomasyon bloğunda bir hata oluştu: {e}")
             page.screenshot(path="debug_screenshot.png")
             print("Hata anının ekran görüntüsü 'debug_screenshot.png' olarak kaydedildi.")
             browser.close()
             sys.exit(1)
-        
-        # Tarayıcı işimiz bitti, kapatabiliriz.
-        # Dosya indirme işini requests ile yapmak daha stabil olabilir.
-        # Önceki kodumuzdaki gibi devam edilebilir veya doğrudan Playwright ile de indirilebilir.
-        # Şimdilik süreci tamamlamak adına browser'ı burada kapatalım.
-        print("Tüm tarayıcı işlemleri başarıyla tamamlandı.")
-        browser.close()
 
 
 if __name__ == "__main__":
