@@ -39,29 +39,37 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Adım: Playwright'in ihtiyaç duyduğu tarayıcıları kur (EN ÖNEMLİ ADIM)
+      # 4. Adım: Playwright'in ihtiyaç duyduğu tarayıcıları kur
       # Bu adım olmadan downloader.py çalışmaz.
       - name: Playwright Tarayıcılarını Kur
         run: playwright install --with-deps
 
-      # 5. Adım: Şifreli Fiyat Listesini İndir
-      - name: Güvenli Dosyayı İndir (downloader.py)
+      # 5. Adım: Şifreli Dosyayı İndir
+      - name: Adım 1 - Güvenli Dosyayı İndir (downloader.py)
+        id: download_step # Hata kontrolü için bu adıma bir ID veriyoruz
         env:
           # GitHub Secrets'ta tanımladığımız gizli bilgileri betiğe aktar
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
         run: python downloader.py
-      
-      # NOT: Diğer halka açık dosyaları da indirmek için (ruhsatlı ilaçlar vb.)
-      # basit bir 'public_downloader.py' betiği oluşturup bu adımdan sonra
-      # çalıştırabilirsiniz. Şimdilik bu dosyaların zaten repoda olduğunu varsayıyoruz.
 
-      # 6. Adım: Tüm Ham Verileri Temizle ve Standardize Et
-      - name: Verileri Temizle (data_cleaner.py)
+      # 6. Adım: Hata Durumunda Ekran Görüntüsünü Kaydet
+      - name: Hata Durumunda Ekran Görüntüsünü Yükle
+        # Sadece bir önceki 'download_step' adlı adım başarısız olduğunda çalışır
+        if: failure() && steps.download_step.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          # İndireceğiniz dosyanın adı bu olacak
+          name: hata-ekran-goruntusu
+          # Sanal makinede kaydedilen ekran görüntüsünün adı
+          path: debug_screenshot.png
+      
+      # 7. Adım: Tüm Ham Verileri Temizle
+      - name: Adım 2 - Verileri Temizle (data_cleaner.py)
         run: python data_cleaner.py
 
-      # 7. Adım: İşlenmiş Verileri Depoya Kaydet
-      - name: Değişiklikleri Depoya Gönder (Commit & Push)
+      # 8. Adım: İşlenmiş Verileri Depoya Kaydet
+      - name: Adım 3 - Değişiklikleri Depoya Gönder (Commit & Push)
         run: |
           # Git için bot kimliğini yapılandır
           git config --global user.name 'github-actions[bot]'
