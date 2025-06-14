@@ -1,48 +1,38 @@
-# Dosya Yolu: .github/workflows/main.yml (Nihai ve Basitleştirilmiş Sürüm)
+# Dosya Yolu: .github/workflows/main.yml (Modüler Çalışma için Güncellenmiş Sürüm)
 
 name: Veri Temizleme Otomasyonu
 
 on:
-  # 1. Ana dala (main/master) bir push yapıldığında çalışır.
-  # Yani, ham verileri güncellediğinizde otomatik olarak tetiklenir.
   push:
-    branches:
-      - main
-      - master
-
-  # 2. Manuel olarak da çalıştırabilmek için
+    branches: [ main, master ]
   workflow_dispatch:
-  
-  # 3. Zamanlanmış görev (isteğe bağlı)
   schedule:
-    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
+    - cron: '0 3 * * *'
 
 jobs:
   clean-data:
-    # GitHub'ın standart, hızlı ve ücretsiz sanal makinesini kullanıyoruz.
     runs-on: ubuntu-latest
     name: Veri Dosyalarını Temizle ve Güncelle
 
     steps:
-      # Adım 1: Depodaki kodları ve verileri sanal makineye klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
-      # Adım 2: Python ortamını kur
       - name: Python 3.9 Kurulumu
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
-      # Adım 3: Gerekli Python kütüphanelerini yükle
       - name: Bağımlılıkları Yükle
-        run: pip install -r requirements.txt
-      
-      # Adım 4: Veri Temizleme Betiğini Çalıştır
-      - name: data_cleaner.py Çalıştır
-        run: python data_cleaner.py
+        run: pip install pandas openpyxl numpy
 
-      # Adım 5: İşlenmiş Verileri Depoya Kaydet
+      - name: Veri Temizleme Betiklerini Çalıştır
+        run: |
+          python clean_ruhsatli.py
+          python clean_etkin_madde.py
+          python clean_yurtdisi_etkin_madde.py
+          # Diğer temizleme betikleri de buraya eklenebilir
+
       - name: Değişiklikleri Depoya Gönder
         run: |
           git config --global user.name 'github-actions[bot]'
