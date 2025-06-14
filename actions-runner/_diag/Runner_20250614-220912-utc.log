@@ -1,0 +1,94 @@
+[2025-06-14 22:09:12Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'Runner': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.runner'
+[2025-06-14 22:09:12Z INFO Listener] Runner is built for Windows (X64) - win-x64.
+[2025-06-14 22:09:12Z INFO Listener] RuntimeInformation: Microsoft Windows 10.0.26100.
+[2025-06-14 22:09:12Z INFO Listener] Version: 2.325.0
+[2025-06-14 22:09:12Z INFO Listener] Commit: 71ed7cd46223bd5d61633445946813012b502d54
+[2025-06-14 22:09:12Z INFO Listener] Culture: tr-TR
+[2025-06-14 22:09:12Z INFO Listener] UI Culture: tr-TR
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO Listener] Validating directory permissions for: 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO CommandLineParser] Parse
+[2025-06-14 22:09:12Z INFO CommandLineParser] Parsing 1 args
+[2025-06-14 22:09:12Z INFO CommandLineParser] parsing argument
+[2025-06-14 22:09:12Z INFO CommandLineParser] HasArgs: False
+[2025-06-14 22:09:12Z INFO CommandLineParser] Adding Command: remove
+[2025-06-14 22:09:12Z INFO Listener] Arguments parsed
+[2025-06-14 22:09:12Z INFO Runner] ExecuteCommand
+[2025-06-14 22:09:12Z INFO ConfigurationStore] currentAssemblyLocation: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin\Runner.Listener.dll
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] binPath: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] RootFolder: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'Runner': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.runner'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] ConfigFilePath: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.runner
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'MigratedRunner': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.runner_migrated'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] MigratedConfigFilePath: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.runner_migrated
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'Credentials': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] CredFilePath: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'MigratedCredentials': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials_migrated'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] MigratedCredFilePath: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials_migrated
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:09:12Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:09:12Z INFO HostContext] Well known config file 'Service': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.service'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] ServiceConfigFilePath: C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.service
+[2025-06-14 22:09:12Z INFO CommandSettings] Flag 'help': 'False'
+[2025-06-14 22:09:12Z INFO CommandSettings] Flag 'version': 'False'
+[2025-06-14 22:09:12Z INFO CommandSettings] Flag 'commit': 'False'
+[2025-06-14 22:09:12Z INFO CommandSettings] Flag 'check': 'False'
+[2025-06-14 22:09:12Z INFO CommandSettings] Command 'configure': 'False'
+[2025-06-14 22:09:12Z INFO CommandSettings] Command 'remove': 'True'
+[2025-06-14 22:09:12Z INFO CommandSettings] Flag 'local': 'False'
+[2025-06-14 22:09:12Z INFO ConfigurationStore] IsServiceConfigured()
+[2025-06-14 22:09:12Z INFO ConfigurationStore] IsServiceConfigured: False
+[2025-06-14 22:09:12Z INFO ConfigurationStore] IsConfigured()
+[2025-06-14 22:09:12Z INFO ConfigurationStore] IsConfigured: True
+[2025-06-14 22:09:12Z INFO ConfigurationStore] HasCredentials()
+[2025-06-14 22:09:12Z INFO ConfigurationStore] stored True
+[2025-06-14 22:09:12Z INFO ConfigurationStore] Read setting file: 396 chars
+[2025-06-14 22:09:12Z INFO CommandSettings] Arg 'token': ''
+[2025-06-14 22:09:12Z INFO CommandSettings] Flag 'unattended': 'False'
+[2025-06-14 22:09:12Z INFO PromptManager] ReadValue
+[2025-06-14 22:09:12Z INFO Terminal] WRITE: Enter runner remove token: 
+[2025-06-14 22:09:12Z INFO Terminal] READ SECRET
+[2025-06-14 22:10:20Z INFO Terminal] Read value: '***'
+[2025-06-14 22:10:21Z INFO ConfigurationManager] Http response code: OK from 'POST https://api.github.com/actions/runner-registration' (A45B:301D05:8973112:8DC7908:684DF34C)
+[2025-06-14 22:10:21Z INFO ConfigurationManager] cred retrieved via GitHub auth
+[2025-06-14 22:10:21Z INFO RunnerServer] EstablishVssConnection
+[2025-06-14 22:10:21Z INFO RunnerServer] Establish connection with 100 seconds timeout.
+[2025-06-14 22:10:21Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-06-14 22:10:21Z INFO RunnerServer] EstablishVssConnection
+[2025-06-14 22:10:21Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-06-14 22:10:21Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-06-14 22:10:21Z INFO RunnerServer] EstablishVssConnection
+[2025-06-14 22:10:21Z INFO RunnerServer] Establish connection with 60 seconds timeout.
+[2025-06-14 22:10:21Z INFO GitHubActionsService] Starting operation Location.GetConnectionData
+[2025-06-14 22:10:21Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-06-14 22:10:21Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-06-14 22:10:21Z INFO GitHubActionsService] Finished operation Location.GetConnectionData
+[2025-06-14 22:10:22Z INFO Terminal] WRITE LINE: 
+[2025-06-14 22:10:22Z INFO ConfigurationStore] IsConfigured()
+[2025-06-14 22:10:22Z INFO ConfigurationStore] IsConfigured: True
+[2025-06-14 22:10:22Z INFO ConfigurationStore] HasCredentials()
+[2025-06-14 22:10:22Z INFO ConfigurationStore] stored True
+[2025-06-14 22:10:22Z INFO HostContext] Well known directory 'Bin': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\bin'
+[2025-06-14 22:10:22Z INFO HostContext] Well known directory 'Root': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner'
+[2025-06-14 22:10:22Z INFO HostContext] Well known config file 'RSACredentials': 'C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials_rsaparams'
+[2025-06-14 22:10:22Z INFO RSAEncryptedFileKeyManager] Deleting RSA key parameters file C:\Users\mahir\OneDrive\Documents\TITCK-KUB-KT\actions-runner\.credentials_rsaparams
+[2025-06-14 22:10:22Z INFO Terminal] WRITE LINE: 
+[2025-06-14 22:10:22Z INFO Listener] Runner execution has finished with return code 0

@@ -1,7 +1,7 @@
-# Dosya Yolu: .github/workflows/main.yml
+# Dosya Yolu: .github/workflows/main.yml (Nihai Sürüm)
 
 # İş akışının GitHub arayüzünde görünecek adı
-name: Veri Temizleme ve Standardizasyon Otomasyonu
+name: Veri Temizleme Otomasyonu
 
 # Bu iş akışını neyin tetikleyeceğini belirler
 on:
@@ -15,16 +15,17 @@ on:
   # 2. Manuel olarak da çalıştırabilmek için
   workflow_dispatch:
   
-  # 3. Zamanlanmış görev: Her gece çalıştırıp güncel tutmak için
-  # Cron sözdizimi ile her gün 03:00 UTC'de çalışır.
+  # 3. Zamanlanmış görev (isteğe bağlı)
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
 
 jobs:
-  # "clean-and-commit-data" adında bir iş tanımlıyoruz
-  clean-and-commit-data:
-    # Bu işin çalışacağı sanal makine ortamı
+  # "clean-data" adında bir iş tanımlıyoruz
+  clean-data:
+    # --- EN ÖNEMLİ DEĞİŞİKLİK ---
+    # Artık GitHub'ın standart, hızlı ve ücretsiz sanal makinesini kullanıyoruz.
     runs-on: ubuntu-latest
+    # -----------------------------
 
     # İşin adımları (sırayla çalıştırılır)
     steps:
