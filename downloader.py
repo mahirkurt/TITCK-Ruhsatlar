@@ -46,11 +46,10 @@ def main():
             
             # KULLANICI NOTU: İndirme linkinin metnini veya benzersiz bir özelliğini buraya yazın.
             print("İndirme linki aranıyor...")
-            download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # <-- SADECE TIRNAK İÇİNİ DEĞİŞTİRİN
+            download_link_locator = page.locator("a:has-text('Detaylı Fiyat Listesi')") # ÖRNEKTİR
             
             download_link_locator.wait_for(timeout=15000)
             
-            # Hatanın olduğu satırın doğru hali:
             dynamic_url = download_link_locator.get_attribute("href")
             
             if dynamic_url.startswith('/'):
@@ -59,4 +58,39 @@ def main():
             print(f"Dinamik URL başarıyla bulundu: {dynamic_url}")
             
             all_cookies = page.context.cookies()
-            cookies_
+            cookies_dict = {cookie['name']: cookie['value'] for cookie in all_cookies}
+            print("Kimlik doğrulama çerezleri tarayıcıdan alındı.")
+            
+            browser.close()
+            print("Tarayıcı kapatıldı.")
+
+        except PlaywrightTimeoutError:
+            print(f"HATA: Belirtilen seçici veya sayfa zaman aşımına uğradı. Seçicileri veya URL'leri kontrol edin.")
+            browser.close()
+            sys.exit(1)
+        except Exception as e:
+            print(f"Tarayıcı otomasyonu sırasında bir hata oluştu: {e}")
+            browser.close()
+            sys.exit(1)
+
+        print("Dosya 'requests' kütüphanesi ile indiriliyor...")
+        try:
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36'}
+            response = requests.get(dynamic_url, cookies=cookies_dict, headers=headers)
+            response.raise_for_status()
+            
+            filename = dynamic_url.split('/')[-1]
+            if not filename or not filename.endswith((".xlsx", ".xls")):
+                filename = "indirilen_detayli_liste.xlsx"
+
+            output_path = OUTPUT_DIR / filename
+            with open(output_path, 'wb') as f:
+                f.write(response.content)
+            print(f"BAŞARILI! Dosya şuraya kaydedildi: {output_path}")
+            
+        except requests.exceptions.RequestException as e:
+            print(f"HATA: Dosya indirilirken bir sorun oluştu: {e}")
+            sys.exit(1)
+
+if __name__ == "__main__":
+    main()
