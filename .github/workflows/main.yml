@@ -1,64 +1,71 @@
-# Dosya Yolu: .github/workflows/main.yml (Windows Self-Hosted Runner Uyumlu Nihai Sürüm)
+# Dosya Yolu: .github/workflows/main.yml
 
-name: TİTCK Veri Otomasyonu (Self-Hosted Runner)
+# İş akışının GitHub arayüzünde görünecek adı
+name: Veri Temizleme ve Standardizasyon Otomasyonu
 
+# Bu iş akışını neyin tetikleyeceğini belirler
 on:
+  # 1. Ana dala (main/master) bir push yapıldığında çalışır.
+  # Yani, ham verileri güncellediğinizde otomatik olarak tetiklenir.
+  push:
+    branches:
+      - main
+      - master
+
+  # 2. Manuel olarak da çalıştırabilmek için
+  workflow_dispatch:
+  
+  # 3. Zamanlanmış görev: Her gece çalıştırıp güncel tutmak için
+  # Cron sözdizimi ile her gün 03:00 UTC'de çalışır.
   schedule:
     - cron: '0 3 * * *'
-  workflow_dispatch:
 
 jobs:
-  update-data:
-    runs-on: self-hosted
+  # "clean-and-commit-data" adında bir iş tanımlıyoruz
+  clean-and-commit-data:
+    # Bu işin çalışacağı sanal makine ortamı
+    runs-on: ubuntu-latest
 
+    # İşin adımları (sırayla çalıştırılır)
     steps:
+      # 1. Adım: Depodaki kodları ve verileri sanal makineye klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
-      - name: Python 3.9 Ortamını Ayarla
+      # 2. Adım: Python ortamını kur
+      - name: Python 3.9 Kurulumu
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
+      # 3. Adım: Gerekli Python kütüphanelerini yükle
       - name: Bağımlılıkları Yükle (requirements.txt)
-        # "shell: bash" satırları kaldırıldı. Artık varsayılan olan PowerShell kullanılacak.
-        run: python -m pip install -r requirements.txt
-        
-      - name: Playwright Tarayıcılarını Kur
-        run: python -m playwright install --with-deps
-
-      - name: Adım 1 - Güvenli Dosyayı İndir (downloader.py)
-        id: download_step
-        env:
-          TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
-          TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
-        run: python downloader.py
-
-      - name: Hata Durumunda Ekran Görüntüsünü Yükle
-        if: failure() && steps.download_step.outcome == 'failure'
-        uses: actions/upload-artifact@v4
-        with:
-          name: hata-ekran-goruntusu
-          path: debug_screenshot.png
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
       
-      - name: Adım 2 - Verileri Temizle (data_cleaner.py)
+      # 4. Adım: Veri Temizleme Betiğini Çalıştır
+      # Bu adım, data_cleaner.py'yi çalıştırarak ham verileri işler
+      # ve sonuçları "islenmis_veriler" klasörüne yazar.
+      - name: Verileri Temizle (data_cleaner.py)
         run: python data_cleaner.py
 
-      - name: Adım 3 - Değişiklikleri Depoya Gönder (Commit & Push)
-        # Bu adım zaten doğru şekilde PowerShell için yazılmıştı.
-        shell: powershell
+      # 5. Adım: İşlenmiş Verileri Depoya Kaydet
+      - name: Değişiklikleri Depoya Gönder (Commit & Push)
         run: |
+          # Git için bot kimliğini yapılandır
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Sadece 'islenmis_veriler' klasöründeki değişiklikleri ekle
           git add islenmis_veriler/
           
-          $gitStatus = git status --porcelain
-          
-          if ([string]::IsNullOrWhiteSpace($gitStatus)) {
-              Write-Host "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
-          } else {
-              Write-Host "Değişiklikler bulundu, commit atılıyor ve gönderiliyor..."
-              $TODAY = Get-Date -UFormat "%Y-%m-%d"
-              git commit -m "Otomatik Veri Güncelleme (Self-Hosted): $TODAY"
-              git push
-          }
+          # Eğer izlenen dosyalarda bir değişiklik yoksa, hiçbir şey yapma
+          if [[ -z $(git status --porcelain) ]]; then
+            echo "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
+          else
+            # Değişiklik varsa, bugünün tarihiyle commit at ve ana dala gönder
+            TODAY=$(date -u +"%Y-%m-%d")
+            git commit -m "Otomatik Veri Temizleme: $TODAY"
+            git push
+          fi
