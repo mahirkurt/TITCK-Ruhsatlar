@@ -1,67 +1,57 @@
 # Dosya Yolu: .github/workflows/main.yml
 
-# İş akışının GitHub arayüzünde görünecek adı
 name: TİTCK Veri Otomasyonu (Self-Hosted Runner)
 
-# Bu iş akışını neyin tetikleyeceğini belirler
 on:
   schedule:
-    # Zamanlanmış görev: Cron sözdizimi ile her gün 03:00 UTC'de çalışır.
-    # (Bu, Türkiye saati ile yazın 06:00, kışın 05:00'e denk gelir.)
     - cron: '0 3 * * *'
-  
-  # Manuel tetikleme: GitHub arayüzündeki "Actions" sekmesinden
-  # "Run workflow" butonu ile de istediğiniz zaman çalıştırabilirsiniz.
   workflow_dispatch:
 
 jobs:
-  # "update-data" adında bir iş tanımlıyoruz
   update-data:
-    # --- EN ÖNEMLİ DEĞİŞİKLİK BURADA ---
-    # Artık GitHub'ın sanal makinesini değil, bizim kendi
-    # bilgisayarımızı kullanmasını söylüyoruz.
     runs-on: self-hosted
-    # ------------------------------------
 
-    # İşin adımları (sırayla çalıştırılır)
     steps:
-      # 1. Adım: Depodaki kodları bilgisayarınızdaki runner çalışma alanına klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
-      # 2. Adım: (İsteğe bağlı ama önerilir) Belirli bir Python versiyonunu kullan
       - name: Python 3.9 Ortamını Ayarla
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
-      # 3. Adım: Gerekli Python kütüphanelerini yükle
-      # Bu komutlar bilgisayarınızda, runner'ın çalışma dizininde çalıştırılır.
       - name: Bağımlılıkları Yükle (requirements.txt)
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      # 4. Adım: Playwright'in ihtiyaç duyduğu tarayıcıları kur
-      # Bilgisayarınızda kurulu olsalar bile bu adımı burada tutmak,
-      # ortamın her zaman tutarlı olmasını sağlar.
+        run: python -m pip install -r requirements.txt
+        shell: bash # Bu ve sonraki basit komutlar için bash kullanmak daha tutarlı olabilir
+        
       - name: Playwright Tarayıcılarını Kur
         run: python -m playwright install --with-deps
+        shell: bash
 
-      # 5. Adım: Şifreli Dosyayı İndir
       - name: Adım 1 - Güvenli Dosyayı İndir (downloader.py)
+        id: download_step
         env:
-          # GitHub Secrets'ta tanımladığımız gizli bilgileri güvenle aktar
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
         run: python downloader.py
+        shell: bash
+
+      - name: Hata Durumunda Ekran Görüntüsünü Yükle
+        if: failure() && steps.download_step.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: hata-ekran-goruntusu
+          path: debug_screenshot.png
       
-      # 6. Adım: Tüm Ham Verileri Temizle
       - name: Adım 2 - Verileri Temizle (data_cleaner.py)
         run: python data_cleaner.py
+        shell: bash
 
-      # 7. Adım: İşlenmiş Verileri Depoya Kaydet
+      # --- DÜZELTİLEN ADIM BURASI ---
       - name: Adım 3 - Değişiklikleri Depoya Gönder (Commit & Push)
+        # Windows runner'ı varsayılan olarak PowerShell kullandığı için
+        # bu adımı PowerShell sözdiziminde yazıyoruz.
+        shell: powershell
         run: |
           # Git için bot kimliğini yapılandır
           git config --global user.name 'github-actions[bot]'
@@ -70,12 +60,16 @@ jobs:
           # Sadece 'islenmis_veriler' klasöründeki değişiklikleri ekle
           git add islenmis_veriler/
           
-          # Eğer izlenen dosyalarda bir değişiklik yoksa, hiçbir şey yapma
-          if [[ -z $(git status --porcelain) ]]; then
-            echo "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
-          else
-            # Değişiklik varsa, bugünün tarihiyle commit at ve ana dala gönder
-            TODAY=$(date -u +"%Y-%m-%d")
-            git commit -m "Otomatik Veri Güncelleme (Self-Hosted): $TODAY"
-            git push
-          fi
+          # Değişiklik olup olmadığını kontrol et
+          $gitStatus = git status --porcelain
+          
+          if ([string]::IsNullOrWhiteSpace($gitStatus)) {
+              # Eğer değişiklik yoksa, mesaj yaz ve çık
+              Write-Host "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
+          } else {
+              # Değişiklik varsa, commit at ve gönder
+              Write-Host "Değişiklikler bulundu, commit atılıyor ve gönderiliyor..."
+              $TODAY = Get-Date -UFormat "%Y-%m-%d"
+              git commit -m "Otomatik Veri Güncelleme (Self-Hosted): $TODAY"
+              git push
+          }
