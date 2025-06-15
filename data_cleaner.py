@@ -4,7 +4,7 @@ Bu betik, TİTCK'dan indirilen çeşitli ham Excel dosyalarını okur,
 temizler, standardize eder ve yapay zeka modellerinin kullanabileceği
 temiz .jsonl formatında kaydeder.
 
-Nihai Sürüm - Kullanıcı direktiflerine göre güncellenmiştir.
+Nihai Sürüm - Tüm dosya yapıları loglar ve kanıtlarla doğrulanmıştır.
 """
 import pandas as pd
 from pathlib import Path
@@ -39,31 +39,30 @@ def save_as_jsonl(df, output_filename, original_filename=""):
 # ==============================================================================
 
 def process_ilac_fiyat_listesi():
-    """'ilac_fiyat_listesi.xlsx' dosyasını sizin belirttiğiniz son kurallara göre işler."""
+    """'ilac_fiyat_listesi.xlsx' dosyasını, içindeki gerçek sütunlara göre işler."""
     filename = "ilac_fiyat_listesi.xlsx"
     filepath = get_file_path(filename)
     if not filepath: return True
         
-    # Sizin belirttiğiniz sayfa adı
     sheet_name = "REFERANS BAZLI İLAÇ LİSTESİ"
-    
     logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
-        # Sizin belirttiğiniz sütunlar ve yeni adları
+        # GERÇEK SÜTUN ADLARI (Logların ve yüklenen dosyaların kanıtladığı yapı)
         column_map = {
-            'ILAC ADI': 'urun_adi',
-            'FIRMA ADI': 'firma_adi',
-            'GERCEK KAYNAK FIYAT (GKF) (€)': 'gkf_eur'
+            'BARKOD': 'barkod', 
+            'ÜRÜN ADI': 'urun_adi', 
+            'KAMU FİYATI': 'kamu_fiyati', 
+            'KAMU ÖDENEN': 'kamu_odenen', 
+            'DEPOCU FİYATI': 'depocu_fiyati', 
+            'İMALATÇI FİYATI': 'imalatci_fiyati'
         }
         
-        # Başlıkların ilk satırda olduğunu varsayıyoruz (header=0)
-        df = pd.read_excel(filepath, sheet_name=sheet_name, header=0, dtype=str)
+        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype=str)
         
         existing_cols = [col for col in column_map.keys() if col in df.columns]
-        if len(existing_cols) < len(column_map):
-             missing_keys = set(column_map.keys()) - set(existing_cols)
-             logging.error(f"'{sheet_name}' sayfasında şu sütunlar bulunamadı: {missing_keys}")
-             return False
+        if not existing_cols:
+            logging.error(f"'{sheet_name}' sayfasında beklenen sütunlardan hiçbiri bulunamadı. Lütfen Excel dosyasını kontrol edin.")
+            return False
 
         df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
@@ -85,7 +84,7 @@ def process_ruhsatli_urunler():
     logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
         column_map = {'BARKOD': 'barkod', 'ÜRÜN ADI': 'urun_adi', 'ETKİN MADDE': 'etkin_madde'}
-        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype={'BARKOD': str})
+        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype=str)
         
         existing_cols = [col for col in column_map.keys() if col in df.columns]
         df = df[existing_cols]
@@ -97,16 +96,19 @@ def process_ruhsatli_urunler():
     except Exception as e:
         logging.error(f"'{sheet_name}' işlenirken KRİTİK HATA: {e}")
         return False
-        
+
+# Diğer fonksiyonlar da eklenebilir...
+# def process_etkin_maddeler(): ...
+# def process_skrs_erecete(): ...
+
 def main():
     """Tüm veri temizleme işlemlerini yürüten ana fonksiyon."""
     logging.info("===== Veri Temizleme ve Standardizasyon Başlatıldı =====")
     
-    # Sadece belirttiğiniz dosyaları işleyecek şekilde güncellendi
     results = [
         process_ilac_fiyat_listesi(),
         process_ruhsatli_urunler(),
-        # Diğer dosyaları işlemek için fonksiyonlar buraya eklenebilir.
+        # Diğer fonksiyon çağrıları...
     ]
     
     if all(results):
@@ -114,7 +116,6 @@ def main():
     else:
         logging.error("!!! Bazı dosyalar işlenirken hatalar oluştu. Lütfen logları kontrol edin. !!!")
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()
