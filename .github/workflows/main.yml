@@ -1,41 +1,52 @@
-# Dosya Yolu: .github/workflows/main.yml (Doğru Sıralama ile Nihai Sürüm)
+# Dosya Yolu: .github/workflows/main.yml (Nihai ve Sadece Veri Temizlemeye Odaklı Sürüm)
 
-name: TİTCK Veri Otomasyonu
+name: Veri Temizleme Otomasyonu
 
 on:
+  # 1. Ana dala (main/master) bir push yapıldığında çalışır.
   push:
     branches:
       - main
       - master
-  workflow_dispatch:
-  schedule:
-    - cron: '0 3 * * *'
 
+  # 2. Manuel olarak da çalıştırabilmek için
+  workflow_dispatch:
+  
+  # 3. Zamanlanmış görev (isteğe bağlı)
+  schedule:
+    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
+
+# İş akışına deponun içeriğini değiştirme (yazma) izni verir.
 permissions:
   contents: write
 
 jobs:
-  # Bu iş, halka açık verileri temizler
+  # Sadece tek bir işimiz var: Veri Temizleme
   veri-temizleme:
+    # GitHub'ın standart, hızlı ve ücretsiz Linux sanal makinesini kullanıyoruz.
     runs-on: ubuntu-latest
     name: Veri Dosyalarını Temizle ve Güncelle
 
     steps:
+      # Adım 1: Depodaki kodları ve verileri sanal makineye klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
 
+      # Adım 2: Python ortamını kur
       - name: Python 3.9 Kurulumu
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
-      - name: Bağımlılıkları Yükle (requirements.txt)
-        # ÖNCE kütüphaneleri kuruyoruz
-        run: python -m pip install -r requirements.txt
-
-      - name: Veri Temizleme Betiğini Çalıştır
+      # Adım 3: Gerekli Python kütüphanelerini yükle
+      - name: Bağımlılıkları Yükle
+        run: pip install -r requirements.txt
+      
+      # Adım 4: Veri Temizleme Betiğini Çalıştır
+      - name: data_cleaner.py Çalıştır
         run: python data_cleaner.py
 
+      # Adım 5: İşlenmiş Verileri Depoya Kaydet
       - name: Değişiklikleri Depoya Gönder
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -48,41 +59,3 @@ jobs:
             git commit -m "Otomatik Veri Temizleme: $TODAY"
             git push
           fi
-          
-  # Bu iş, şifreli dosyayı indirmeyi dener
-  guvenli-veri-indirme:
-    runs-on: ubuntu-latest
-    name: (Deneysel) Güvenli Veri İndirme
-    continue-on-error: true
-
-    steps:
-      - name: Depoyu Klonla
-        uses: actions/checkout@v4
-
-      - name: Python 3.9 Kurulumu
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-
-      - name: Tam Bağımlılıkları Yükle
-        # ÖNCE kütüphaneleri kuruyoruz
-        run: python -m pip install -r requirements.txt
-
-      - name: Playwright Tarayıcılarını Kur
-        # SONRA kütüphanenin komutunu çalıştırıyoruz
-        run: python -m playwright install --with-deps
-
-      - name: Güvenli Dosyayı İndirmeyi Dene (downloader.py)
-        id: download_step
-        env:
-          TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
-          TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
-          TWOCAPTCHA_API_KEY: ${{ secrets.TWOCAPTCHA_API_KEY }}
-        run: python downloader.py
-
-      - name: Hata Durumunda Ekran Görüntüsünü Yükle
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: guvenli-downloader-hata-goruntusu
-          path: debug_screenshot.png

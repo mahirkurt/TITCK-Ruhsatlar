@@ -2,8 +2,3 @@
 pandas
 openpyxl
 numpy
-playwright
-playwright-stealth
-requests
-2captcha-python
-setuptools
