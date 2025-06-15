@@ -1,15 +1,11 @@
-# -*- coding: utf-8 -*-
-"""
-Bu betik, TİTCK'dan indirilen çeşitli ham Excel dosyalarını okur,
-temizler, standardize eder ve yapay zeka modellerinin kullanabileceği
-temiz .jsonl formatında kaydeder.
+# Dosya Adı: data_cleaner.py
 
-Nihai Sürüm - Sadece mevcut dosyaları işler.
-"""
 import pandas as pd
 from pathlib import Path
 import sys
 import logging
+import re
+import numpy as np
 
 # --- Loglama ve Klasör Kurulumu ---
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] - %(message)s", stream=sys.stdout)
@@ -19,44 +15,39 @@ PROCESSED_DATA_DIR = BASE_DIR / "islenmis_veriler"
 RAW_DATA_DIR.mkdir(exist_ok=True)
 PROCESSED_DATA_DIR.mkdir(exist_ok=True)
 
-def process_ruhsatli_urunler():
-    """Ruhsatlı ürünler listesini işler."""
-    filename = "ruhsatli_ilaclar_listesi.xlsx"
-    filepath = RAW_DATA_DIR / filename
+
+def process_file(config):
+    """Genel bir dosya işleme fonksiyonu."""
+    input_filename = config["input_filename"]
+    sheet_name = config["sheet_name"]
+    output_filename = config["output_filename"]
+    header_row = config["header_row"]
+    column_map = config["column_map"]
     
+    filepath = RAW_DATA_DIR / input_filename
     if not filepath.exists():
         logging.warning(f"Kaynak dosya bulunamadı, atlanıyor: {filepath}")
-        return True # Dosya yoksa başarılı say, devam et
+        return True
     
-    sheet_name = "RUHSATLI ÜRÜNLER LİSTESİ"
-    logging.info(f"'{filename}' -> '{sheet_name}' sayfası işleniyor...")
+    logging.info(f"'{input_filename}' -> '{sheet_name}' sayfası işleniyor...")
     try:
-        # Sadece var olan ve ihtiyaç duyulan temel sütunlar
-        column_map = {
-            'BARKOD': 'barkod', 
-            'ÜRÜN ADI': 'urun_adi', 
-            'ETKİN MADDE': 'etkin_madde', 
-            'ATC KODU': 'atc_kodu', 
-            'RUHSAT SAHİBİ FİRMA': 'ruhsat_sahibi_firma'
-        }
+        df = pd.read_excel(filepath, sheet_name=sheet_name, header=header_row, dtype=str)
         
-        # Başlıkların 2. satırda olduğunu biliyoruz (header=1)
-        df = pd.read_excel(filepath, sheet_name=sheet_name, header=1, dtype={'BARKOD': str})
-        
-        # Dosyada var olan ve bizim istediğimiz sütunları al
         existing_cols = [col for col in column_map.keys() if col in df.columns]
         if not existing_cols:
-            logging.error(f"'{sheet_name}' sayfasında belirtilen sütunlardan hiçbiri bulunamadı.")
+            logging.error(f"'{sheet_name}' sayfasında belirtilen sütunlardan hiçbiri bulunamadı. Lütfen Excel dosyasını ve column_map'i kontrol edin.")
             return False
-            
+
         df = df[existing_cols]
         df.rename(columns=column_map, inplace=True)
         df.dropna(how='all', inplace=True)
+        
+        for col in df.select_dtypes(include=['object']).columns:
+            df[col] = df[col].str.strip()
 
-        # Temizlenmiş dosyayı kaydet
-        processed_file_path = PROCESSED_DATA_DIR / "ruhsatli_urunler.jsonl"
+        processed_file_path = PROCESSED_DATA_DIR / output_filename
         df.to_json(processed_file_path, orient='records', lines=True, force_ascii=False)
-        logging.info(f"-> '{filename}' başarıyla 'ruhsatli_urunler.jsonl' olarak kaydedildi. ({len(df)} satır)")
+        logging.info(f"-> Başarıyla '{output_filename}' olarak kaydedildi. ({len(df)} satır)")
         return True
     except Exception as e:
         logging.error(f"'{sheet_name}' işlenirken KRİTİK HATA: {e}")
@@ -66,15 +57,35 @@ def main():
     """Tüm veri temizleme işlemlerini yürüten ana fonksiyon."""
     logging.info("===== Veri Temizleme ve Standardizasyon Başlatıldı =====")
     
-    # Sadece ve sadece ruhsatli_urunler fonksiyonunu çağırıyoruz.
-    success = process_ruhsatli_urunler()
+    files_to_process = [
+        {
+            "input_filename": "ilac_fiyat_listesi.xlsx",
+            "sheet_name": "REFERANS BAZLI İLAÇ LİSTESİ",
+            "output_filename": "ilac_fiyatlari.jsonl",
+            "header_row": 1,
+            "column_map": {
+                'ILAC ADI': 'urun_adi',
+                'FIRMA ADI': 'firma_adi',
+                'GERCEK KAYNAK FIYAT (GKF) (€)': 'gkf_eur'
+            }
+        },
+        {
+            "input_filename": "ruhsatli_ilaclar_listesi.xlsx",
+            "sheet_name": "RUHSATLI ÜRÜNLER LİSTESİ",
+            "output_filename": "ruhsatli_urunler.jsonl",
+            "header_row": 1,
+            "column_map": {'BARKOD': 'barkod', 'ÜRÜN ADI': 'urun_adi', 'ETKİN MADDE': 'etkin_madde', 'ATC KODU': 'atc_kodu', 'RUHSAT SAHİBİ FİRMA': 'ruhsat_sahibi_firma'}
+        }
+        # İhtiyaç duyduğunuz diğer dosyaları bu listeye ekleyebilirsiniz.
+    ]
     
-    if success:
-        logging.info("===== İşlem Başarıyla Tamamlandı =====")
+    results = [process_file(config) for config in files_to_process]
+    
+    if all(results):
+        logging.info("===== Tüm Dosyalar Başarıyla İşlendi =====")
     else:
-        logging.error("!!! İşlem sırasında bir hata oluştu. Lütfen logları kontrol edin. !!!")
+        logging.error("!!! Bazı dosyalar işlenirken hatalar oluştu. Lütfen logları kontrol edin. !!!")
         sys.exit(1)
-
 
 if __name__ == "__main__":
     main()

@@ -1,52 +1,26 @@
-# Dosya Yolu: .github/workflows/main.yml (Nihai ve Sadece Veri Temizlemeye Odaklı Sürüm)
-
+# Dosya Yolu: .github/workflows/main.yml
 name: Veri Temizleme Otomasyonu
-
 on:
-  # 1. Ana dala (main/master) bir push yapıldığında çalışır.
   push:
-    branches:
-      - main
-      - master
-
-  # 2. Manuel olarak da çalıştırabilmek için
+    branches: [ main, master ]
   workflow_dispatch:
-  
-  # 3. Zamanlanmış görev (isteğe bağlı)
-  schedule:
-    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
-
-# İş akışına deponun içeriğini değiştirme (yazma) izni verir.
 permissions:
   contents: write
-
 jobs:
-  # Sadece tek bir işimiz var: Veri Temizleme
-  veri-temizleme:
-    # GitHub'ın standart, hızlı ve ücretsiz Linux sanal makinesini kullanıyoruz.
+  clean-data:
     runs-on: ubuntu-latest
     name: Veri Dosyalarını Temizle ve Güncelle
-
     steps:
-      # Adım 1: Depodaki kodları ve verileri sanal makineye klonla
       - name: Depoyu Klonla
         uses: actions/checkout@v4
-
-      # Adım 2: Python ortamını kur
       - name: Python 3.9 Kurulumu
         uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-
-      # Adım 3: Gerekli Python kütüphanelerini yükle
       - name: Bağımlılıkları Yükle
         run: pip install -r requirements.txt
-      
-      # Adım 4: Veri Temizleme Betiğini Çalıştır
       - name: data_cleaner.py Çalıştır
         run: python data_cleaner.py
-
-      # Adım 5: İşlenmiş Verileri Depoya Kaydet
       - name: Değişiklikleri Depoya Gönder
         run: |
           git config --global user.name 'github-actions[bot]'
