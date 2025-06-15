@@ -1,6 +1,6 @@
-# Dosya Yolu: .github/workflows/main.yml (Nihai Çalışma Sürümü)
+# Dosya Yolu: .github/workflows/main.yml (PATH Sorunu Düzeltilmiş Nihai Sürüm)
 
-name: Veri Temizleme Otomasyonu
+name: TİTCK Veri Otomasyonu
 
 on:
   push:
@@ -15,7 +15,8 @@ permissions:
   contents: write
 
 jobs:
-  clean-data:
+  # Bu iş, halka açık verileri temizler
+  veri-temizleme:
     runs-on: ubuntu-latest
     name: Veri Dosyalarını Temizle ve Güncelle
 
@@ -29,9 +30,9 @@ jobs:
           python-version: '3.9'
 
       - name: Bağımlılıkları Yükle
-        run: pip install pandas openpyxl
-      
-      - name: Verileri Temizle (data_cleaner.py)
+        run: python -m pip install -r requirements.txt
+
+      - name: Veri Temizleme Betiğini Çalıştır
         run: python data_cleaner.py
 
       - name: Değişiklikleri Depoya Gönder
@@ -46,3 +47,40 @@ jobs:
             git commit -m "Otomatik Veri Temizleme: $TODAY"
             git push
           fi
+          
+  # Bu iş, şifreli dosyayı indirmeyi dener
+  guvenli-veri-indirme:
+    runs-on: ubuntu-latest
+    name: (Deneysel) Güvenli Veri İndirme
+    continue-on-error: true
+
+    steps:
+      - name: Depoyu Klonla
+        uses: actions/checkout@v4
+
+      - name: Python 3.9 Kurulumu
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Tam Bağımlılıkları Yükle
+        run: python -m pip install -r requirements.txt
+
+      - name: Playwright Tarayıcılarını Kur
+        # 'playwright' komutunu Python modülü olarak çalıştırarak PATH sorununu çöz
+        run: python -m playwright install --with-deps
+
+      - name: Güvenli Dosyayı İndirmeyi Dene (downloader.py)
+        id: download_step
+        env:
+          TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
+          TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
+          TWOCAPTCHA_API_KEY: ${{ secrets.TWOCAPTCHA_API_KEY }}
+        run: python downloader.py
+
+      - name: Hata Durumunda Ekran Görüntüsünü Yükle
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: guvenli-downloader-hata-goruntusu
+          path: debug_screenshot.png
