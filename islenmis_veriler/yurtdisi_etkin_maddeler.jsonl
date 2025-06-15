@@ -1,377 +1,376 @@
-{"etkin_madde_kodu":"YDS01EB0599","etkin_madde":"physostigmine","farmasotik_form":"vial","atc_kodu":"S01EB05","atc_adi":"physostigmine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA05BA0399","etkin_madde":"silibinin","farmasotik_form":"vial","atc_kodu":"A05BA03","atc_adi":"silibinin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB9999","etkin_madde":"(RS)-2,3-bis(sulphanyl)propane-1-sulphonic acid, sodium salt-monohydrate","farmasotik_form":"capsule","atc_kodu":"V03AB","atc_adi":"antidotes","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX0599","etkin_madde":"3,4- diaminopyridine","farmasotik_form":"tablet","atc_kodu":"N07XX05","atc_adi":"amifampridine ","recete_turu":"Normal","icd10_kodu":"G70.2;G73.1","icd10_adi":"Konjenital ve gelişimsel miyastenia; Eaton-lambert sendromu"}
-{"etkin_madde_kodu":"YDB05AA0699","etkin_madde":"4% succinylated gelatine","farmasotik_form":"vial","atc_kodu":"B05AA06","atc_adi":"gelatin agents ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XD0499","etkin_madde":"5-aminolevulinic acid","farmasotik_form":"oral solution","atc_kodu":"L01XD04","atc_adi":"aminolevulinic acid","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDD05BA0299","etkin_madde":"8-methoxypsoralen","farmasotik_form":"vial","atc_kodu":"D05BA02","atc_adi":"methoxsalen","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA05AA0399","etkin_madde":"acide cholique","farmasotik_form":"capsule","atc_kodu":"A05AA03","atc_adi":"cholic acid ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN06DX0399","etkin_madde":"aducanumab","farmasotik_form":"vial","atc_kodu":"N06DX03","atc_adi":"aducanumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01BA0599","etkin_madde":"ajmaline","farmasotik_form":"vial","atc_kodu":"C01BA05","atc_adi":"ajmaline","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01CD9999","etkin_madde":"albumin bound paclitaxel","farmasotik_form":"vial","atc_kodu":"L01CD","atc_adi":"taxanes","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB0799","etkin_madde":"alglucosidase alfa","farmasotik_form":"vial","atc_kodu":"A16AB07","atc_adi":"alglucosidase alfa","recete_turu":"Normal","icd10_kodu":"E74.0","icd10_adi":"Glikojen depo hastalıkları"}
-{"etkin_madde_kodu":"YDC01EA0199","etkin_madde":"alprostadil (prostaglandin e1)","farmasotik_form":"urethral stick","atc_kodu":"C01EA01","atc_adi":"alprostadil","recete_turu":"Normal","icd10_kodu":"N52;N48","icd10_adi":"Erektil disfonksiyon; Penisin diğer bozuklukları"}
-{"etkin_madde_kodu":"YDN04BB0199","etkin_madde":"amantadine hydrochloride","farmasotik_form":"tablet","atc_kodu":"N04BB01","atc_adi":"amantadine ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07AA3099","etkin_madde":"ambenonium chloride","farmasotik_form":"tablet","atc_kodu":"N07AA30","atc_adi":"ambenonium","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ01GB0699","etkin_madde":"amikacin liposomal","farmasotik_form":"inhalation solution","atc_kodu":"J01GB06","atc_adi":"amikacin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC03DB0199","etkin_madde":"amiloride","farmasotik_form":"tablet","atc_kodu":"C03DB01","atc_adi":"amiloride","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDD11AX9999","etkin_madde":"aminobenzoate potassium","farmasotik_form":"capsule, powder","atc_kodu":"D11AX","atc_adi":"other dermatologicals","recete_turu":"Normal","icd10_kodu":"N48.6;N48.8","icd10_adi":"Balanit kserotika obliterans; Penisin diğer tanımlanmış bozuklukları"}
-{"etkin_madde_kodu":"YDL01FX1899","etkin_madde":"amivantamab","farmasotik_form":"vial","atc_kodu":"L01FX18","atc_adi":"amivantamab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN06BA0199","etkin_madde":"amphetamine, dextroamphetamine mixed salts","farmasotik_form":"tablet, capsul","atc_kodu":"N06BA01","atc_adi":"amfetamine","recete_turu":"Kırmızı","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX0199","etkin_madde":"amsacrine","farmasotik_form":"vial","atc_kodu":"L01XX01","atc_adi":"amsacrine","recete_turu":"Normal","icd10_kodu":"C92.0;C91.0","icd10_adi":"Akut myeloid lösemi; Akut lenfoblastik lösemi"}
-{"etkin_madde_kodu":"YDG03BB0299","etkin_madde":"androstanolone","farmasotik_form":"gel","atc_kodu":"G03BB02","atc_adi":"androstanolone ","recete_turu":"Normal","icd10_kodu":"Q55;Q56.4;E29.1;E29.8;E29.9","icd10_adi":"Erkek genital organlarının diğer konjenital malformasyonları; Ambiguous genitalia; Testiküler hipofonksiyon; Testiküler fonksiyon bozukluğu, diğer; Testiküler fonksiyon bozukluğu, tanımlanmamış"}
-{"etkin_madde_kodu":"YDS01AE0399","etkin_madde":"apraclonidine hydrochloride","farmasotik_form":"eye drop","atc_kodu":"S01AE03","atc_adi":"apraclonidine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB05XB0199","etkin_madde":"arginine hydrochloride","farmasotik_form":"vial","atc_kodu":"B05XB01","atc_adi":"arginine hydrochloride","recete_turu":"Normal","icd10_kodu":"Üre siklus metabolizması bozuklukları;Metabolik bozukluklar, diğer","icd10_adi":"E72.2; E88"}
-{"etkin_madde_kodu":"YDP01BF0199","etkin_madde":"artemether and lumefantrine","farmasotik_form":"tablet","atc_kodu":"P01BF01","atc_adi":"artemether and lumefantrine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01BE0399","etkin_madde":"artesunate","farmasotik_form":"vial","atc_kodu":"P01BE03","atc_adi":"artesunate","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05AH0599","etkin_madde":"asenapine","farmasotik_form":"sublingual tablet","atc_kodu":"N05AH05","atc_adi":"asenapine ","recete_turu":"Yeşil","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB1399","etkin_madde":"asfotase alfa","farmasotik_form":"vial","atc_kodu":"A16AB13","atc_adi":"asfotase alfa","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX0299","etkin_madde":"asparaginase erwinia chrysanthemi","farmasotik_form":"vial","atc_kodu":"L01XX02","atc_adi":"asparaginase","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM09AX0399","etkin_madde":"ataluren","farmasotik_form":"granules for oral suspension","atc_kodu":"M09AX03","atc_adi":"ataluren","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01AX0699","etkin_madde":"atovaquone","farmasotik_form":"oral solution","atc_kodu":"P01AX06","atc_adi":" atovaquone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01BB5199","etkin_madde":"atovaquone and proguanil hydrochloride","farmasotik_form":"tablet","atc_kodu":"P01BB51","atc_adi":"proguanil, combinations ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA03BA0199","etkin_madde":"atropine sulfate","farmasotik_form":"eye drop","atc_kodu":"A03BA01","atc_adi":"atropine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX1899","etkin_madde":"avapritinib","farmasotik_form":"tablet","atc_kodu":"L01EX18","atc_adi":"avapritinib ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB02BX0899","etkin_madde":"avatrombopag","farmasotik_form":"tablet","atc_kodu":"B02BX08","atc_adi":"avatrombopag","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AX0399","etkin_madde":"bacillus calmette-guerin(bcg) strains","farmasotik_form":"vaccine (injection)","atc_kodu":"L03AX03","atc_adi":"BCG vaccine","recete_turu":"Normal","icd10_kodu":"C67","icd10_adi":"Malign mesane neoplazmı"}
-{"etkin_madde_kodu":"YDL03AX0398","etkin_madde":"bacillus calmette-guerin(bcg), danish strain 1331","farmasotik_form":"vaccine (injection)","atc_kodu":"L03AX03","atc_adi":"BCG vaccine","recete_turu":"Normal","icd10_kodu":"C67","icd10_adi":"Malign mesane neoplazmı"}
-{"etkin_madde_kodu":"YDV08BA0299","etkin_madde":"barium sulfate","farmasotik_form":"oral suspension","atc_kodu":"V08BA02","atc_adi":"barium sulfate without suspending agents","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XC3999","etkin_madde":"belantamab mafodotin","farmasotik_form":"vial","atc_kodu":"L01XC39","atc_adi":"belantamab mafodotin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX4999","etkin_madde":"belinostat","farmasotik_form":"vial","atc_kodu":"L01XX49","atc_adi":"belinostat","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL04AA4899","etkin_madde":"belumosidil","farmasotik_form":"tablet","atc_kodu":"L04AA48","atc_adi":"belumosudil","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX7499","etkin_madde":"belzutifan","farmasotik_form":"tablet","atc_kodu":"L01XX74","atc_adi":"belzutifan","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AA0699","etkin_madde":"betaine anhydrous","farmasotik_form":"oral solution","atc_kodu":"A16AA06","atc_adi":"betaine","recete_turu":"Normal","icd10_kodu":"E72","icd10_adi":"Amino-asit metabolizmasının\n diğer bozuklukları"}
-{"etkin_madde_kodu":"YDA16AA0696","etkin_madde":"betaine anhydrous","farmasotik_form":"powder","atc_kodu":"A16AA06","atc_adi":"betaine","recete_turu":"Normal","icd10_kodu":"E72","icd10_adi":"Amino-asit metabolizmasının\n diğer bozuklukları"}
-{"etkin_madde_kodu":"YDA16AA0698","etkin_madde":"betaine hydrochloride","farmasotik_form":"powder","atc_kodu":"A16AA06","atc_adi":"betaine","recete_turu":"Normal","icd10_kodu":"E72","icd10_adi":"Amino-asit metabolizmasının\n diğer bozuklukları"}
-{"etkin_madde_kodu":"YDA16AA0697","etkin_madde":"betaine hydrochloride","farmasotik_form":"oral solution","atc_kodu":"A16AA06","atc_adi":"betaine","recete_turu":"Normal","icd10_kodu":"E72","icd10_adi":"Amino-asit metabolizmasının\n diğer bozuklukları"}
-{"etkin_madde_kodu":"YDN07AB0299","etkin_madde":"bethanechol chloride","farmasotik_form":"tablet","atc_kodu":"N07AB02","atc_adi":"bethanechol","recete_turu":"Normal","icd10_kodu":"N31","icd10_adi":"Mesanenin nöromusküler fonksiyon bozukluğu, başka yerde sınıflanmamış"}
-{"etkin_madde_kodu":"YDD03AX1399","etkin_madde":"betula pendula roth, betula pubescens ehrh","farmasotik_form":"gel","atc_kodu":"D03AX13","atc_adi":"betulae cortex  ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XE4199","etkin_madde":"binimetinib","farmasotik_form":"tablet","atc_kodu":"L01XE41","atc_adi":"binimetinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ06AA0499","etkin_madde":"botulinum antitoxin-A, B, C, D, E, F, G","farmasotik_form":"vial","atc_kodu":"J06AA04","atc_adi":"botulinum antitoxin ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDS01LA0699","etkin_madde":"brolucizumab","farmasotik_form":"vial","atc_kodu":"S01LA06","atc_adi":"brolucizumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AX2899","etkin_madde":"bulevirtide","farmasotik_form":"vial","atc_kodu":"J05AX28","atc_adi":"bulevirtide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC03CA0299","etkin_madde":"bumetanide","farmasotik_form":"tablet","atc_kodu":"C03CA02","atc_adi":"bumetanide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM05BX0599","etkin_madde":"burosumab","farmasotik_form":"vial","atc_kodu":"M05BX05","atc_adi":"burosumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN02BG1099","etkin_madde":"cannabidiol","farmasotik_form":"oral solution","atc_kodu":"N02BG10","atc_adi":"cannabinoids ","recete_turu":"Kırmızı","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX2799","etkin_madde":"capivasertib","farmasotik_form":"tablet","atc_kodu":"L01EX27","atc_adi":"capivasertib ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB01AX0799","etkin_madde":"caplacizumab-YHDP","farmasotik_form":"vial","atc_kodu":"B01AX07","atc_adi":"caplacizumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX1799","etkin_madde":"capmatinib","farmasotik_form":"tablet","atc_kodu":"L01EX17","atc_adi":"capmatinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN01BX0499","etkin_madde":"capsaicin","farmasotik_form":"transdermal therapeutic system (TTS)","atc_kodu":"N01BX04","atc_adi":"capsaicin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG02AD0499","etkin_madde":"carboprost tromethamine","farmasotik_form":"vial","atc_kodu":"G02AD04","atc_adi":"carboprost","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XC9999","etkin_madde":"cemiplimab","farmasotik_form":"vial","atc_kodu":"L01XC","atc_adi":" monoclonal antibodies","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDS01XA2499","etkin_madde":"cenegermin","farmasotik_form":"eye drop","atc_kodu":"S01XA24","atc_adi":"cenegermin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB1799","etkin_madde":"cerliponase alfa","farmasotik_form":"vial (intraventricular injection)","atc_kodu":"A16AB17","atc_adi":"cerliponase alfa","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07AX0399","etkin_madde":"cevimeline hydrochloride","farmasotik_form":"tablet, capsul","atc_kodu":"N07AX03","atc_adi":"cevimeline","recete_turu":"Normal","icd10_kodu":"M35.0","icd10_adi":"Sikka sendromu [sjögren]"}
-{"etkin_madde_kodu":"YDV06DX9999","etkin_madde":"cholesterol, carbonhydrate (cholesterol, dried glucose syrup)","farmasotik_form":"powder","atc_kodu":"V06DX","atc_adi":"other combinations of nutrients","recete_turu":"Normal","icd10_kodu":"E78;E88.8;E88.9","icd10_adi":"Lipoprotein metabolizması bozuklukları\n ve diğer lipidemiler; Metabolik bozukluklar diğer tanımlanmamış; Metabolik bozukluklar, tanımlanmamış"}
-{"etkin_madde_kodu":"YDC10AC0199","etkin_madde":"cholestyramine ","farmasotik_form":"powder","atc_kodu":"C10AC01","atc_adi":"colestyramine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB05XA3199","etkin_madde":"Chromium trichloride hexahydrate, Copper chloride dihydrate, Iron (III) chloride hexahydrate, Manganese chloride tetrahydrate, Potassium iodide, Sodium fluoride, Sodium molybdate dihydrate, Sodium selenite, Zinc chloride.","farmasotik_form":"vial","atc_kodu":"B05XA31","atc_adi":"electrolytes in combination with other drugs ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA13A99999","etkin_madde":"citrulline malate","farmasotik_form":"oral solution","atc_kodu":"A13A","atc_adi":"tonics","recete_turu":"Normal","icd10_kodu":"E72.2;E72.8","icd10_adi":"Üre siklus metabolizması bozuklukları; Amino-asit metabolizması diğer tanımlanmış bozuklukları"}
-{"etkin_madde_kodu":"YDN05BA0999","etkin_madde":"clobazam","farmasotik_form":"tablet","atc_kodu":"N05BA09","atc_adi":"clobazam","recete_turu":"Yeşil","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDJ04BA0199","etkin_madde":"clofazimine","farmasotik_form":"capsule","atc_kodu":"J04BA01","atc_adi":"clofazimine","recete_turu":"Normal","icd10_kodu":"A15","icd10_adi":"Solunum yolları tüberkülozu, bakteriyolojik ve histolojik olarak onaylanmış"}
-{"etkin_madde_kodu":"YDC02AC0199","etkin_madde":"clonidine hydrochloride","farmasotik_form":"transdermal therapeutic system (TTS)","atc_kodu":"C02AC01","atc_adi":"clonidine","recete_turu":"Normal","icd10_kodu":"I10;I15;F84.0; F90.0","icd10_adi":"Esansiyel hipertansiyon; Sekonder hipertansiyon; Otizm; Dikkat eksikliği hiperaktivite bozukluğu"}
-{"etkin_madde_kodu":"YDC02AC0198","etkin_madde":"clonidine hydrochloride","farmasotik_form":"tablet","atc_kodu":"C02AC01","atc_adi":"clonidine","recete_turu":"Normal","icd10_kodu":"I10;I15;F84.0; F90.0","icd10_adi":"Esansiyel hipertansiyon; Sekonder hipertansiyon; Otizm; Dikkat eksikliği hiperaktivite bozukluğu"}
-{"etkin_madde_kodu":"YDB02BD1399","etkin_madde":"coagulation factor X (human)","farmasotik_form":"vial","atc_kodu":"B02BD13","atc_adi":"coagulation factor X","recete_turu":"Turuncu\/Mor","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM04AC0199","etkin_madde":"colchicine ","farmasotik_form":"tablet","atc_kodu":"M04AC01","atc_adi":"colchicine","recete_turu":"Normal","icd10_kodu":"E85.0;M10","icd10_adi":"Heredofamilyal amiloidozis; Nöropatik olmayan gut"}
-{"etkin_madde_kodu":"YDC10AC0499","etkin_madde":"colesevelam hcl (aspartame free)","farmasotik_form":"tablet","atc_kodu":"C10AC04","atc_adi":"colesevelam ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC10AC0497","etkin_madde":"colesevelam hcl (aspartame free)","farmasotik_form":"oral suspension","atc_kodu":"C10AC04","atc_adi":"colesevelam ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC10AC0498","etkin_madde":"colesevelam hydrochloride","farmasotik_form":"sachet","atc_kodu":"C10AC04","atc_adi":"colesevelam","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV04CD0499","etkin_madde":"corticorelin trifluoroacetate","farmasotik_form":"vial","atc_kodu":"V04CD04","atc_adi":"corticorelin","recete_turu":"Normal","icd10_kodu":"E24;E27.4","icd10_adi":"Cushing sendromu; Adrenokortikal yetmezlik, diğer ve tanımlanmamış"}
-{"etkin_madde_kodu":"YDB06AX0199","etkin_madde":"crizanlizumab","farmasotik_form":"vial","atc_kodu":"B06AX01","atc_adi":"crizanlizumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AA0499","etkin_madde":"cysteamine bitartrate","farmasotik_form":"capsule","atc_kodu":"A16AA04","atc_adi":"mercaptamine","recete_turu":"Normal","icd10_kodu":"E72.0","icd10_adi":"Amino-asit taşıma bozuklukları"}
-{"etkin_madde_kodu":"YDS01XA2199","etkin_madde":"cysteamine hydrochloride","farmasotik_form":"eye drop","atc_kodu":"S01XA21","atc_adi":"mercaptamine","recete_turu":"Normal","icd10_kodu":"E72.0","icd10_adi":"Amino-asit taşıma bozuklukları"}
-{"etkin_madde_kodu":"YDL01DA0199","etkin_madde":"dactinomycin","farmasotik_form":"vial","atc_kodu":"L01DA01","atc_adi":"dactinomycin","recete_turu":"Normal","icd10_kodu":"C00-C97;D00-D48","icd10_adi":"Kanser; Kanser"}
-{"etkin_madde_kodu":"YDM03CA0199","etkin_madde":"dantrolene sodium","farmasotik_form":"vial","atc_kodu":"M03CA01","atc_adi":"dantrolene","recete_turu":"Normal","icd10_kodu":"T88.3;G21.0;G82.4;G81.1;G82.1","icd10_adi":"Anesteziden dolayı malign hipertermi; Malign nöroleptik sendrom; Spastik tetrapleji; Spastik hemipleji; Spastik parapleji"}
-{"etkin_madde_kodu":"YDM03CA0198","etkin_madde":"dantrolene sodium","farmasotik_form":"capsule, tablet","atc_kodu":"M03CA01","atc_adi":"dantrolene","recete_turu":"Normal","icd10_kodu":"G82.4;G81.1;G82.1","icd10_adi":"Spastik tetrapleji; Spastik hemipleji; Spastik parapleji"}
-{"etkin_madde_kodu":"YDJ04BA0299","etkin_madde":"dapsone","farmasotik_form":"tablet","atc_kodu":"J04BA02","atc_adi":"dapsone","recete_turu":"Normal","icd10_kodu":"A00-Z99","icd10_adi":"Endikasyon şartı aranmayacaktır."}
-{"etkin_madde_kodu":"YDJ04BA9999","etkin_madde":"dapsone and rifampicin","farmasotik_form":"tablet","atc_kodu":"J04BA","atc_adi":"drugs for treatment of lepra","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AC0199","etkin_madde":"deferoxamine methanesulfonate","farmasotik_form":"vial","atc_kodu":"V03AC01","atc_adi":"deferoxamine","recete_turu":"Normal","icd10_kodu":"E83.1 ; T45.4","icd10_adi":"Demir metabolizması bozuklukları; Demir ve bileşenleri ile zehirlenme"}
-{"etkin_madde_kodu":"YDB01AX0199","etkin_madde":"defibrotide","farmasotik_form":"vial","atc_kodu":"B01AX01","atc_adi":"defibrotide","recete_turu":"Normal","icd10_kodu":"K76.5;Z94","icd10_adi":"Hepatik veno-okluzif hastalık; Organ ve doku nakilleri"}
-{"etkin_madde_kodu":"YDR05DA0999","etkin_madde":"dextromethorphan hydrobromide","farmasotik_form":"tablet","atc_kodu":"R05DA09","atc_adi":"dextromethorphan ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX5999","etkin_madde":"dextromethorphan hydrobromide and quinidine sulfate","farmasotik_form":"capsule","atc_kodu":"N07XX59","atc_adi":"dextromethorphan, combinations ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AH0199","etkin_madde":"diazoxide","farmasotik_form":"oral solution","atc_kodu":"V03AH01","atc_adi":"diazoxide","recete_turu":"Normal","icd10_kodu":"E16;-*","icd10_adi":"Pankreas iç salgısının diğer bozuklukları; -*"}
-{"etkin_madde_kodu":"YDV03AH0198","etkin_madde":"diazoxide","farmasotik_form":"tablet","atc_kodu":"V03AH01","atc_adi":"diazoxide","recete_turu":"Normal","icd10_kodu":"E16;-*","icd10_adi":"Pankreas iç salgısının diğer bozuklukları; -*"}
-{"etkin_madde_kodu":"YDC01AA0499","etkin_madde":"digitoxine\n","farmasotik_form":"tablet","atc_kodu":"C01AA04","atc_adi":"digitoxin","recete_turu":"Normal","icd10_kodu":"I50;I50.0","icd10_adi":"Kalp yetmezliği; Konjestif kalp yetmezliği"}
-{"etkin_madde_kodu":"YDV03AB2499","etkin_madde":"digoxin immune fab","farmasotik_form":"vial","atc_kodu":"V03AB24","atc_adi":"digitalis antitoxin  ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB0999","etkin_madde":"dimercaprol","farmasotik_form":"vial","atc_kodu":"V03AB09","atc_adi":"dimercaprol","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG04BX1399","etkin_madde":"dimethyl sulfoxide","farmasotik_form":"oral solution","atc_kodu":"G04BX13","atc_adi":"dimethyl sulfoxide","recete_turu":"Normal","icd10_kodu":"N30.1","icd10_adi":"İnterstisiyel sistit (kronik)"}
-{"etkin_madde_kodu":"YDL01XC1699","etkin_madde":"dinutuximab beta","farmasotik_form":"vial","atc_kodu":"L01XC16","atc_adi":"dinutuximab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB05XA0699","etkin_madde":"dipotassium phosphate, potassium dihydrogen phosphate","farmasotik_form":"vial","atc_kodu":"B05XA06","atc_adi":" potassium phosphate, incl. combinations with other potassium salts ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB01AC0799","etkin_madde":"dipyridamole","farmasotik_form":"vial","atc_kodu":"B01AC07","atc_adi":"dipyridamole","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG04BC9999","etkin_madde":"disodium hydrogenphosphate, potassium dihidrogen phosphate","farmasotik_form":"tablet","atc_kodu":"G04BC","atc_adi":"urinary concrement solvents","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01BA0399","etkin_madde":"disopyramide phosphate","farmasotik_form":"capsule, tablet","atc_kodu":"C01BA03","atc_adi":"disopyramide","recete_turu":"Normal","icd10_kodu":"I49;I47.0;I47.2;I42.1","icd10_adi":"Kardiyak aritmiler, diğer; Re-entran ventriküler aritmi; Ventriküler taşikardi; Obstrüktif  hipertrofik kardiyomiyopati"}
-{"etkin_madde_kodu":"YDN07BB0199","etkin_madde":"disulfiram","farmasotik_form":"implant","atc_kodu":"N07BB01","atc_adi":"disülfiram","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV06DC9999","etkin_madde":"d-mannose","farmasotik_form":"powder","atc_kodu":"V06DC","atc_adi":"carbohydrates","recete_turu":"Normal","icd10_kodu":"E77.8, E88.9","icd10_adi":"Glikoprotein metabolizmasının diğer bozuklukları; Metabolik bozukluklar, tanımlanmamış"}
-{"etkin_madde_kodu":"YDN06AA1299","etkin_madde":"doxepin hydrochloride","farmasotik_form":"tablet","atc_kodu":"N06AA12","atc_adi":"doxepin","recete_turu":"Normal","icd10_kodu":"L50;L20","icd10_adi":"Ürtiker; Atopik dermatit"}
-{"etkin_madde_kodu":"YDM01CC0199","etkin_madde":"D-penicillamine","farmasotik_form":"tablet, capsul","atc_kodu":"M01CC01","atc_adi":"penicillamine","recete_turu":"Normal","icd10_kodu":"E83.0;M05;M06;M08;E72.0","icd10_adi":"Bakır metabolizması bozuklukları; Seropozitif romatoid artrit; Romatoid artrit, diğer; Juvenil artrit; Amino-asit taşıma bozuklukları"}
-{"etkin_madde_kodu":"YDC01BD0799","etkin_madde":"dronedarone hydrochloride","farmasotik_form":"tablet","atc_kodu":"C01BD07","atc_adi":"dronedarone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01CA9999","etkin_madde":"droxidopa","farmasotik_form":"tablet, capsul","atc_kodu":"C01CA","atc_adi":"adrenergic and dopaminergic agents","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EM0499","etkin_madde":"duvelisib","farmasotik_form":"capsule","atc_kodu":"L01EM04","atc_adi":"duvelisib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX9999","etkin_madde":"edaravone","farmasotik_form":"vial","atc_kodu":"N07XX","atc_adi":"other nervous system drugs","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YD999999999","etkin_madde":"elacestrant","farmasotik_form":"tablet","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AX9999","etkin_madde":"elapegademase","farmasotik_form":"vial","atc_kodu":"L03AX","atc_adi":"other immunostimulants","recete_turu":"Normal","icd10_kodu":"D81","icd10_adi":"Kombine i̇mmün yetmezlik"}
-{"etkin_madde_kodu":"YDR07AX3299","etkin_madde":"elexacaftor\/ivacaftor\/tezacaftor, and ivacaftor","farmasotik_form":"tablet, granule","atc_kodu":"R07AX32","atc_adi":"elexacaftor,tezacaftor and ivacaftor","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX1099","etkin_madde":"eliglustat","farmasotik_form":"capsule","atc_kodu":"A16AX10","atc_adi":"eliglustat","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB9999","etkin_madde":"elosulfase alfa","farmasotik_form":"vial","atc_kodu":"A16AB","atc_adi":"enzymes","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XC2399","etkin_madde":"elotuzumab","farmasotik_form":"vial","atc_kodu":"L01XC23","atc_adi":"elotuzumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL04AA3999","etkin_madde":"emapalumab","farmasotik_form":"vial","atc_kodu":"L04AA39","atc_adi":"emapalumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX4199","etkin_madde":"eribulin mesylate","farmasotik_form":"vial","atc_kodu":"L01XX41","atc_adi":"eribulin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ01FA0199","etkin_madde":"erythromycin","farmasotik_form":"oral suspension","atc_kodu":"J01FA01","atc_adi":"erythromycin ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM09AX0699","etkin_madde":"eteplirsen","farmasotik_form":"vial","atc_kodu":"M09AX06","atc_adi":"eteplirsen","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG03CA0199","etkin_madde":"ethinyl estradiol","farmasotik_form":"tablet","atc_kodu":"G03CA01","atc_adi":"ethinylestradiol ","recete_turu":"Normal","icd10_kodu":"E28.3;E28.8;E28.9;Q96;Q56.0;","icd10_adi":"Diğer primer ovarian yetmezlik; Over disfonksiyonu, diğer; Over disfonksiyonu, tanımlanmamış; Turner sendromu; Hermaphroditizm, başka bir yerde sınıflanmamış"}
-{"etkin_madde_kodu":"YDN03AD0199","etkin_madde":"ethosuximide","farmasotik_form":"capsule","atc_kodu":"N03AD01","atc_adi":"ethosuximide","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDN03AD0198","etkin_madde":"ethosuximide","farmasotik_form":"oral solution","atc_kodu":"N03AD01","atc_adi":"ethosuximide","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDN01AX0799","etkin_madde":"etomidate","farmasotik_form":"vial","atc_kodu":"N01AX07","atc_adi":"etomidate","recete_turu":"Yeşil","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AX1099","etkin_madde":"felbamate","farmasotik_form":"tablet","atc_kodu":"N03AX10","atc_adi":"felbamate","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA08AA0299","etkin_madde":"fenfluramine","farmasotik_form":"oral solution","atc_kodu":"A08AA02","atc_adi":" fenfluramine ","recete_turu":"Kırmızı","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB05XA3099","etkin_madde":"Ferrous chloride, Zinc chloride, Manganese chloride, Cupric chloride, Chromic chloride, Sodium molybdate dihydrate, Sodium selenite pentahydrate, Sodium fluoride, Potassium iodide","farmasotik_form":"vial","atc_kodu":"B05XA30","atc_adi":" combinations of electrolytes ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01BC0499","etkin_madde":"flecainide acetate","farmasotik_form":"tablet","atc_kodu":"C01BC04","atc_adi":"flecainide","recete_turu":"Normal","icd10_kodu":"I47.1;I48;I49;I47.0;I47.2","icd10_adi":"Supraventriküler taşikardi; Atrial fibrilasyon ve flutter; Kardiyak aritmiler, diğer; Re-entran ventriküler aritmi; Ventriküler taşikardi"}
-{"etkin_madde_kodu":"YDJ02AX0199","etkin_madde":"flucytosine","farmasotik_form":"tablet","atc_kodu":"J02AX01","atc_adi":"flucytosine","recete_turu":"Normal","icd10_kodu":"B45.1","icd10_adi":"Serebral kriptokokkoz"}
-{"etkin_madde_kodu":"YDJ02AX0198","etkin_madde":"flucytosine","farmasotik_form":"vial","atc_kodu":"J02AX01","atc_adi":"flucytosine","recete_turu":"Normal","icd10_kodu":"B45.1","icd10_adi":"Serebral kriptokokkoz"}
-{"etkin_madde_kodu":"YDL02BB0199","etkin_madde":"flutamide","farmasotik_form":"tablet","atc_kodu":"L02BB01","atc_adi":"flutamide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB3499","etkin_madde":"fomepizole","farmasotik_form":"vial","atc_kodu":"V03AB34","atc_adi":"fomepizole ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EN0499","etkin_madde":"futibatinib","farmasotik_form":"tablet","atc_kodu":"L01EN04","atc_adi":"futibatinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB0899","etkin_madde":"galsulfase","farmasotik_form":"vial","atc_kodu":"A16AB08","atc_adi":"galsulfase","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AX2799","etkin_madde":"ganaxolone","farmasotik_form":"oral suspension","atc_kodu":"N03AX27","atc_adi":"ganaxolone ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX1699","etkin_madde":"givosiran","farmasotik_form":"vial","atc_kodu":"A16AX16","atc_adi":"givosiran","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB05BA0299","etkin_madde":"glicerol trioleate oil","farmasotik_form":"oral solution","atc_kodu":"B05BA02","atc_adi":"fat emulsions","recete_turu":"Normal","icd10_kodu":"E71.3","icd10_adi":"Yağ-asidi metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDL01FX2899","etkin_madde":"glofitamab","farmasotik_form":"vial","atc_kodu":"L01FX28","atc_adi":"glofitamab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB3299","etkin_madde":"glutathione","farmasotik_form":"vial","atc_kodu":"V03AB32","atc_adi":"glutathione","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV06DX9998","etkin_madde":"glycine free powdered infant formula","farmasotik_form":"powder","atc_kodu":"V06DX","atc_adi":"other combinations of nutrients","recete_turu":"Normal","icd10_kodu":"E72.5","icd10_adi":"Glisin metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDA03AB0299","etkin_madde":"glycopyrrolate","farmasotik_form":"oral solution","atc_kodu":"A03AB02","atc_adi":"glycopyrronium bromide","recete_turu":"Normal","icd10_kodu":"R61;K11.7","icd10_adi":"Hiperhidroz; Tükrük salgısı bozuklukları"}
-{"etkin_madde_kodu":"YDA03AB0297","etkin_madde":"glycopyrrolate","farmasotik_form":"tablet","atc_kodu":"A03AB02","atc_adi":"glycopyrronium bromide","recete_turu":"Normal","icd10_kodu":"R61;K11.7","icd10_adi":"Hiperhidroz; Tükrük salgısı bozuklukları"}
-{"etkin_madde_kodu":"YDA03AB0296","etkin_madde":"glycopyrrolate","farmasotik_form":"vial","atc_kodu":"A03AB02","atc_adi":"glycopyrronium bromide","recete_turu":"Normal","icd10_kodu":"R61;K11.7","icd10_adi":"Hiperhidroz; Tükrük salgısı bozuklukları"}
-{"etkin_madde_kodu":"YDA03AB0298","etkin_madde":"glycopyrronium bromide ","farmasotik_form":"oral solution","atc_kodu":"A03AB02","atc_adi":"glycopyrronium bromide ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDS01AX0899","etkin_madde":"hexamidine","farmasotik_form":"eye drop","atc_kodu":"S01AX08","atc_adi":"hexamidine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB02BD0799","etkin_madde":"human coagulation factor XIII","farmasotik_form":"vial","atc_kodu":"B02BD07","atc_adi":"coagulation factor XIII","recete_turu":"Turuncu\/Mor","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB06AB9999","etkin_madde":"human hemin","farmasotik_form":"vial","atc_kodu":"B06AB","atc_adi":"other hem products","recete_turu":"Normal","icd10_kodu":"E80","icd10_adi":"Porfirin ve bilirubin metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDB06AA0399","etkin_madde":"hyaluronidase","farmasotik_form":"vial","atc_kodu":"B06AA03","atc_adi":"hyaluronidase","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC02DB0299","etkin_madde":"hydralazine hcl","farmasotik_form":"tablet","atc_kodu":"C02DB02","atc_adi":"hydralazine","recete_turu":"Normal","icd10_kodu":"O14;O11;O13;O15","icd10_adi":"Hamilelikte [gebeliğe bağlı] hipertansiyon,\n belirgin proteinüri ile; Hamilelik öncesi mevcut hipertansif bozukluk, eşlik eden proteinüri ile birlikte; Hamilelikte [gebeliğe bağlı] hipertansiyon, belirgin proteinüri olmadan; Eklampsi"}
-{"etkin_madde_kodu":"YDC02DB0298","etkin_madde":"hydralazine hcl","farmasotik_form":"vial","atc_kodu":"C02DB02","atc_adi":"hydralazine","recete_turu":"Normal","icd10_kodu":"O14;O11;O13;O15","icd10_adi":"Hamilelikte [gebeliğe bağlı] hipertansiyon,\n belirgin proteinüri ile; Hamilelik öncesi mevcut hipertansif bozukluk, eşlik eden proteinüri ile birlikte; Hamilelikte [gebeliğe bağlı] hipertansiyon, belirgin proteinüri olmadan; Eklampsi"}
-{"etkin_madde_kodu":"YDC03AA0399","etkin_madde":"hydrochlorothiazide","farmasotik_form":"tablet","atc_kodu":"C03AA03","atc_adi":"hydrochlorothiazide","recete_turu":"Normal","icd10_kodu":"R60;I50;K74;N01;N02;N03;N04;N05;N06;N07;N08;N11;N15;N16;N18;N19;N25;N26;N27;N28;N29;J81;O12.0;E83.5;N25.1","icd10_adi":"Ödem, başka yerde sınıflanmamış; Kalp yetmezliği; Karaciğer fibroz ve sirozu; Hızlı ilerleyen nefritik sendrom; Tekrarlayan ve inatçı hematür; Kronik nefritik sendrom; Nefrotik sendrom; Nefritik sendrom, tanımlanmamış; İzole proteinüri, tanımlanmış morfolojik lezyon ile; Herediter nefropati, başka yerde sınıflanmamış; Glomerüler bozukluklar, başka yerde sınıflanmış hastalıklarda; Kronik tübülo-interstisyel nefrit; Renal tübülo-interstisyel hastalıklar, diğer; Renal tübülo-interstisyel bozukluklar, başka yerde sınıflanmış hastalıklarda; Kronik böbrek yetmezliği; Böbrek yetmezlikleri, tanımlanmamış; Renal tübüler fonksiyonun harabiyeti sonucu oluşan bozukluklar; Kontrakte böbrek, tanımlanmamış; Küçük böbrek, nedeni bilinmeyen; Böbrek ve üreterin diğer bozuklukları, başka yerde sınıflanmamış; Böbrek ve üreterin diğer bozuklukları, başka yerde sınıflanmamış hastalıklarda; Akciğer ödemi; Hamilelikte ödem; Kalsiyum metabolizması bozuklukları; Nefrojenik diyabetes insipidus"}
-{"etkin_madde_kodu":"YDH02AB0999","etkin_madde":"hydrocortisone","farmasotik_form":"tablet","atc_kodu":"H02AB09","atc_adi":"hydrocortisone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01BA9999","etkin_madde":"hydroquinidine hydrochloride","farmasotik_form":"capsule","atc_kodu":"C01BA","atc_adi":"antiarrhythmics, class Ia","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB3399","etkin_madde":"hydroxocobalamin","farmasotik_form":"vial","atc_kodu":"V03AB33","atc_adi":"hydroxocobalamin ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV06999999","etkin_madde":"hydroxybutyric acid","farmasotik_form":"powder","atc_kodu":"V06","atc_adi":"general nutritions","recete_turu":"Normal","icd10_kodu":"E71.3; E74.0","icd10_adi":"Yağ-asidi metabolizması bozuklukları; Glikojen depo hastalıkları"}
-{"etkin_madde_kodu":"YDP01BA0299","etkin_madde":"hydroxychloroquine sulphate ","farmasotik_form":"tablet","atc_kodu":"P01BA02","atc_adi":"hydroxychloroquine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN06BX1399","etkin_madde":"idebenone","farmasotik_form":"tablet","atc_kodu":"N06BX13","atc_adi":"idebenone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX4799","etkin_madde":"idelalisib","farmasotik_form":"tablet","atc_kodu":"L01XX47","atc_adi":"idelalisib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB0999","etkin_madde":"idursulfase beta","farmasotik_form":"vial","atc_kodu":"A16AB09","atc_adi":"idursulfase","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ07BF0399","etkin_madde":"inactivated polio vaccine","farmasotik_form":"vaccine (injection)","atc_kodu":"J07BF03","atc_adi":"poliomyelitis, trivalent, inactivated, whole virus","recete_turu":"Normal","icd10_kodu":"Z94.8","icd10_adi":"Diğer organ ve dokuların nakli"}
-{"etkin_madde_kodu":"YDV04CX0199","etkin_madde":"indocyanine green","farmasotik_form":"vial","atc_kodu":"V04CX01","atc_adi":"indocyanine green ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX1599","etkin_madde":"inotersen","farmasotik_form":"vial","atc_kodu":"N07XX15","atc_adi":"inotersen","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AB0399","etkin_madde":"interferon gamma","farmasotik_form":"vial","atc_kodu":"L03AB03","atc_adi":"interferon gamma","recete_turu":"Normal","icd10_kodu":"Q78.2;D71","icd10_adi":"Osteopetrozis; Polimorfonükleer nötrofillerin fonksiyon bozuklukları"}
-{"etkin_madde_kodu":"YDR01AX0399","etkin_madde":"ipratropium bromide","farmasotik_form":"nasal spray","atc_kodu":"R01AX03","atc_adi":"ipratropium bromide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ02AC0598","etkin_madde":"isavuconazonium sulfate","farmasotik_form":"capsule","atc_kodu":"J02AC05","atc_adi":"isavuconazole","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ02AC0599","etkin_madde":"isavuconazonium sulfate","farmasotik_form":"vial","atc_kodu":"J02AC05","atc_adi":"isavuconazole","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDR07AX0299","etkin_madde":"ivacaftor","farmasotik_form":"granule, tablet","atc_kodu":"R07AX02","atc_adi":"ivacaftor","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDR07AX3298","etkin_madde":"ivacaftor\/tezacaftor\/elexacaftor","farmasotik_form":"tablet","atc_kodu":"R07AX32","atc_adi":"elexacaftor,tezacaftor and ivacaftor","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDR07AX3199","etkin_madde":"ivacaftor; ivacaftor, tezacaftor","farmasotik_form":"tablet","atc_kodu":"R07AX31","atc_adi":"ivacaftor and tezacaftor ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP02CF0199","etkin_madde":"ivermectin","farmasotik_form":" cream","atc_kodu":"P02CF01","atc_adi":"ivermectin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX6299","etkin_madde":"ivosidenib","farmasotik_form":"tablet","atc_kodu":"L01XX62","atc_adi":"\tivosidenib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01DC0499","etkin_madde":"ixabepilone","farmasotik_form":"vial","atc_kodu":"L01DC04","atc_adi":"ixabepilone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC07AG0199","etkin_madde":"labetalol","farmasotik_form":"tablet","atc_kodu":"C07AG01","atc_adi":"labetalol","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC07AG0198","etkin_madde":"labetalol","farmasotik_form":"vial","atc_kodu":"C07AG01","atc_adi":"labetalol","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB06AC0599","etkin_madde":"lanadelumab","farmasotik_form":"vial","atc_kodu":"B06AC05","atc_adi":" lanadelumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX9999","etkin_madde":"large neutral amino acids","farmasotik_form":"tablet","atc_kodu":"A16AX","atc_adi":"Various alimentary tract and\n metabolism products","recete_turu":"Normal","icd10_kodu":"E70.0","icd10_adi":"Klasik \nfenilketonüri"}
-{"etkin_madde_kodu":"YDA16AX9994","etkin_madde":"large neutral amino acids, biotin, vitamin B12, vitamin B6, calcium phosphorus","farmasotik_form":"tablet","atc_kodu":"A16AX","atc_adi":"Various alimentary tract and\n metabolism products","recete_turu":"Normal","icd10_kodu":"E70.0","icd10_adi":"Klasik \nfenilketonüri"}
-{"etkin_madde_kodu":"YDA16AX9995","etkin_madde":"large neutral amino acids, biotin, vitamin B12, vitamin B6, folic acid","farmasotik_form":"powder","atc_kodu":"A16AX","atc_adi":"Various alimentary tract and\n metabolism products","recete_turu":"Normal","icd10_kodu":"E70.0","icd10_adi":"Klasik \nfenilketonüri"}
-{"etkin_madde_kodu":"YDL01XX0298","etkin_madde":"L-asparaginase","farmasotik_form":"vial","atc_kodu":"L01XX02","atc_adi":"asparaginase ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EB0999","etkin_madde":"lazertinib","farmasotik_form":"tablet","atc_kodu":"L01EB09","atc_adi":"lazertinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05CJ0299","etkin_madde":"lemborexant","farmasotik_form":"tablet","atc_kodu":"N05CJ02","atc_adi":"lemborexant","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AX3199","etkin_madde":"lenacapavir","farmasotik_form":"tablet","atc_kodu":"J05AX31","atc_adi":"lenacapavir","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AX3198","etkin_madde":"lenacapavir","farmasotik_form":"vial","atc_kodu":"J05AX31","atc_adi":"lenacapavir","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AX2299","etkin_madde":"leniolisib","farmasotik_form":"tablet","atc_kodu":"L03AX22","atc_adi":"leniolisib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XE2999","etkin_madde":"lenvatinib mesylate","farmasotik_form":"capsule","atc_kodu":"L01XE29","atc_adi":"lenvatinib ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN04BA0299","etkin_madde":"levodopa, carbidopa (100\/25 mg)","farmasotik_form":"tablet","atc_kodu":"N04BA02","atc_adi":"levodopa and decarboxylase inhibitor","recete_turu":"Normal","icd10_kodu":"G20;G21;G22","icd10_adi":"Parkinson hastalığı; Sekonder parkinsonizm; Parkinsonizm, başka yerde sınıflanmış hastalıklarda"}
-{"etkin_madde_kodu":"YDN04BA0298","etkin_madde":"levodopa, carbidopa monohydrate","farmasotik_form":"intestinal gel","atc_kodu":"N04BA02","atc_adi":"levodopa and decarboxylase inhibitor","recete_turu":"Normal","icd10_kodu":"G20;G21;G22","icd10_adi":"Parkinson hastalığı; Sekonder parkinsonizm; Parkinsonizm, başka yerde sınıflanmış hastalıklarda"}
-{"etkin_madde_kodu":"YDH03AA0199","etkin_madde":"levothyroxine sodium","farmasotik_form":"vial","atc_kodu":"H03AA01","atc_adi":"levothyroxine sodium","recete_turu":"Normal","icd10_kodu":"E03.0;E03.1","icd10_adi":"Difüz guatırla beraber olan konjenital hipotiroidi; Guatırsız konjenital hipotiroidi"}
-{"etkin_madde_kodu":"YDH03AA0198","etkin_madde":"levothyroxine sodium","farmasotik_form":"gel capsul","atc_kodu":"H03AA01","atc_adi":"levothyroxine sodium","recete_turu":"Normal","icd10_kodu":"E03.0;E03.1","icd10_adi":"Difüz guatırla beraber olan konjenital hipotiroidi; Guatırsız konjenital hipotiroidi"}
-{"etkin_madde_kodu":"YDA16AA0399","etkin_madde":"L-glutamine","farmasotik_form":"oral solution","atc_kodu":"A16AA03","atc_adi":"glutamine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX1999","etkin_madde":"liposomal irinotecan hydrochloride","farmasotik_form":"vial","atc_kodu":"L01XX19","atc_adi":"irinotecan","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05AN0199","etkin_madde":"lithium carbonate","farmasotik_form":"tablet","atc_kodu":"N05AN01","atc_adi":"lithium","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01AD0299","etkin_madde":"lomustine","farmasotik_form":"capsule, tablet","atc_kodu":"L01AD02","atc_adi":"lomustine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AR1099","etkin_madde":"lopinavir, ritonavir","farmasotik_form":"vial","atc_kodu":"J05AR10","atc_adi":"lopinavir and ritonavir","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05AH0199","etkin_madde":"loxapine","farmasotik_form":"capsule","atc_kodu":"N05AH01","atc_adi":"loxapine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDR07AX3099","etkin_madde":"lumacaftor and ivacaftor","farmasotik_form":"sachet, tablet","atc_kodu":"R07AX30","atc_adi":"ivacaftor and lumacaftor","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX1899","etkin_madde":"lumasiran","farmasotik_form":"vial","atc_kodu":"A16AX18","atc_adi":" lumasiran ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05AD1099","etkin_madde":"lumateperone","farmasotik_form":"capsule","atc_kodu":"N05AD10","atc_adi":"lumateperone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX6999","etkin_madde":"lurbinectedin","farmasotik_form":"vial","atc_kodu":"L01XX69","atc_adi":"lurbinectedin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AF0299","etkin_madde":"lyophilized dexrazoxane","farmasotik_form":"vial","atc_kodu":"V03AF02","atc_adi":"dexrazoxane","recete_turu":"Normal","icd10_kodu":"T45.1;C00-C97;D00-D48","icd10_adi":"Antineoplastik ve immünsüpressif ilaçlar ile zehirlenme; Kanser; Kanser"}
-{"etkin_madde_kodu":"YDR05CB1699","etkin_madde":"mannitol","farmasotik_form":"capsule","atc_kodu":"R05CB16","atc_adi":"mannitol ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDR05CB1698","etkin_madde":"mannitol","farmasotik_form":"inhalation powder","atc_kodu":"R05CB16","atc_adi":"mannitol ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA05AX0499","etkin_madde":"maralixibat","farmasotik_form":"oral solution","atc_kodu":"A05AX04","atc_adi":"maralixibat chloride ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AX1099","etkin_madde":"maribavir","farmasotik_form":"tablet","atc_kodu":"J05AX10","atc_adi":"maribavir","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDH01AC0399","etkin_madde":"mecasermin","farmasotik_form":"vial","atc_kodu":"H01AC03","atc_adi":"mecasermin","recete_turu":"Normal","icd10_kodu":"E34.3","icd10_adi":"Boy kısalığı, \nbaşka yerde sınıflanmamış"}
-{"etkin_madde_kodu":"YDB05BA0298","etkin_madde":"medium chain triglycerides","farmasotik_form":"oral solution","atc_kodu":"B05BA02","atc_adi":"fat emulsions","recete_turu":"Normal","icd10_kodu":"E78;E88.8;E88.9","icd10_adi":"Lipoprotein metabolizması bozuklukları\n ve diğer lipidemiler; Metabolik bozukluklar diğer tanımlanmamış; Metabolik bozukluklar, tanımlanmamış"}
-{"etkin_madde_kodu":"YDP01BC0299","etkin_madde":"mefloquine hydrochloride","farmasotik_form":"tablet","atc_kodu":"P01BC02","atc_adi":"mefloquine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01CB0199","etkin_madde":"meglumine antimoniate","farmasotik_form":"vial","atc_kodu":"P01CB01","atc_adi":"meglumine antimonate","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01AA0399","etkin_madde":"melphalan","farmasotik_form":"vial","atc_kodu":"L01AA03","atc_adi":"melphalan","recete_turu":"Normal","icd10_kodu":"C00-C97;D00-D48;D50-D89;Z94","icd10_adi":"Kanser; Kanser; Kan ve kan yapıcı organların hastalıkları ve immün sistemin bazı bozuklukları; Organ ve doku nakli"}
-{"etkin_madde_kodu":"YDA06AH0199","etkin_madde":"methylnaltrexone bromide","farmasotik_form":"vial","atc_kodu":"A06AH01","atc_adi":"methylnaltrexone bromide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC03BA0899","etkin_madde":"metolazone","farmasotik_form":"tablet","atc_kodu":"C03BA08","atc_adi":"metolazone ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AA0799","etkin_madde":"metreleptin","farmasotik_form":"vial","atc_kodu":"A16AA07","atc_adi":"metreleptin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV04CD0199","etkin_madde":"metyrapone","farmasotik_form":"capsule","atc_kodu":"V04CD01","atc_adi":"metyrapone","recete_turu":"Normal","icd10_kodu":"E24","icd10_adi":"Cushing sendromu"}
-{"etkin_madde_kodu":"YDC01BB0299","etkin_madde":"mexiletine hydrochloride","farmasotik_form":"capsule","atc_kodu":"C01BB02","atc_adi":"mexiletine","recete_turu":"Normal","icd10_kodu":"I49;I47.0;I47.2;G71.1;G71.2","icd10_adi":"Kardiyak aritmiler, diğer; Re-entran ventriküler aritmi; Ventriküler taşikardi; Myotonik bozukluklar; Konjenital myopatiler"}
-{"etkin_madde_kodu":"YDN05CD0899","etkin_madde":"midazolam","farmasotik_form":"oromucosal solution","atc_kodu":"N05CD08","atc_adi":"midazolam","recete_turu":"Yeşil","icd10_kodu":"G41","icd10_adi":"Status epileptikus"}
-{"etkin_madde_kodu":"YDC01CA1799","etkin_madde":"midodrine hydrochloride","farmasotik_form":"tablet","atc_kodu":"C01CA17","atc_adi":"midodrine","recete_turu":"Normal","icd10_kodu":"I95.1;N18 ","icd10_adi":"Ortostatik hipotansiyon; Kronik böbrek yetmezliği"}
-{"etkin_madde_kodu":"YDL04AA0699","etkin_madde":"mikofenolat mofetil","farmasotik_form":"vial","atc_kodu":"L04AA06","atc_adi":"mycophenolic acid","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX0999","etkin_madde":"miltefosine","farmasotik_form":"capsule","atc_kodu":"L01XX09","atc_adi":"miltefosine ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ01AA0899","etkin_madde":"minocycline","farmasotik_form":"capsule, tablet","atc_kodu":"J01AA08","atc_adi":"minocycline","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC02DC0199","etkin_madde":"minoxidil","farmasotik_form":"tablet","atc_kodu":"C02DC01","atc_adi":"minoxidil","recete_turu":"Normal","icd10_kodu":"R03","icd10_adi":"Kan basıncının anormal olması, tanısı olmayan"}
-{"etkin_madde_kodu":"YD999999998","etkin_madde":"mirvetuximab soravtansine-gynx","farmasotik_form":"vial","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01DC0399","etkin_madde":"mitomycin (2 mg)","farmasotik_form":"vial","atc_kodu":"L01DC03","atc_adi":"mitomycin","recete_turu":"Normal","icd10_kodu":"D00-D48;H52; H17.8;H17.9;H40;H0.4;H04.5;H11.0","icd10_adi":"Refraksiyon ve akomodasyon bozuklukları; Kornea skar ve opasiteleri, diğer; Korneada skar ve opasite, tanımlanmamış; Glokom; Lakrimal sistem \nbozuklukları; Lakrimal pasajda stenoz ve yetmezlik; Pterjiyum"}
-{"etkin_madde_kodu":"YDL01XX2399","etkin_madde":"mitotane","farmasotik_form":"tablet","atc_kodu":"L01XX23","atc_adi":"mitotane","recete_turu":"Normal","icd10_kodu":"C74.0","icd10_adi":"Adrenal bezin korteksinin malign neoplazmı"}
-{"etkin_madde_kodu":"YDL01FX2599","etkin_madde":"mosunetuzumab","farmasotik_form":"vial","atc_kodu":"L01FX25","atc_adi":"mosunetuzumab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA11JB9999","etkin_madde":"multivitamins (A,D,E,K) and minerals","farmasotik_form":"capsule","atc_kodu":"A11JB","atc_adi":"Vitamins with minerals","recete_turu":"Normal","icd10_kodu":"E84","icd10_adi":"Kistik fibrozis"}
-{"etkin_madde_kodu":"YDA11JB9998","etkin_madde":"multivitamins (A,D,E,K) and minerals","farmasotik_form":"oral solution","atc_kodu":"A11JB","atc_adi":"Vitamins with minerals","recete_turu":"Normal","icd10_kodu":"E84","icd10_adi":"Kistik fibrozis"}
-{"etkin_madde_kodu":"YDC07AA1299","etkin_madde":"nadolol","farmasotik_form":"tablet","atc_kodu":"C07AA12","atc_adi":"nadolol","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC04AX2199","etkin_madde":"naftidrofuryl oxalate","farmasotik_form":"dragee","atc_kodu":"C04AX21","atc_adi":"naftidrofuryl","recete_turu":"Normal","icd10_kodu":"I73","icd10_adi":"Periferik vasküler hastalıklar diğer"}
-{"etkin_madde_kodu":"YDN07BB0599","etkin_madde":"nalmefene","farmasotik_form":"vial","atc_kodu":"N07BB05","atc_adi":"nalmefene","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB1599","etkin_madde":"naloxone hydrochloride","farmasotik_form":"vial","atc_kodu":"V03AB15","atc_adi":"naloxone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA07EA0199","etkin_madde":"natrium(prednisolon-21-succinat)","farmasotik_form":"vial","atc_kodu":"A07EA01","atc_adi":"prednisolone ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01FX2199","etkin_madde":"naxitamab","farmasotik_form":"vial","atc_kodu":"L01FX21","atc_adi":"naxitamab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01BB0799","etkin_madde":"nelarabine","farmasotik_form":"vial","atc_kodu":"L01BB07","atc_adi":"nelarabine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XE9999","etkin_madde":"neratinib maleate","farmasotik_form":"tablet","atc_kodu":"L01XE","atc_adi":"protein kinase inhibitors","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AG0199","etkin_madde":"nevirapine","farmasotik_form":"oral solution","atc_kodu":"J05AG01","atc_adi":"nevirapine ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01DX1699","etkin_madde":"nicorandil","farmasotik_form":"tablet","atc_kodu":"C01DX16","atc_adi":"nicorandil ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XC9998","etkin_madde":"nimotuzumab","farmasotik_form":"vial","atc_kodu":"L01XC","atc_adi":"monoclonal antibodies","recete_turu":"Normal","icd10_kodu":"C71","icd10_adi":"Beyin malign neoplazmı"}
-{"etkin_madde_kodu":"YD999999992","etkin_madde":"nirogacestat","farmasotik_form":"tablet","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01AX1199","etkin_madde":"nitazoxanide","farmasotik_form":"tablet","atc_kodu":"P01AX11","atc_adi":"nitazoxanide","recete_turu":"Normal","icd10_kodu":"A07.2","icd10_adi":"Kriptosporidiyoz"}
-{"etkin_madde_kodu":"YDC08CA0899","etkin_madde":"nitrendipine","farmasotik_form":"tablet","atc_kodu":"C08CA08","atc_adi":"nitrendipine ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC02DD0199","etkin_madde":"nitroprussid natrium","farmasotik_form":"vial","atc_kodu":"C02DD01","atc_adi":"nitroprusside","recete_turu":"Normal","icd10_kodu":"I10;I15","icd10_adi":"Esansiyel (primer) hipertansiyon; Sekonder hipertansiyon"}
-{"etkin_madde_kodu":"YDA05AA0499","etkin_madde":"obeticholic acid","farmasotik_form":"tablet","atc_kodu":"A05AA04","atc_adi":"obeticholic acid","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA05AX0599","etkin_madde":"odevixibat","farmasotik_form":"capsule","atc_kodu":"A05AX05","atc_adi":"odevixibat","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB2599","etkin_madde":"olipudase alfa","farmasotik_form":"vial","atc_kodu":"A16AB25","atc_adi":"olipudase alfa","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA07EC0399","etkin_madde":"olsalazine sodium","farmasotik_form":"capsule","atc_kodu":"A07EC03","atc_adi":"olsalazine","recete_turu":"Normal","icd10_kodu":"K51","icd10_adi":"Ülseratif kolit"}
-{"etkin_madde_kodu":"YD999999997","etkin_madde":"omaveloxolone","farmasotik_form":"capsule","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM09AX0999","etkin_madde":"onasemnogene abeparvovec-xioi","farmasotik_form":"vial","atc_kodu":"M09AX09","atc_adi":"onasemnogene abeparvovec","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDH02CA0299","etkin_madde":"osilodrostat","farmasotik_form":"tablet","atc_kodu":"H02CA02","atc_adi":"osilodrostat","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AF0299","etkin_madde":"oxcarbazepine","farmasotik_form":"tablet","atc_kodu":"N03AF02","atc_adi":"oxcarbazepine","recete_turu":"Normal","icd10_kodu":"G.40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDN06AX0199","etkin_madde":"oxitriptan","farmasotik_form":"capsule","atc_kodu":"N06AX01","atc_adi":"oxitriptan","recete_turu":"Normal","icd10_kodu":"E70;E70.0","icd10_adi":"Aromatik amino-asit metabolizması bozuklukları; Klasik fenilketonüri"}
-{"etkin_madde_kodu":"YDM09AX1199","etkin_madde":"palovarotene","farmasotik_form":"capsule","atc_kodu":"M09AX11","atc_adi":"palovarotene","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA09AA0299","etkin_madde":"pancreatic enzymes","farmasotik_form":"enterik tablet","atc_kodu":"A09AA02","atc_adi":"multienzymes\n(lipase, protease \netc.)","recete_turu":"Normal","icd10_kodu":"E84","icd10_adi":"Kistik fibrozis"}
-{"etkin_madde_kodu":"YDA07AA0699","etkin_madde":"paromomycin","farmasotik_form":"capsule, powder","atc_kodu":"A07AA06","atc_adi":"paromomycin","recete_turu":"Normal","icd10_kodu":"A07.2;A06","icd10_adi":"Kriptosporidiyoz; Amebiyaz"}
-{"etkin_madde_kodu":"YDH01CB0599","etkin_madde":"pasireotide","farmasotik_form":"Solution for injection (long acting release)","atc_kodu":"H01CB05","atc_adi":"pasireotide ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX1299","etkin_madde":"patisiran","farmasotik_form":"vial","atc_kodu":"N07XX12","atc_adi":"patisiran","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX2499","etkin_madde":"pegaspargase","farmasotik_form":"vial","atc_kodu":"L01XX24","atc_adi":"pegaspargase","recete_turu":"Normal","icd10_kodu":"C91.0","icd10_adi":"Akut lenfoblastik lösemi"}
-{"etkin_madde_kodu":"YDL04AA5499","etkin_madde":"pegcetacoplan","farmasotik_form":"vial","atc_kodu":"L04AA54","atc_adi":"pegcetacoplan","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AB1199","etkin_madde":"peginterferon alfa-2a","farmasotik_form":"vial","atc_kodu":"L03AB11","atc_adi":" peginterferon alfa-2a ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB1999","etkin_madde":"pegvaliase","farmasotik_form":"vial","atc_kodu":"A16AB19","atc_adi":"pegvaliase","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX2099","etkin_madde":"pemigatinib","farmasotik_form":"tablet","atc_kodu":"L01EX20","atc_adi":"pemigatinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01CX0199","etkin_madde":"pentamidine isethionate","farmasotik_form":"inhalation solution","atc_kodu":"P01CX01","atc_adi":"pentamidine isethionate","recete_turu":"Normal","icd10_kodu":"B59","icd10_adi":"Pnömosistoz (j17.3*)"}
-{"etkin_madde_kodu":"YDP01CX0198","etkin_madde":"pentamidine isethionate","farmasotik_form":"vial","atc_kodu":"P01CX01","atc_adi":"pentamidine isethionate","recete_turu":"Normal","icd10_kodu":"B59","icd10_adi":"Pnömosistoz (j17.3*)"}
-{"etkin_madde_kodu":"YDL01XX0899","etkin_madde":"pentostatin","farmasotik_form":"vial","atc_kodu":"L01XX08","atc_adi":"pentostatin","recete_turu":"Normal","icd10_kodu":"C83;C84.0;C91.7;C91.4;C85;C82\n","icd10_adi":"Yaygın non-hodgkin lenfoma; Mikozis fungoides; Lenfoid lösemiler, diğer; Saçlı hücreli lösemi; Non-hodgkin lenfoma, diğer ve tanımlanmamış tipler; Folliküler [nodüler] non-hodgkin lenfoma"}
-{"etkin_madde_kodu":"YDN07X99999","etkin_madde":"peptide porcine brain extract (proteolytic peptid fraction derive from protein of porcine brain)","farmasotik_form":"vial","atc_kodu":"N07X","atc_adi":"other nervous system drugs","recete_turu":"Normal","icd10_kodu":"I67.8;P91.0;","icd10_adi":"Serebral i̇skemi; Yenidoğanda serebral iskemi"}
-{"etkin_madde_kodu":"YDN03AX2299","etkin_madde":"perampanel","farmasotik_form":"tablet","atc_kodu":"N03AX22","atc_adi":"perampanel ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AA0299","etkin_madde":"phenobarbital","farmasotik_form":"vial","atc_kodu":"N03AA02","atc_adi":"phenobarbital","recete_turu":"Yeşil","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB01AA0499","etkin_madde":"phenprocoumon","farmasotik_form":"tablet","atc_kodu":"B01AA04","atc_adi":"phenprocoumon","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC04AB0199","etkin_madde":"phentolamine mesylate","farmasotik_form":"vial","atc_kodu":"C04AB01","atc_adi":"phentolamine","recete_turu":"Normal","icd10_kodu":"I15.2;D35.0","icd10_adi":"Sekonder hipertansiyon, endokrin hastalıklara bağlı; Adrenal bez benign neoplazmı"}
-{"etkin_madde_kodu":"YDL01DC9999","etkin_madde":"picibanil (OK-432)","farmasotik_form":"vial","atc_kodu":"L01DC","atc_adi":"other cytotoxic antibiotics","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05AX1799","etkin_madde":"pimavanserin","farmasotik_form":"capsule","atc_kodu":"N05AX17","atc_adi":"pimavanserin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX1199","etkin_madde":"pitolisant","farmasotik_form":"tablet","atc_kodu":"N07XX11","atc_adi":"pitolisant","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01DB1199","etkin_madde":"pixantrone","farmasotik_form":"vial","atc_kodu":"L01DB11","atc_adi":"pixantrone","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YD999999996","etkin_madde":"plasminogen","farmasotik_form":"eye drop","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Mor","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YD999999995","etkin_madde":"plasminogen, human-tvmh","farmasotik_form":"vial","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Mor","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XC3799","etkin_madde":"polatuzumab vedotin","farmasotik_form":"vial","atc_kodu":"L01XC37","atc_adi":"polatuzumab vedotin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XE2499","etkin_madde":"ponatinib","farmasotik_form":"tablet","atc_kodu":"L01XE24","atc_adi":"ponatinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05CM1199","etkin_madde":"potassium bromide","farmasotik_form":"tablet","atc_kodu":"N05CM11","atc_adi":"bromides ","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDA12BA0199","etkin_madde":"potassium chloride","farmasotik_form":"tablet","atc_kodu":"A12BA01","atc_adi":"potassium chloride ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDH03CA9999","etkin_madde":"potassium iodide","farmasotik_form":"tablet","atc_kodu":"H03CA","atc_adi":"Iodine therapy","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG04BC9998","etkin_madde":"potassium sodium hydrogen citrate","farmasotik_form":"granule","atc_kodu":"G04BC","atc_adi":"urinary concrement solvents","recete_turu":"Normal","icd10_kodu":"N20","icd10_adi":"Böbrek ve üreter taşı"}
-{"etkin_madde_kodu":"YDL01BA0599","etkin_madde":"pralatrexate","farmasotik_form":"vial","atc_kodu":"L01BA05","atc_adi":"pralatrexate ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB0499","etkin_madde":"pralidoxime","farmasotik_form":"vial","atc_kodu":"V03AB04","atc_adi":"pralidoxime","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX2399","etkin_madde":"pralsetinib","farmasotik_form":"capsule","atc_kodu":"L01EX23","atc_adi":"pralsetinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP02BA0199","etkin_madde":"praziquantel","farmasotik_form":"tablet","atc_kodu":"P02BA01","atc_adi":"praziquantel","recete_turu":"Normal","icd10_kodu":"B65","icd10_adi":"Siştozomiyaz [bilharziyaz]"}
-{"etkin_madde_kodu":"YDP01BA0399","etkin_madde":"primaquine phosphate","farmasotik_form":"tablet","atc_kodu":"P01BA03","atc_adi":"primaquine ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM04AB0199","etkin_madde":"probenecid","farmasotik_form":"tablet","atc_kodu":"M04AB01","atc_adi":"probenecid","recete_turu":"Normal","icd10_kodu":"E79.0;-*","icd10_adi":"Hiperürisemi, enflamatuvar artrit \nve tofüs hastalığı bulgularının bulunmadığı; -*"}
-{"etkin_madde_kodu":"YDM04AB0198","etkin_madde":"probenecid","farmasotik_form":"vial","atc_kodu":"M04AB01","atc_adi":"probenecid","recete_turu":"Normal","icd10_kodu":"E79.0;-*","icd10_adi":"Hiperürisemi, enflamatuvar artrit \nve tofüs hastalığı bulgularının bulunmadığı; -*"}
-{"etkin_madde_kodu":"YDL01XB0199","etkin_madde":"procarbazine hydrochloride","farmasotik_form":"capsule","atc_kodu":"L01XB01","atc_adi":"procarbazine","recete_turu":"Normal","icd10_kodu":"C00-C97;D00-D48","icd10_adi":"Kanser; Kanser"}
-{"etkin_madde_kodu":"YDS01AX1599","etkin_madde":"propamidine isethionate","farmasotik_form":"eye drop","atc_kodu":"S01AX15","atc_adi":"propamidine ","recete_turu":"Normal","icd10_kodu":"B60.1","icd10_adi":"Akantamoebiyaz"}
-{"etkin_madde_kodu":"YDN07AA0299","etkin_madde":"pyridostigmine bromide ","farmasotik_form":"tablet","atc_kodu":"N07AA02","atc_adi":"pyridostigmine","recete_turu":"Normal","icd10_kodu":"G70.2","icd10_adi":"Konjenital myastenia"}
-{"etkin_madde_kodu":"YDA11HA0299","etkin_madde":"pyridoxine (vitamin B6)","farmasotik_form":"vial","atc_kodu":"A11HA02","atc_adi":"pyridoxine (vit B6)","recete_turu":"Normal","icd10_kodu":"E53.1;E72.1;E72.5","icd10_adi":"Piridoksin eksikliği; Sülfür-taşıyan amino-asit metabolizması bozuklukları; Glisin metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDP01BD0199","etkin_madde":"pyrimethamine","farmasotik_form":"tablet","atc_kodu":"P01BD01","atc_adi":"pyrimethamine","recete_turu":"Normal","icd10_kodu":"B58","icd10_adi":"Toksoplazmoz"}
-{"etkin_madde_kodu":"YDC01BA0199","etkin_madde":"quinidin sulphate","farmasotik_form":"tablet","atc_kodu":"C01BA01","atc_adi":"quinidine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDP01BC0199","etkin_madde":"quinine sulphate","farmasotik_form":"tablet","atc_kodu":"P01BC01","atc_adi":"quinine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL04AA0499","etkin_madde":"rabbit anti-human thymocyte immunoglobulin","farmasotik_form":"vial","atc_kodu":"L04AA04","atc_adi":"antithymocyte immunoglobulin (rabbit)","recete_turu":"Mor","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01BA0399","etkin_madde":"raltitrexed","farmasotik_form":"vial","atc_kodu":"L01BA03","atc_adi":"raltitrexed","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV10AX0599","etkin_madde":"rhenium (186Re) sulfide colloid","farmasotik_form":"vial","atc_kodu":"V10AX05","atc_adi":"rhenium (186Re) sulfide colloid","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ04BA9998","etkin_madde":"rifampicin, dapsone and clofazimine","farmasotik_form":"tablet","atc_kodu":"J04BA","atc_adi":"drugs for treatment of lepra","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX1999","etkin_madde":"ripretinib","farmasotik_form":"tablet","atc_kodu":"L01EX19","atc_adi":" ripretinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM09AX1099","etkin_madde":"risdiplam","farmasotik_form":"oral solution","atc_kodu":"M09AX10","atc_adi":"risdiplam","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN06DA0399","etkin_madde":"rivastigmine","farmasotik_form":"transdermal therapeutic system (TTS)","atc_kodu":"N06DA03","atc_adi":"rivastigmine","recete_turu":"Normal","icd10_kodu":"F00; F02; F03; G30","icd10_adi":"Bunama, alzheimer hastalığında; Bunama, başka yerde sınıflanmış diğer hastalıklarda; Bunama, tanımlanmamış; Alzheimer hastalığı"}
-{"etkin_madde_kodu":"YDL01XX3999","etkin_madde":"romidepsin","farmasotik_form":"vial","atc_kodu":"L01XX39","atc_adi":"romidepsin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AB1599","etkin_madde":"ropeginterferon alfa-2b","farmasotik_form":"vial","atc_kodu":"L03AB15","atc_adi":"ropeginterferon alfa-2b","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX5599","etkin_madde":"rucaparib","farmasotik_form":"tablet","atc_kodu":"L01XX55","atc_adi":"rucaparib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AF0399","etkin_madde":"rufinamide","farmasotik_form":"oral solution","atc_kodu":"N03AF03","atc_adi":"rufinamide","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDN03AF0398","etkin_madde":"rufinamide","farmasotik_form":"tablet","atc_kodu":"N03AF03","atc_adi":"rufinamide","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDA16AB0699","etkin_madde":"sacrosidase","farmasotik_form":"oral solution","atc_kodu":"A16AB06","atc_adi":"sacrosidase","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV10BX0299","etkin_madde":"samarium (153Sm) lexidronam","farmasotik_form":"vial","atc_kodu":"V10BX02","atc_adi":"samarium (153Sm) lexidronam","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL03AA0999","etkin_madde":"sargramostim","farmasotik_form":"vial","atc_kodu":"L03AA09","atc_adi":"sargramostim","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB1499","etkin_madde":"sebelipase alfa","farmasotik_form":"vial","atc_kodu":"A16AB14","atc_adi":"sebelipase alfa","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EX2299","etkin_madde":"selpercatinib","farmasotik_form":"capsule","atc_kodu":"L01EX22","atc_adi":"selpercatinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EE0499","etkin_madde":"selumetinib","farmasotik_form":"capsule","atc_kodu":"L01EE04","atc_adi":"selumetinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA08AA1299","etkin_madde":"setmelanotide","farmasotik_form":"vial","atc_kodu":"A08AA12","atc_adi":"setmelanotide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL04AC1199","etkin_madde":"siltuximab","farmasotik_form":"vial","atc_kodu":"L04AC11","atc_adi":"siltuximab","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX9998","etkin_madde":"sodium benzoate","farmasotik_form":"tablet, powder","atc_kodu":"A16AX","atc_adi":"various alimentary tract and metabolism products","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX9996","etkin_madde":"sodium benzoate","farmasotik_form":"oral solution","atc_kodu":"A16AX","atc_adi":"various alimentary tract and metabolism products","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA06AD6599","etkin_madde":"sodium chloride, sodium bicarbonate, potassium chloride, macrogol","farmasotik_form":"sachet","atc_kodu":"A06AD65","atc_adi":"macrogol, combinations","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG01AD9999","etkin_madde":"sodium dichloroacetate","farmasotik_form":"powder","atc_kodu":"G01AD","atc_adi":"Organic acids","recete_turu":"Normal","icd10_kodu":"E74","icd10_adi":"Karbonhidrat metabolizmasının diğer bozuklukları"}
-{"etkin_madde_kodu":"YDB05XA1499","etkin_madde":"sodium glycerophosphate","farmasotik_form":"vial","atc_kodu":"B05XA14","atc_adi":" sodium glycerophosphate ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX9997","etkin_madde":"sodium phenylacetate and sodium benzoate","farmasotik_form":"vial","atc_kodu":"A16AX","atc_adi":"various alimentary tract and \nmetabolism products","recete_turu":"Normal","icd10_kodu":"E72.2","icd10_adi":"Üre siklus metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDA16AX0399","etkin_madde":"sodium phenylbutyrate","farmasotik_form":"granule, tablet","atc_kodu":"A16AX03","atc_adi":"sodium phenylbutyrate","recete_turu":"Normal","icd10_kodu":"E72.2","icd10_adi":"Üre siklus metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDA12CX9999","etkin_madde":"sodium phosphate monobasic","farmasotik_form":"tablet","atc_kodu":"A12CX","atc_adi":"other mineral products","recete_turu":"Normal","icd10_kodu":"E55.0;E83.3","icd10_adi":"Raşitizm, aktif; Fosfor metabolizması bozuklukları(vitamin-d resistan raşitizm)"}
-{"etkin_madde_kodu":"YDV03AE0199","etkin_madde":"sodium polystrene sulfonate","farmasotik_form":"oral suspension","atc_kodu":"V03AE01","atc_adi":"polystrene sulfonate","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV03AB0699","etkin_madde":"sodium thiosulphate","farmasotik_form":"vial","atc_kodu":"V03AB06","atc_adi":"thiosulfate ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ05AP5599","etkin_madde":"sofosbuvir and velpatasvir ","farmasotik_form":"tablet","atc_kodu":"J05AP55","atc_adi":"sofosbuvir and velpatasvir ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN06BA1499","etkin_madde":"solriamfetol","farmasotik_form":"tablet","atc_kodu":"N06BA14","atc_adi":"solriamfetol","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AX1799","etkin_madde":"stiripentol","farmasotik_form":"capsule, sachet","atc_kodu":"N03AX17","atc_adi":"stiripentol","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDL01AD0499","etkin_madde":"streptozocine","farmasotik_form":"vial","atc_kodu":"L01AD04","atc_adi":"streptozocin","recete_turu":"Normal","icd10_kodu":"C25.4","icd10_adi":"Endokrin pankreas malign \nneoplazmı"}
-{"etkin_madde_kodu":"YDV03AB9998","etkin_madde":"succimer","farmasotik_form":"capsule","atc_kodu":"V03AB","atc_adi":"antidotes","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDJ01EC0299","etkin_madde":"sulfadiazine","farmasotik_form":"tablet","atc_kodu":"J01EC02","atc_adi":"sulfadiazine","recete_turu":"Normal","icd10_kodu":"B58","icd10_adi":"Toksoplazmoz"}
-{"etkin_madde_kodu":"YDM01AB0299","etkin_madde":"sulindac","farmasotik_form":"tablet","atc_kodu":"M01AB02","atc_adi":"sulindac","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN03AX0399","etkin_madde":"sulthiame","farmasotik_form":"tablet","atc_kodu":"N03AX03","atc_adi":"sultiame","recete_turu":"Normal","icd10_kodu":"G40","icd10_adi":"Epilepsi"}
-{"etkin_madde_kodu":"YDM03AB0199","etkin_madde":"suxamethonium chloride","farmasotik_form":"vial","atc_kodu":"M03AB01","atc_adi":"suxamethonium ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX0899","etkin_madde":"tafamidis (as meglumine)","farmasotik_form":"capsule","atc_kodu":"N07XX08","atc_adi":"tafamidis","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX6799","etkin_madde":"tagraxofusp","farmasotik_form":"vial","atc_kodu":"L01XX67","atc_adi":"tagraxofusp","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX7299","etkin_madde":"tazemetostat","farmasotik_form":"tablet","atc_kodu":"L01XX72","atc_adi":"tazemetostat","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX7599","etkin_madde":"tebentafusp","farmasotik_form":"vial","atc_kodu":"L01XX75","atc_adi":"tebentafusp ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV09DA0499","etkin_madde":"technetium (99mTc) mebrofenin ","farmasotik_form":"vial","atc_kodu":"V09DA04","atc_adi":"technetium (99mTc) mebrofenin ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX0899","etkin_madde":"teduglutide","farmasotik_form":"vial","atc_kodu":"A16AX08","atc_adi":"teduglutide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX0699","etkin_madde":"tetrabenazine","farmasotik_form":"tablet","atc_kodu":"N07XX06","atc_adi":"tetrabenazine","recete_turu":"Normal","icd10_kodu":"G10;G24.0;G24.1;G24.2;G24.3;G24,4;G24.5;G24.8;G24.9;G26","icd10_adi":"Huntington hastalığı(huntington koresi); Distoni, ilaca bağlı; İdiopatik ailesel distoni; İdiopatik ailesel olmayan distoni; Spazmodik tortikolis; İdiopatik orofasyal distoni; Blefarospazm; Distoni, diğer; Distoni, tanımlanmamış (diskinezi bşt); Ekstrapiramidal bozukluklar ve hareket bozuklukları, başka yerde sınıflanmamış hastalıklarda"}
-{"etkin_madde_kodu":"YDH01AA0298","etkin_madde":"tetracosactide (0,25 mg)","farmasotik_form":"vial","atc_kodu":"H01AA02","atc_adi":"tetracosactide","recete_turu":"Normal","icd10_kodu":"E27;E25","icd10_adi":"Adrenal bezin diğer bozuklukları; Adrenogenital bozukluklar"}
-{"etkin_madde_kodu":"YDH01AA0299","etkin_madde":"tetracosactide (1 mg)","farmasotik_form":"vial","atc_kodu":"H01AA02","atc_adi":"tetracosactide","recete_turu":"Normal","icd10_kodu":"G.35;L.10; L.40; K.51; K.50; E.27; E.25; G40.4","icd10_adi":"Multipl skleroz; Pemfigus; Psoriazis; Ülseratif kolit; Crohn (bölgesel enterit); Adrenal bezin diğer bozuklukları; Adrenogenital bozukluklar; Diğer jeneralize epilepsi ve epileptik sendromlar"}
-{"etkin_madde_kodu":"YDN02BG1098","etkin_madde":"tetrahydrocannabinol and cannabidiol","farmasotik_form":"oromucosal spray","atc_kodu":"N02BG10","atc_adi":"cannabinoids ","recete_turu":"Kırmızı","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA11DA0199","etkin_madde":"thiamin (vitamin B1)","farmasotik_form":"vial","atc_kodu":"A11DA01","atc_adi":"thiamine (vit B1)","recete_turu":"Normal","icd10_kodu":"E71.0","icd10_adi":"Maple-şurup-idrar hastalığı"}
-{"etkin_madde_kodu":"YDL01AC0199","etkin_madde":"thiotepa","farmasotik_form":"vial","atc_kodu":"L01AC01","atc_adi":"thiotepa","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDG04BC9997","etkin_madde":"tiopronin","farmasotik_form":"tablet","atc_kodu":"G04BC","atc_adi":"urinary concrement solvents","recete_turu":"Normal","icd10_kodu":"E72.0","icd10_adi":"Amino-asit taşıma bozuklukları"}
-{"etkin_madde_kodu":"YDH03AA0499","etkin_madde":"tiratricol","farmasotik_form":"capsule","atc_kodu":"H03AA04","atc_adi":"tiratricol","recete_turu":"Normal","icd10_kodu":"E07.9;E03,8;E03.9;E23.7","icd10_adi":"Tiroid bozuklukları, tanımlanmamış; Hipotroidizm tanımlanmış, diğer; Hipotroidizm, tanımlanmamış; Hipofiz bezinin bozuklukları, tanımlanmamış"}
-{"etkin_madde_kodu":"YDV04CJ0199","etkin_madde":"tirotropin alfa","farmasotik_form":"vial","atc_kodu":"V04CJ01","atc_adi":"thyrotropin","recete_turu":"Normal","icd10_kodu":"C73","icd10_adi":"Tiroid bez malign neoplazmı"}
-{"etkin_madde_kodu":"YDL01FX2399","etkin_madde":"tisotumab vedotin","farmasotik_form":"vial","atc_kodu":"L01FX23","atc_adi":"tisotumab vedotin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC03CA0499","etkin_madde":"torasemide","farmasotik_form":"tablet","atc_kodu":"C03CA04","atc_adi":"torasemide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB01AC2198","etkin_madde":"treprostinil sodium","farmasotik_form":"inhalation solution","atc_kodu":"B01AC21","atc_adi":"treprostinil ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX1499","etkin_madde":"tretinoin","farmasotik_form":"capsule","atc_kodu":"L01XX14","atc_adi":"tretinoin","recete_turu":"Normal","icd10_kodu":"C92.4","icd10_adi":"Akut promiyelositik lösemi"}
-{"etkin_madde_kodu":"YDC01DA5299","etkin_madde":"triacylglycerol forms of oleic acid and eruric acid","farmasotik_form":"oral solution","atc_kodu":"C01DA52","atc_adi":"glyceryl trinitrate, combinations","recete_turu":"Normal","icd10_kodu":"E27.0-E27.4;E71.3","icd10_adi":"Adrenal yetmezliği; Yağ-asidi metabolizması bozuklukları"}
-{"etkin_madde_kodu":"YDP02BX0499","etkin_madde":"triclabendazole\n","farmasotik_form":"tablet","atc_kodu":"P02BX04","atc_adi":"triclabendazole","recete_turu":"Normal","icd10_kodu":"B66.3\n","icd10_adi":"Fasioliyaz"}
-{"etkin_madde_kodu":"YDL01BC5999","etkin_madde":"trifluridine and tipiracil","farmasotik_form":"tablet","atc_kodu":"L01BC59","atc_adi":"trifluridine, combinations ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AX1799","etkin_madde":"triheptanoin","farmasotik_form":"oral liquid","atc_kodu":"A16AX17","atc_adi":"triheptanoin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN04AA0199","etkin_madde":"trihexyphenidyl hydrochloride","farmasotik_form":"tablet","atc_kodu":"N04AA01","atc_adi":"trihexyphenidyl","recete_turu":"Yeşil","icd10_kodu":"G20;G21;G22;G24.0;G25.1;G25.3;G25.4;G25.6;G24","icd10_adi":"Parkinson hastalığı; Sekonder parkinsonizm; Parkinsonizm, başka yerde sınıflanmış hastalıklarda; Distoni, ilaca bağlı; Tremor, ilaca bağlı; İlaca bağlı miyoklonus; Kore, ilaca bağlı; Distoni"}
-{"etkin_madde_kodu":"YDS01AA2099","etkin_madde":"trimetoprim + polimiksin b sülfat","farmasotik_form":"eye drop","atc_kodu":"S01AA20","atc_adi":" antibiotics in combination with other drugs","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YD999999994","etkin_madde":"trofinetide","farmasotik_form":"oral solution","atc_kodu":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","atc_adi":"DSÖ tarafından  ATC kodu henüz belirlenmemiş ilaç","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EH0399","etkin_madde":"tucatinib","farmasotik_form":"tablet","atc_kodu":"L01EH03","atc_adi":"tucatinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07XX1399","etkin_madde":"valbenazine","farmasotik_form":"capsule","atc_kodu":"N07XX13","atc_adi":"valbenazine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XE1299","etkin_madde":"vandetanib","farmasotik_form":"tablet","atc_kodu":"L01XE12","atc_adi":"vandetanib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN07BC9999","etkin_madde":"vanoxerin","farmasotik_form":"vial","atc_kodu":"N07BC","atc_adi":"drugs used in opioid dependence","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDH01BA0199","etkin_madde":"vasopressin","farmasotik_form":"vial","atc_kodu":"H01BA01","atc_adi":"vasopressin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB1599","etkin_madde":"velmanase alfa","farmasotik_form":"vial","atc_kodu":"A16AB15","atc_adi":"velmanase alfa","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDC01DX2299","etkin_madde":"vericiguat","farmasotik_form":"tablet","atc_kodu":"C01DX22","atc_adi":"vericiguat","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDS01LA0199","etkin_madde":"verteporfin","farmasotik_form":"vial","atc_kodu":"S01LA01","atc_adi":"verteporfin ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDA16AB1899","etkin_madde":"vestronidase alfa","farmasotik_form":"vial","atc_kodu":"A16AB18","atc_adi":"vestronidase alfa ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01CA0399","etkin_madde":"vindesinsulfate","farmasotik_form":"vial","atc_kodu":"L01CA03","atc_adi":"vindesine","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01XX3899","etkin_madde":"vorinostat","farmasotik_form":"capsule","atc_kodu":"L01XX38","atc_adi":"vorinostat ","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDM05BX0799","etkin_madde":"vosoritide","farmasotik_form":"vial","atc_kodu":"M05BX07","atc_adi":"vosoritide","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB01AA0399","etkin_madde":"warfarin sodium","farmasotik_form":"oral suspension","atc_kodu":"B01AA03","atc_adi":"warfarin","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDB01AA0398","etkin_madde":"warfarin sodium","farmasotik_form":"tablet","atc_kodu":"B01AA03","atc_adi":"warfarin","recete_turu":"Normal","icd10_kodu":"Z79.8;I82;Z95.2;Z95;4","icd10_adi":"Profilaktik tedaviler diğer; Diğer venöz emboliler ve trombozlar; Kalp kapağı protezi; Kalp-kapak değişimleri, diğer"}
-{"etkin_madde_kodu":"YDV10AA0199","etkin_madde":"yttrium (90Y) citrate colloid","farmasotik_form":"vial","atc_kodu":"V10AA01","atc_adi":"yttrium (90Y) citrate colloid","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDL01EL0399","etkin_madde":"zanubrutinib","farmasotik_form":"capsule","atc_kodu":"L01EL03","atc_adi":"zanubrutinib","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDN05CF0299","etkin_madde":"zolpidem tartrate","farmasotik_form":"tablet","atc_kodu":"N05CF02","atc_adi":"zolpidem","recete_turu":"Yeşil","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"YDV06DD9999","etkin_madde":"α-ketoisoleucine calcium salt, α-ketoleucine calcium salt, α-ketophenylalanine calcium salt, α-ketovaline calcium salt, α-hydroxymethionine calcium salt, lysine acetate, threonine, tryptophan, histidine, tyrosine","farmasotik_form":"tablet","atc_kodu":"V06DD","atc_adi":"Amino acids, incl. combinations with polypeptides","recete_turu":"Normal","icd10_kodu":null,"icd10_adi":"Nan"}
-{"etkin_madde_kodu":"*G sütununda \"1\" bulunan etkin maddeleri içeren ilaçlar, Kurumumuzdan alınacak yurt dışı ilaç kullanım onayı ile temin edilebilmektedir. ","etkin_madde":null,"farmasotik_form":null,"atc_kodu":null,"atc_adi":null,"recete_turu":null,"icd10_kodu":null,"icd10_adi":"Nan"}
+{"etkin_madde":"physostigmine","farmasotik_form":"vial"}
+{"etkin_madde":"silibinin","farmasotik_form":"vial"}
+{"etkin_madde":"(RS)-2,3-bis(sulphanyl)propane-1-sulphonic acid, sodium salt-monohydrate","farmasotik_form":"capsule"}
+{"etkin_madde":"3,4- diaminopyridine","farmasotik_form":"tablet"}
+{"etkin_madde":"4% succinylated gelatine","farmasotik_form":"vial"}
+{"etkin_madde":"5-aminolevulinic acid","farmasotik_form":"oral solution"}
+{"etkin_madde":"8-methoxypsoralen","farmasotik_form":"vial"}
+{"etkin_madde":"acide cholique","farmasotik_form":"capsule"}
+{"etkin_madde":"aducanumab","farmasotik_form":"vial"}
+{"etkin_madde":"ajmaline","farmasotik_form":"vial"}
+{"etkin_madde":"albumin bound paclitaxel","farmasotik_form":"vial"}
+{"etkin_madde":"alglucosidase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"alprostadil (prostaglandin e1)","farmasotik_form":"urethral stick"}
+{"etkin_madde":"amantadine hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"ambenonium chloride","farmasotik_form":"tablet"}
+{"etkin_madde":"amikacin liposomal","farmasotik_form":"inhalation solution"}
+{"etkin_madde":"amiloride","farmasotik_form":"tablet"}
+{"etkin_madde":"aminobenzoate potassium","farmasotik_form":"capsule, powder"}
+{"etkin_madde":"amivantamab","farmasotik_form":"vial"}
+{"etkin_madde":"amphetamine, dextroamphetamine mixed salts","farmasotik_form":"tablet, capsul"}
+{"etkin_madde":"amsacrine","farmasotik_form":"vial"}
+{"etkin_madde":"androstanolone","farmasotik_form":"gel"}
+{"etkin_madde":"apraclonidine hydrochloride","farmasotik_form":"eye drop"}
+{"etkin_madde":"arginine hydrochloride","farmasotik_form":"vial"}
+{"etkin_madde":"artemether and lumefantrine","farmasotik_form":"tablet"}
+{"etkin_madde":"artesunate","farmasotik_form":"vial"}
+{"etkin_madde":"asenapine","farmasotik_form":"sublingual tablet"}
+{"etkin_madde":"asfotase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"asparaginase erwinia chrysanthemi","farmasotik_form":"vial"}
+{"etkin_madde":"ataluren","farmasotik_form":"granules for oral suspension"}
+{"etkin_madde":"atovaquone","farmasotik_form":"oral solution"}
+{"etkin_madde":"atovaquone and proguanil hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"atropine sulfate","farmasotik_form":"eye drop"}
+{"etkin_madde":"avapritinib","farmasotik_form":"tablet"}
+{"etkin_madde":"avatrombopag","farmasotik_form":"tablet"}
+{"etkin_madde":"bacillus calmette-guerin(bcg) strains","farmasotik_form":"vaccine (injection)"}
+{"etkin_madde":"bacillus calmette-guerin(bcg), danish strain 1331","farmasotik_form":"vaccine (injection)"}
+{"etkin_madde":"barium sulfate","farmasotik_form":"oral suspension"}
+{"etkin_madde":"belantamab mafodotin","farmasotik_form":"vial"}
+{"etkin_madde":"belinostat","farmasotik_form":"vial"}
+{"etkin_madde":"belumosidil","farmasotik_form":"tablet"}
+{"etkin_madde":"belzutifan","farmasotik_form":"tablet"}
+{"etkin_madde":"betaine anhydrous","farmasotik_form":"oral solution"}
+{"etkin_madde":"betaine anhydrous","farmasotik_form":"powder"}
+{"etkin_madde":"betaine hydrochloride","farmasotik_form":"powder"}
+{"etkin_madde":"betaine hydrochloride","farmasotik_form":"oral solution"}
+{"etkin_madde":"bethanechol chloride","farmasotik_form":"tablet"}
+{"etkin_madde":"betula pendula roth, betula pubescens ehrh","farmasotik_form":"gel"}
+{"etkin_madde":"binimetinib","farmasotik_form":"tablet"}
+{"etkin_madde":"botulinum antitoxin-A, B, C, D, E, F, G","farmasotik_form":"vial"}
+{"etkin_madde":"brolucizumab","farmasotik_form":"vial"}
+{"etkin_madde":"bulevirtide","farmasotik_form":"vial"}
+{"etkin_madde":"bumetanide","farmasotik_form":"tablet"}
+{"etkin_madde":"burosumab","farmasotik_form":"vial"}
+{"etkin_madde":"cannabidiol","farmasotik_form":"oral solution"}
+{"etkin_madde":"capivasertib","farmasotik_form":"tablet"}
+{"etkin_madde":"caplacizumab-YHDP","farmasotik_form":"vial"}
+{"etkin_madde":"capmatinib","farmasotik_form":"tablet"}
+{"etkin_madde":"capsaicin","farmasotik_form":"transdermal therapeutic system (TTS)"}
+{"etkin_madde":"carboprost tromethamine","farmasotik_form":"vial"}
+{"etkin_madde":"cemiplimab","farmasotik_form":"vial"}
+{"etkin_madde":"cenegermin","farmasotik_form":"eye drop"}
+{"etkin_madde":"cerliponase alfa","farmasotik_form":"vial (intraventricular injection)"}
+{"etkin_madde":"cevimeline hydrochloride","farmasotik_form":"tablet, capsul"}
+{"etkin_madde":"cholesterol, carbonhydrate (cholesterol, dried glucose syrup)","farmasotik_form":"powder"}
+{"etkin_madde":"cholestyramine ","farmasotik_form":"powder"}
+{"etkin_madde":"Chromium trichloride hexahydrate, Copper chloride dihydrate, Iron (III) chloride hexahydrate, Manganese chloride tetrahydrate, Potassium iodide, Sodium fluoride, Sodium molybdate dihydrate, Sodium selenite, Zinc chloride.","farmasotik_form":"vial"}
+{"etkin_madde":"citrulline malate","farmasotik_form":"oral solution"}
+{"etkin_madde":"clobazam","farmasotik_form":"tablet"}
+{"etkin_madde":"clofazimine","farmasotik_form":"capsule"}
+{"etkin_madde":"clonidine hydrochloride","farmasotik_form":"transdermal therapeutic system (TTS)"}
+{"etkin_madde":"clonidine hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"coagulation factor X (human)","farmasotik_form":"vial"}
+{"etkin_madde":"colchicine ","farmasotik_form":"tablet"}
+{"etkin_madde":"colesevelam hcl (aspartame free)","farmasotik_form":"tablet"}
+{"etkin_madde":"colesevelam hcl (aspartame free)","farmasotik_form":"oral suspension"}
+{"etkin_madde":"colesevelam hydrochloride","farmasotik_form":"sachet"}
+{"etkin_madde":"corticorelin trifluoroacetate","farmasotik_form":"vial"}
+{"etkin_madde":"crizanlizumab","farmasotik_form":"vial"}
+{"etkin_madde":"cysteamine bitartrate","farmasotik_form":"capsule"}
+{"etkin_madde":"cysteamine hydrochloride","farmasotik_form":"eye drop"}
+{"etkin_madde":"dactinomycin","farmasotik_form":"vial"}
+{"etkin_madde":"dantrolene sodium","farmasotik_form":"vial"}
+{"etkin_madde":"dantrolene sodium","farmasotik_form":"capsule, tablet"}
+{"etkin_madde":"dapsone","farmasotik_form":"tablet"}
+{"etkin_madde":"dapsone and rifampicin","farmasotik_form":"tablet"}
+{"etkin_madde":"deferoxamine methanesulfonate","farmasotik_form":"vial"}
+{"etkin_madde":"defibrotide","farmasotik_form":"vial"}
+{"etkin_madde":"dextromethorphan hydrobromide","farmasotik_form":"tablet"}
+{"etkin_madde":"dextromethorphan hydrobromide and quinidine sulfate","farmasotik_form":"capsule"}
+{"etkin_madde":"diazoxide","farmasotik_form":"oral solution"}
+{"etkin_madde":"diazoxide","farmasotik_form":"tablet"}
+{"etkin_madde":"digitoxine\n","farmasotik_form":"tablet"}
+{"etkin_madde":"digoxin immune fab","farmasotik_form":"vial"}
+{"etkin_madde":"dimercaprol","farmasotik_form":"vial"}
+{"etkin_madde":"dimethyl sulfoxide","farmasotik_form":"oral solution"}
+{"etkin_madde":"dinutuximab beta","farmasotik_form":"vial"}
+{"etkin_madde":"dipotassium phosphate, potassium dihydrogen phosphate","farmasotik_form":"vial"}
+{"etkin_madde":"dipyridamole","farmasotik_form":"vial"}
+{"etkin_madde":"disodium hydrogenphosphate, potassium dihidrogen phosphate","farmasotik_form":"tablet"}
+{"etkin_madde":"disopyramide phosphate","farmasotik_form":"capsule, tablet"}
+{"etkin_madde":"disulfiram","farmasotik_form":"implant"}
+{"etkin_madde":"d-mannose","farmasotik_form":"powder"}
+{"etkin_madde":"doxepin hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"D-penicillamine","farmasotik_form":"tablet, capsul"}
+{"etkin_madde":"dronedarone hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"droxidopa","farmasotik_form":"tablet, capsul"}
+{"etkin_madde":"duvelisib","farmasotik_form":"capsule"}
+{"etkin_madde":"edaravone","farmasotik_form":"vial"}
+{"etkin_madde":"elacestrant","farmasotik_form":"tablet"}
+{"etkin_madde":"elapegademase","farmasotik_form":"vial"}
+{"etkin_madde":"elexacaftor\/ivacaftor\/tezacaftor, and ivacaftor","farmasotik_form":"tablet, granule"}
+{"etkin_madde":"eliglustat","farmasotik_form":"capsule"}
+{"etkin_madde":"elosulfase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"elotuzumab","farmasotik_form":"vial"}
+{"etkin_madde":"emapalumab","farmasotik_form":"vial"}
+{"etkin_madde":"eribulin mesylate","farmasotik_form":"vial"}
+{"etkin_madde":"erythromycin","farmasotik_form":"oral suspension"}
+{"etkin_madde":"eteplirsen","farmasotik_form":"vial"}
+{"etkin_madde":"ethinyl estradiol","farmasotik_form":"tablet"}
+{"etkin_madde":"ethosuximide","farmasotik_form":"capsule"}
+{"etkin_madde":"ethosuximide","farmasotik_form":"oral solution"}
+{"etkin_madde":"etomidate","farmasotik_form":"vial"}
+{"etkin_madde":"felbamate","farmasotik_form":"tablet"}
+{"etkin_madde":"fenfluramine","farmasotik_form":"oral solution"}
+{"etkin_madde":"Ferrous chloride, Zinc chloride, Manganese chloride, Cupric chloride, Chromic chloride, Sodium molybdate dihydrate, Sodium selenite pentahydrate, Sodium fluoride, Potassium iodide","farmasotik_form":"vial"}
+{"etkin_madde":"flecainide acetate","farmasotik_form":"tablet"}
+{"etkin_madde":"flucytosine","farmasotik_form":"tablet"}
+{"etkin_madde":"flucytosine","farmasotik_form":"vial"}
+{"etkin_madde":"flutamide","farmasotik_form":"tablet"}
+{"etkin_madde":"fomepizole","farmasotik_form":"vial"}
+{"etkin_madde":"futibatinib","farmasotik_form":"tablet"}
+{"etkin_madde":"galsulfase","farmasotik_form":"vial"}
+{"etkin_madde":"ganaxolone","farmasotik_form":"oral suspension"}
+{"etkin_madde":"givosiran","farmasotik_form":"vial"}
+{"etkin_madde":"glicerol trioleate oil","farmasotik_form":"oral solution"}
+{"etkin_madde":"glofitamab","farmasotik_form":"vial"}
+{"etkin_madde":"glutathione","farmasotik_form":"vial"}
+{"etkin_madde":"glycine free powdered infant formula","farmasotik_form":"powder"}
+{"etkin_madde":"glycopyrrolate","farmasotik_form":"oral solution"}
+{"etkin_madde":"glycopyrrolate","farmasotik_form":"tablet"}
+{"etkin_madde":"glycopyrrolate","farmasotik_form":"vial"}
+{"etkin_madde":"glycopyrronium bromide ","farmasotik_form":"oral solution"}
+{"etkin_madde":"hexamidine","farmasotik_form":"eye drop"}
+{"etkin_madde":"human coagulation factor XIII","farmasotik_form":"vial"}
+{"etkin_madde":"human hemin","farmasotik_form":"vial"}
+{"etkin_madde":"hyaluronidase","farmasotik_form":"vial"}
+{"etkin_madde":"hydralazine hcl","farmasotik_form":"tablet"}
+{"etkin_madde":"hydralazine hcl","farmasotik_form":"vial"}
+{"etkin_madde":"hydrochlorothiazide","farmasotik_form":"tablet"}
+{"etkin_madde":"hydrocortisone","farmasotik_form":"tablet"}
+{"etkin_madde":"hydroquinidine hydrochloride","farmasotik_form":"capsule"}
+{"etkin_madde":"hydroxocobalamin","farmasotik_form":"vial"}
+{"etkin_madde":"hydroxybutyric acid","farmasotik_form":"powder"}
+{"etkin_madde":"hydroxychloroquine sulphate ","farmasotik_form":"tablet"}
+{"etkin_madde":"idebenone","farmasotik_form":"tablet"}
+{"etkin_madde":"idelalisib","farmasotik_form":"tablet"}
+{"etkin_madde":"idursulfase beta","farmasotik_form":"vial"}
+{"etkin_madde":"inactivated polio vaccine","farmasotik_form":"vaccine (injection)"}
+{"etkin_madde":"indocyanine green","farmasotik_form":"vial"}
+{"etkin_madde":"inotersen","farmasotik_form":"vial"}
+{"etkin_madde":"interferon gamma","farmasotik_form":"vial"}
+{"etkin_madde":"ipratropium bromide","farmasotik_form":"nasal spray"}
+{"etkin_madde":"isavuconazonium sulfate","farmasotik_form":"capsule"}
+{"etkin_madde":"isavuconazonium sulfate","farmasotik_form":"vial"}
+{"etkin_madde":"ivacaftor","farmasotik_form":"granule, tablet"}
+{"etkin_madde":"ivacaftor\/tezacaftor\/elexacaftor","farmasotik_form":"tablet"}
+{"etkin_madde":"ivacaftor; ivacaftor, tezacaftor","farmasotik_form":"tablet"}
+{"etkin_madde":"ivermectin","farmasotik_form":" cream"}
+{"etkin_madde":"ivosidenib","farmasotik_form":"tablet"}
+{"etkin_madde":"ixabepilone","farmasotik_form":"vial"}
+{"etkin_madde":"labetalol","farmasotik_form":"tablet"}
+{"etkin_madde":"labetalol","farmasotik_form":"vial"}
+{"etkin_madde":"lanadelumab","farmasotik_form":"vial"}
+{"etkin_madde":"large neutral amino acids","farmasotik_form":"tablet"}
+{"etkin_madde":"large neutral amino acids, biotin, vitamin B12, vitamin B6, calcium phosphorus","farmasotik_form":"tablet"}
+{"etkin_madde":"large neutral amino acids, biotin, vitamin B12, vitamin B6, folic acid","farmasotik_form":"powder"}
+{"etkin_madde":"L-asparaginase","farmasotik_form":"vial"}
+{"etkin_madde":"lazertinib","farmasotik_form":"tablet"}
+{"etkin_madde":"lemborexant","farmasotik_form":"tablet"}
+{"etkin_madde":"lenacapavir","farmasotik_form":"tablet"}
+{"etkin_madde":"lenacapavir","farmasotik_form":"vial"}
+{"etkin_madde":"leniolisib","farmasotik_form":"tablet"}
+{"etkin_madde":"lenvatinib mesylate","farmasotik_form":"capsule"}
+{"etkin_madde":"levodopa, carbidopa (100\/25 mg)","farmasotik_form":"tablet"}
+{"etkin_madde":"levodopa, carbidopa monohydrate","farmasotik_form":"intestinal gel"}
+{"etkin_madde":"levothyroxine sodium","farmasotik_form":"vial"}
+{"etkin_madde":"levothyroxine sodium","farmasotik_form":"gel capsul"}
+{"etkin_madde":"L-glutamine","farmasotik_form":"oral solution"}
+{"etkin_madde":"liposomal irinotecan hydrochloride","farmasotik_form":"vial"}
+{"etkin_madde":"lithium carbonate","farmasotik_form":"tablet"}
+{"etkin_madde":"lomustine","farmasotik_form":"capsule, tablet"}
+{"etkin_madde":"lopinavir, ritonavir","farmasotik_form":"vial"}
+{"etkin_madde":"loxapine","farmasotik_form":"capsule"}
+{"etkin_madde":"lumacaftor and ivacaftor","farmasotik_form":"sachet, tablet"}
+{"etkin_madde":"lumasiran","farmasotik_form":"vial"}
+{"etkin_madde":"lumateperone","farmasotik_form":"capsule"}
+{"etkin_madde":"lurbinectedin","farmasotik_form":"vial"}
+{"etkin_madde":"lyophilized dexrazoxane","farmasotik_form":"vial"}
+{"etkin_madde":"mannitol","farmasotik_form":"capsule"}
+{"etkin_madde":"mannitol","farmasotik_form":"inhalation powder"}
+{"etkin_madde":"maralixibat","farmasotik_form":"oral solution"}
+{"etkin_madde":"maribavir","farmasotik_form":"tablet"}
+{"etkin_madde":"mecasermin","farmasotik_form":"vial"}
+{"etkin_madde":"medium chain triglycerides","farmasotik_form":"oral solution"}
+{"etkin_madde":"mefloquine hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"meglumine antimoniate","farmasotik_form":"vial"}
+{"etkin_madde":"melphalan","farmasotik_form":"vial"}
+{"etkin_madde":"methylnaltrexone bromide","farmasotik_form":"vial"}
+{"etkin_madde":"metolazone","farmasotik_form":"tablet"}
+{"etkin_madde":"metreleptin","farmasotik_form":"vial"}
+{"etkin_madde":"metyrapone","farmasotik_form":"capsule"}
+{"etkin_madde":"mexiletine hydrochloride","farmasotik_form":"capsule"}
+{"etkin_madde":"midazolam","farmasotik_form":"oromucosal solution"}
+{"etkin_madde":"midodrine hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"mikofenolat mofetil","farmasotik_form":"vial"}
+{"etkin_madde":"miltefosine","farmasotik_form":"capsule"}
+{"etkin_madde":"minocycline","farmasotik_form":"capsule, tablet"}
+{"etkin_madde":"minoxidil","farmasotik_form":"tablet"}
+{"etkin_madde":"mirvetuximab soravtansine-gynx","farmasotik_form":"vial"}
+{"etkin_madde":"mitomycin (2 mg)","farmasotik_form":"vial"}
+{"etkin_madde":"mitotane","farmasotik_form":"tablet"}
+{"etkin_madde":"mosunetuzumab","farmasotik_form":"vial"}
+{"etkin_madde":"multivitamins (A,D,E,K) and minerals","farmasotik_form":"capsule"}
+{"etkin_madde":"multivitamins (A,D,E,K) and minerals","farmasotik_form":"oral solution"}
+{"etkin_madde":"nadolol","farmasotik_form":"tablet"}
+{"etkin_madde":"naftidrofuryl oxalate","farmasotik_form":"dragee"}
+{"etkin_madde":"nalmefene","farmasotik_form":"vial"}
+{"etkin_madde":"naloxone hydrochloride","farmasotik_form":"vial"}
+{"etkin_madde":"natrium(prednisolon-21-succinat)","farmasotik_form":"vial"}
+{"etkin_madde":"naxitamab","farmasotik_form":"vial"}
+{"etkin_madde":"nelarabine","farmasotik_form":"vial"}
+{"etkin_madde":"neratinib maleate","farmasotik_form":"tablet"}
+{"etkin_madde":"nevirapine","farmasotik_form":"oral solution"}
+{"etkin_madde":"nicorandil","farmasotik_form":"tablet"}
+{"etkin_madde":"nimotuzumab","farmasotik_form":"vial"}
+{"etkin_madde":"nirogacestat","farmasotik_form":"tablet"}
+{"etkin_madde":"nitazoxanide","farmasotik_form":"tablet"}
+{"etkin_madde":"nitrendipine","farmasotik_form":"tablet"}
+{"etkin_madde":"nitroprussid natrium","farmasotik_form":"vial"}
+{"etkin_madde":"obeticholic acid","farmasotik_form":"tablet"}
+{"etkin_madde":"odevixibat","farmasotik_form":"capsule"}
+{"etkin_madde":"olipudase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"olsalazine sodium","farmasotik_form":"capsule"}
+{"etkin_madde":"omaveloxolone","farmasotik_form":"capsule"}
+{"etkin_madde":"onasemnogene abeparvovec-xioi","farmasotik_form":"vial"}
+{"etkin_madde":"osilodrostat","farmasotik_form":"tablet"}
+{"etkin_madde":"oxcarbazepine","farmasotik_form":"tablet"}
+{"etkin_madde":"oxitriptan","farmasotik_form":"capsule"}
+{"etkin_madde":"palovarotene","farmasotik_form":"capsule"}
+{"etkin_madde":"pancreatic enzymes","farmasotik_form":"enterik tablet"}
+{"etkin_madde":"paromomycin","farmasotik_form":"capsule, powder"}
+{"etkin_madde":"pasireotide","farmasotik_form":"Solution for injection (long acting release)"}
+{"etkin_madde":"patisiran","farmasotik_form":"vial"}
+{"etkin_madde":"pegaspargase","farmasotik_form":"vial"}
+{"etkin_madde":"pegcetacoplan","farmasotik_form":"vial"}
+{"etkin_madde":"peginterferon alfa-2a","farmasotik_form":"vial"}
+{"etkin_madde":"pegvaliase","farmasotik_form":"vial"}
+{"etkin_madde":"pemigatinib","farmasotik_form":"tablet"}
+{"etkin_madde":"pentamidine isethionate","farmasotik_form":"inhalation solution"}
+{"etkin_madde":"pentamidine isethionate","farmasotik_form":"vial"}
+{"etkin_madde":"pentostatin","farmasotik_form":"vial"}
+{"etkin_madde":"peptide porcine brain extract (proteolytic peptid fraction derive from protein of porcine brain)","farmasotik_form":"vial"}
+{"etkin_madde":"perampanel","farmasotik_form":"tablet"}
+{"etkin_madde":"phenobarbital","farmasotik_form":"vial"}
+{"etkin_madde":"phenprocoumon","farmasotik_form":"tablet"}
+{"etkin_madde":"phentolamine mesylate","farmasotik_form":"vial"}
+{"etkin_madde":"picibanil (OK-432)","farmasotik_form":"vial"}
+{"etkin_madde":"pimavanserin","farmasotik_form":"capsule"}
+{"etkin_madde":"pitolisant","farmasotik_form":"tablet"}
+{"etkin_madde":"pixantrone","farmasotik_form":"vial"}
+{"etkin_madde":"plasminogen","farmasotik_form":"eye drop"}
+{"etkin_madde":"plasminogen, human-tvmh","farmasotik_form":"vial"}
+{"etkin_madde":"polatuzumab vedotin","farmasotik_form":"vial"}
+{"etkin_madde":"ponatinib","farmasotik_form":"tablet"}
+{"etkin_madde":"potassium bromide","farmasotik_form":"tablet"}
+{"etkin_madde":"potassium chloride","farmasotik_form":"tablet"}
+{"etkin_madde":"potassium iodide","farmasotik_form":"tablet"}
+{"etkin_madde":"potassium sodium hydrogen citrate","farmasotik_form":"granule"}
+{"etkin_madde":"pralatrexate","farmasotik_form":"vial"}
+{"etkin_madde":"pralidoxime","farmasotik_form":"vial"}
+{"etkin_madde":"pralsetinib","farmasotik_form":"capsule"}
+{"etkin_madde":"praziquantel","farmasotik_form":"tablet"}
+{"etkin_madde":"primaquine phosphate","farmasotik_form":"tablet"}
+{"etkin_madde":"probenecid","farmasotik_form":"tablet"}
+{"etkin_madde":"probenecid","farmasotik_form":"vial"}
+{"etkin_madde":"procarbazine hydrochloride","farmasotik_form":"capsule"}
+{"etkin_madde":"propamidine isethionate","farmasotik_form":"eye drop"}
+{"etkin_madde":"pyridostigmine bromide ","farmasotik_form":"tablet"}
+{"etkin_madde":"pyridoxine (vitamin B6)","farmasotik_form":"vial"}
+{"etkin_madde":"pyrimethamine","farmasotik_form":"tablet"}
+{"etkin_madde":"quinidin sulphate","farmasotik_form":"tablet"}
+{"etkin_madde":"quinine sulphate","farmasotik_form":"tablet"}
+{"etkin_madde":"rabbit anti-human thymocyte immunoglobulin","farmasotik_form":"vial"}
+{"etkin_madde":"raltitrexed","farmasotik_form":"vial"}
+{"etkin_madde":"rhenium (186Re) sulfide colloid","farmasotik_form":"vial"}
+{"etkin_madde":"rifampicin, dapsone and clofazimine","farmasotik_form":"tablet"}
+{"etkin_madde":"ripretinib","farmasotik_form":"tablet"}
+{"etkin_madde":"risdiplam","farmasotik_form":"oral solution"}
+{"etkin_madde":"rivastigmine","farmasotik_form":"transdermal therapeutic system (TTS)"}
+{"etkin_madde":"romidepsin","farmasotik_form":"vial"}
+{"etkin_madde":"ropeginterferon alfa-2b","farmasotik_form":"vial"}
+{"etkin_madde":"rucaparib","farmasotik_form":"tablet"}
+{"etkin_madde":"rufinamide","farmasotik_form":"oral solution"}
+{"etkin_madde":"rufinamide","farmasotik_form":"tablet"}
+{"etkin_madde":"sacrosidase","farmasotik_form":"oral solution"}
+{"etkin_madde":"samarium (153Sm) lexidronam","farmasotik_form":"vial"}
+{"etkin_madde":"sargramostim","farmasotik_form":"vial"}
+{"etkin_madde":"sebelipase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"selpercatinib","farmasotik_form":"capsule"}
+{"etkin_madde":"selumetinib","farmasotik_form":"capsule"}
+{"etkin_madde":"setmelanotide","farmasotik_form":"vial"}
+{"etkin_madde":"siltuximab","farmasotik_form":"vial"}
+{"etkin_madde":"sodium benzoate","farmasotik_form":"tablet, powder"}
+{"etkin_madde":"sodium benzoate","farmasotik_form":"oral solution"}
+{"etkin_madde":"sodium chloride, sodium bicarbonate, potassium chloride, macrogol","farmasotik_form":"sachet"}
+{"etkin_madde":"sodium dichloroacetate","farmasotik_form":"powder"}
+{"etkin_madde":"sodium glycerophosphate","farmasotik_form":"vial"}
+{"etkin_madde":"sodium phenylacetate and sodium benzoate","farmasotik_form":"vial"}
+{"etkin_madde":"sodium phenylbutyrate","farmasotik_form":"granule, tablet"}
+{"etkin_madde":"sodium phosphate monobasic","farmasotik_form":"tablet"}
+{"etkin_madde":"sodium polystrene sulfonate","farmasotik_form":"oral suspension"}
+{"etkin_madde":"sodium thiosulphate","farmasotik_form":"vial"}
+{"etkin_madde":"sofosbuvir and velpatasvir ","farmasotik_form":"tablet"}
+{"etkin_madde":"solriamfetol","farmasotik_form":"tablet"}
+{"etkin_madde":"stiripentol","farmasotik_form":"capsule, sachet"}
+{"etkin_madde":"streptozocine","farmasotik_form":"vial"}
+{"etkin_madde":"succimer","farmasotik_form":"capsule"}
+{"etkin_madde":"sulfadiazine","farmasotik_form":"tablet"}
+{"etkin_madde":"sulindac","farmasotik_form":"tablet"}
+{"etkin_madde":"sulthiame","farmasotik_form":"tablet"}
+{"etkin_madde":"suxamethonium chloride","farmasotik_form":"vial"}
+{"etkin_madde":"tafamidis (as meglumine)","farmasotik_form":"capsule"}
+{"etkin_madde":"tagraxofusp","farmasotik_form":"vial"}
+{"etkin_madde":"tazemetostat","farmasotik_form":"tablet"}
+{"etkin_madde":"tebentafusp","farmasotik_form":"vial"}
+{"etkin_madde":"technetium (99mTc) mebrofenin ","farmasotik_form":"vial"}
+{"etkin_madde":"teduglutide","farmasotik_form":"vial"}
+{"etkin_madde":"tetrabenazine","farmasotik_form":"tablet"}
+{"etkin_madde":"tetracosactide (0,25 mg)","farmasotik_form":"vial"}
+{"etkin_madde":"tetracosactide (1 mg)","farmasotik_form":"vial"}
+{"etkin_madde":"tetrahydrocannabinol and cannabidiol","farmasotik_form":"oromucosal spray"}
+{"etkin_madde":"thiamin (vitamin B1)","farmasotik_form":"vial"}
+{"etkin_madde":"thiotepa","farmasotik_form":"vial"}
+{"etkin_madde":"tiopronin","farmasotik_form":"tablet"}
+{"etkin_madde":"tiratricol","farmasotik_form":"capsule"}
+{"etkin_madde":"tirotropin alfa","farmasotik_form":"vial"}
+{"etkin_madde":"tisotumab vedotin","farmasotik_form":"vial"}
+{"etkin_madde":"torasemide","farmasotik_form":"tablet"}
+{"etkin_madde":"treprostinil sodium","farmasotik_form":"inhalation solution"}
+{"etkin_madde":"tretinoin","farmasotik_form":"capsule"}
+{"etkin_madde":"triacylglycerol forms of oleic acid and eruric acid","farmasotik_form":"oral solution"}
+{"etkin_madde":"triclabendazole\n","farmasotik_form":"tablet"}
+{"etkin_madde":"trifluridine and tipiracil","farmasotik_form":"tablet"}
+{"etkin_madde":"triheptanoin","farmasotik_form":"oral liquid"}
+{"etkin_madde":"trihexyphenidyl hydrochloride","farmasotik_form":"tablet"}
+{"etkin_madde":"trimetoprim + polimiksin b sülfat","farmasotik_form":"eye drop"}
+{"etkin_madde":"trofinetide","farmasotik_form":"oral solution"}
+{"etkin_madde":"tucatinib","farmasotik_form":"tablet"}
+{"etkin_madde":"valbenazine","farmasotik_form":"capsule"}
+{"etkin_madde":"vandetanib","farmasotik_form":"tablet"}
+{"etkin_madde":"vanoxerin","farmasotik_form":"vial"}
+{"etkin_madde":"vasopressin","farmasotik_form":"vial"}
+{"etkin_madde":"velmanase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"vericiguat","farmasotik_form":"tablet"}
+{"etkin_madde":"verteporfin","farmasotik_form":"vial"}
+{"etkin_madde":"vestronidase alfa","farmasotik_form":"vial"}
+{"etkin_madde":"vindesinsulfate","farmasotik_form":"vial"}
+{"etkin_madde":"vorinostat","farmasotik_form":"capsule"}
+{"etkin_madde":"vosoritide","farmasotik_form":"vial"}
+{"etkin_madde":"warfarin sodium","farmasotik_form":"oral suspension"}
+{"etkin_madde":"warfarin sodium","farmasotik_form":"tablet"}
+{"etkin_madde":"yttrium (90Y) citrate colloid","farmasotik_form":"vial"}
+{"etkin_madde":"zanubrutinib","farmasotik_form":"capsule"}
+{"etkin_madde":"zolpidem tartrate","farmasotik_form":"tablet"}
+{"etkin_madde":"α-ketoisoleucine calcium salt, α-ketoleucine calcium salt, α-ketophenylalanine calcium salt, α-ketovaline calcium salt, α-hydroxymethionine calcium salt, lysine acetate, threonine, tryptophan, histidine, tyrosine","farmasotik_form":"tablet"}
