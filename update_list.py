@@ -12,7 +12,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # --- SABİTLER ve VERİ KAYNAKLARI ---
 BASE_URL = "https://www.titck.gov.tr"
 LOGIN_URL = f"{BASE_URL}/login"
-OUTPUT_DIR = "data"
+OUTPUT_DIR = "ham_veriler"
 DOWNLOAD_DIR = os.path.abspath(OUTPUT_DIR)
 DATA_SOURCES = [
     {"name": "Ruhsatli_Urunler", "page_url": f"{BASE_URL}/dinamikmodul/85", "is_private": False, "skiprows": 4},
