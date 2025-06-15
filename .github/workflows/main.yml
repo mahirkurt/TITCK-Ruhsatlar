@@ -1,13 +1,23 @@
-# Dosya Yolu: .github/workflows/main.yml (GEÇİCİ TEŞHİS SÜRÜMÜ)
+# Dosya Yolu: .github/workflows/main.yml (Nihai Çalışma Sürümü)
 
-name: Veri Temizleme - TEŞHİS MODU
+name: Veri Temizleme Otomasyonu
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
+
+permissions:
+  contents: write
 
 jobs:
-  diagnose-file:
+  clean-data:
     runs-on: ubuntu-latest
-    name: Excel Dosyasını İncele
+    name: Veri Dosyalarını Temizle ve Güncelle
 
     steps:
       - name: Depoyu Klonla
@@ -20,6 +30,19 @@ jobs:
 
       - name: Bağımlılıkları Yükle
         run: pip install pandas openpyxl
+      
+      - name: Verileri Temizle (data_cleaner.py)
+        run: python data_cleaner.py
 
-      - name: Excel Dosyasının Yapısını Yazdır
-        run: python diagnose_excel.py ham_veriler/ilac_fiyat_listesi.xlsx
+      - name: Değişiklikleri Depoya Gönder
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add islenmis_veriler/
+          if [[ -z $(git status --porcelain) ]]; then
+            echo "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
+          else
+            TODAY=$(date -u +"%Y-%m-%d")
+            git commit -m "Otomatik Veri Temizleme: $TODAY"
+            git push
+          fi
