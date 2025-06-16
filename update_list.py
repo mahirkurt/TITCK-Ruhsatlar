@@ -32,15 +32,21 @@ def download_from_page(config):
     page_url = config["page_url"]
     output_filename = config["output_filename"]
     output_path = OUTPUT_DIR / output_filename
-    
-    logging.info(f"'{page_url}' sayfasından Excel linki aranıyor...")
+
+    logging.info(f"{page_url} sayfasından Excel linki aranıyor...")
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
+        headers = {
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                "AppleWebKit/537.36 (KHTML, like Gecko) "
+                "Chrome/91.0.4472.124 Safari/537.36"
+            )
+        }
         page_response = requests.get(page_url, headers=headers, timeout=30)
         page_response.raise_for_status()
 
-        soup = BeautifulSoup(page_response.content, 'lxml')
-        link_tag = soup.find('a', href=lambda h: h and h.lower().endswith('.xlsx'))
+        soup = BeautifulSoup(page_response.content, "lxml")
+        link_tag = soup.find("a", href=lambda h: h and h.lower().endswith('.xlsx'))
         if not link_tag:
             logging.error(f"{page_url}: .xlsx linki bulunamadı.")
             return False
@@ -51,7 +57,7 @@ def download_from_page(config):
         file_response = requests.get(file_url, headers=headers, timeout=120)
         file_response.raise_for_status()
 
-        with open(output_path, 'wb') as f:
+        with open(output_path, "wb") as f:
             f.write(file_response.content)
 
         logging.info(f"-> '{output_filename}' olarak kaydedildi.")
@@ -61,13 +67,15 @@ def download_from_page(config):
         logging.error(f"Hata: {e}")
         return False
 
- def main():
+
+def main():
     logging.info("===== Ham Veri İndirme Başlatıldı =====")
     results = [download_from_page(cfg) for cfg in FILES_TO_DOWNLOAD]
     if not all(results):
         logging.error("Bazı indirmeler başarısız oldu.")
         sys.exit(1)
     logging.info("Tüm dosyalar başarıyla indirildi.")
+
 
 if __name__ == '__main__':
     main()
