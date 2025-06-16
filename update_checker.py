@@ -2,6 +2,7 @@
 import json
 import sys
 import logging
+import os
 import time
 from urllib.parse import urljoin
 
@@ -9,8 +10,10 @@ import requests
 from bs4 import BeautifulSoup
 
 # --- Ayarlar ve Loglama ---
-logging.basicConfig(level=logging.INFO,
-                    format="%(asctime)s [%(levelname)s] - %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] - %(message)s"
+)
 
 BASE_URL = "https://www.titck.gov.tr"
 FILES_TO_CHECK = [
@@ -42,7 +45,6 @@ def save_state(state):
 
 
 def fetch_xlsx_link(page_url, retries=3, backoff=5):
-    """Sayfadaki .xlsx linkini çeker. Hata durumunda None döner."""
     headers = {"User-Agent": USER_AGENT}
     for attempt in range(1, retries + 1):
         try:
@@ -78,13 +80,19 @@ def main():
             changed.append(key)
 
     save_state(new_state)
-
     is_updated = bool(changed)
-    # GitHub Actions outputs
-    print(f"::set-output name=is_updated::{str(is_updated).lower()}")
-    print(f"::set-output name=changed_files::{','.join(changed)}")
 
-    # Her durumda 0 dön
+    # GitHub Actions outputs via environment file
+    github_output = os.environ.get('GITHUB_OUTPUT')
+    if github_output:
+        with open(github_output, 'a') as fh:
+            fh.write(f"is_updated={str(is_updated).lower()}\n")
+            fh.write(f"changed_files={','.join(changed)}\n")
+    else:
+        # Fallback to console if not in GH Actions environment
+        print(f"is_updated={is_updated}")
+        print(f"changed_files={','.join(changed)}")
+
     sys.exit(0)
 
 
