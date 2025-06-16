@@ -1,4 +1,4 @@
-# Dosya Adı: update_list.py (Web Scraper Sürümü)
+# Dosya Adı: update_list.py
 
 import requests
 from bs4 import BeautifulSoup
@@ -31,12 +31,10 @@ def download_from_page(config):
     
     logging.info(f"'{page_url}' sayfasından Excel linki aranıyor...")
     try:
-        # 1. Ana sayfayı indir
         headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
         page_response = requests.get(page_url, headers=headers, timeout=30)
         page_response.raise_for_status()
 
-        # 2. Sayfanın HTML'ini ayrıştır ve .xlsx ile biten ilk linki bul
         soup = BeautifulSoup(page_response.content, 'lxml')
         excel_link_tag = soup.find('a', href=lambda href: href and href.endswith('.xlsx'))
 
@@ -44,16 +42,14 @@ def download_from_page(config):
             logging.error(f"'{page_url}' sayfasında .xlsx uzantılı bir indirme linki bulunamadı.")
             return False
 
-        # 3. İndirme linkini tam bir URL'ye dönüştür
         file_url = urljoin(BASE_URL, excel_link_tag['href'])
         logging.info(f"İndirme linki bulundu: {file_url}")
 
-        # 4. Asıl dosyayı indir
         file_response = requests.get(file_url, headers=headers, timeout=120)
         file_response.raise_for_status()
 
         with open(output_path, 'wb') as f:
-            f.write(file_response.content)
+            f.write(response.content)
         logging.info(f"-> Başarıyla '{output_filename}' olarak kaydedildi.")
         return True
 
