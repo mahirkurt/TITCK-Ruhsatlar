@@ -1,53 +1,93 @@
-# Dosya Yolu: .github/workflows/main.yml
+#!/usr/bin/env python3
+import json
+import sys
+from urllib.parse import urljoin
 
-name: TİTCK Veri Otomasyonu
+import requests
+from bs4 import BeautifulSoup
 
-on:
-  schedule:
-    - cron: '0 3 * * *' # Her gün UTC 03:00'da çalışır
-  workflow_dispatch:
 
-jobs:
-  update-data:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Depoyu Klonla
-        uses: actions/checkout@v4
+# --- Ayarlar ---
+BASE_URL = "https://www.titck.gov.tr"
+FILES_TO_CHECK = [
+    {"key": "ilac_fiyat_listesi", "page_url": "https://titck.gov.tr/dinamikmodul/100"},
+    {"key": "ruhsatli_ilaclar_listesi", "page_url": "https://www.titck.gov.tr/dinamikmodul/85"},
+    {"key": "etkin_madde_listesi", "page_url": "https://www.titck.gov.tr/dinamikmodul/108"},
+    {"key": "yurtdisi_etkin_madde_listesi", "page_url": "https://www.titck.gov.tr/dinamikmodul/126"},
+    {"key": "skrs_erecete_listesi", "page_url": "https://www.titck.gov.tr/dinamikmodul/43"},
+]
+STATE_FILE = "last_known_links.json"
+USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+    "AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/91.0.4472.124 Safari/537.36"
+)
 
-      - name: Python 3.9 Kurulumu
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
 
-      - name: Bağımlılıkları Yükle
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+def load_state():
+    """State dosyasını okur. Dosya yoksa None döner."""
+    try:
+        with open(STATE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return None
+    except json.JSONDecodeError:
+        print(
+            f"::error file={STATE_FILE}::State dosyası okunamadı, sıfırdan başlıyoruz",
+            file=sys.stderr,
+        )
+        return None
 
-      - name: Playwright Tarayıcılarını Kur
-        run: playwright install --with-deps
 
-      - name: 1. Adım - Şifreli Fiyat Listesini İndir
-        env:
-          TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
-          TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
-        run: python downloader.py
-      
-      # KULLANICI NOTU: Diğer halka açık dosyaları da indirmek için
-      # benzer bir public_downloader.py betiği oluşturup buraya ekleyebilirsiniz.
+def save_state(state):
+    """State dosyasını yazar."""
+    with open(STATE_FILE, "w", encoding="utf-8") as f:
+        json.dump(state, f, ensure_ascii=False, indent=2)
 
-      - name: 2. Adım - Tüm Ham Verileri Temizle
-        run: python data_cleaner.py
 
-      - name: 3. Adım - İşlenmiş Verileri Depoya Gönder
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add islenmis_veriler/
-          if [[ -z $(git status --porcelain) ]]; then
-            echo "İşlenmiş verilerde herhangi bir değişiklik bulunamadı."
-          else
-            TODAY=$(date -u +"%Y-%m-%d")
-            git commit -m "Otomatik Veri Güncelleme: $TODAY"
-            git push
-          fi
+def fetch_xlsx_link(page_url):
+    """Verilen sayfadan .xlsx linkini çeker."""
+    headers = {"User-Agent": USER_AGENT}
+    resp = requests.get(page_url, headers=headers, timeout=30)
+    resp.raise_for_status()
+    soup = BeautifulSoup(resp.content, "lxml")
+    tag = soup.find("a", href=lambda h: h and h.lower().endswith(".xlsx"))
+    return urljoin(BASE_URL, tag["href"]) if tag else None
+
+
+def main():
+    """Güncelleme kontrolünü yapan ve gerekli state dosyasını yöneten ana fonksiyon."""
+    state = load_state()
+    new_state = {}
+    changed_files = []
+
+    # Mevcut state yoksa ilk çalıştırma: sadece state oluşturulacak
+    first_run = state is None
+
+    for cfg in FILES_TO_CHECK:
+        key = cfg["key"]
+        url = cfg["page_url"]
+        try:
+            link = fetch_xlsx_link(url)
+        except Exception as e:
+            print(f"::error ::Sayfa ({url}) işlenirken hata: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        new_state[key] = link
+        if not first_run and link and link != state.get(key):
+            changed_files.append(key)
+
+    is_updated = len(changed_files) > 0
+
+    # State dosyasını her durumda güncelle
+    save_state(new_state)
+
+    # GitHub Actions outputs
+    print(f"::set-output name=is_updated::{str(is_updated).lower()}")
+    print(f"::set-output name=changed_files::{','.join(changed_files)}")
+
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()
