@@ -145,9 +145,7 @@ def process_ruhsatli_urunler():
             3: 'MADDE-22 GEREKÇELİ ASKIDA'
         }
         if 'ruhsat_durumu' in df.columns:
-            df['ruhsat_durumu'] = df['ruhsat_durumu']
-                .map(ruhsat_map)
-                .fillna('Bilinmeyen Durum Kodu')
+            df['ruhsat_durumu'] = df['ruhsat_durumu'].map(ruhsat_map).fillna('Bilinmeyen Durum Kodu')
 
         save_as_jsonl(df, "ruhsatli_urunler.jsonl", "ruhsatli_ilaclar_listesi.xlsx")
         return True
