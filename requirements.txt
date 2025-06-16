@@ -1,6 +1,5 @@
-# Dosya Adı: requirements.txt
+requests
+beautifulsoup4
+lxml
 pandas
 openpyxl
-numpy
-google-generativeai
-streamlit
