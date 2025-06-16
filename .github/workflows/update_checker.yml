@@ -3,37 +3,32 @@ name: TİTCK Güncelleme Kontrolü
 
 on:
   schedule:
-    # Her 6 saatte bir çalışır (00:00, 06:00, 12:00, 18:00 UTC)
     - cron: '0 */6 * * *'
   workflow_dispatch: {}
 
 permissions:
-  issues: write      # Issue açma izni
-  contents: write    # last_known_links.json güncelleme izni
+  issues: write
+  contents: write
 
 jobs:
   check-for-updates:
     runs-on: ubuntu-latest
-    name: Kaynak Dosyaları Kontrol Et
     steps:
-      - name: Depoyu Klonla
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Python Kurulumu
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
-      - name: Bağımlılıkları Yükle
-        run: python -m pip install -r requirements.txt
+      - run: python -m pip install -r requirements.txt
 
-      - name: Güncellemeleri Kontrol Et (update_checker.py)
+      - name: Güncellemeleri Kontrol Et
         id: checker
-        run: python update_checker.py
+        run: python update_checker.py     # ← doğru dosya adı
 
-      - name: Değişiklik Varsa Bildirim Oluştur
+      - name: Issue Oluştur (güncelleme varsa)
         if: steps.checker.outputs.is_updated == 'true'
         uses: actions/github-script@v6
         with:
@@ -41,16 +36,15 @@ jobs:
             github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: '📢 TİTCK Verilerinde Güncelleme Tespit Edildi!',
-              body: `TİTCK kaynak dosyalarında yeni bir versiyon bulundu.
-              Değişen dosyalar: ${{ steps.checker.outputs.changed_files }}`
+              title: '📢 TİTCK Veri Güncellendi!',
+              body: `Değişen dosyalar: ${{ steps.checker.outputs.changed_files }}`
             })
 
-      - name: Güncel Dosya Durumunu Depoya İşle
+      - name: State Dosyasını Commit Et
         if: steps.checker.outputs.is_updated == 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add last_known_links.json
-          git commit -m "Otomatik: Dosya link durumunu güncelle"
+          git commit -m "Otomatik: state güncellendi [$(date -u)]"
           git push
