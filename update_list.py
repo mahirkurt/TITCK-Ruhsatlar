@@ -100,17 +100,28 @@ def process_ruhsatli_urunler():
     """Ruhsatlı ürünler listesini işler ve ruhsat durum kodlarını metne çevirir."""
     column_map = {'BARKOD': 'barkod', 'ÜRÜN ADI': 'urun_adi', 'ETKİN MADDE': 'etkin_madde', 'ATC KODU': 'atc_kodu', 'RUHSAT SAHİBİ FİRMA': 'ruhsat_sahibi_firma', 'RUHSAT NUMARASI': 'ruhsat_no', 'RUHSAT TARİHİ': 'ruhsat_tarihi', 'RUHSATI ASKIDA OLMAYAN ÜRÜN': 'ruhsat_durumu', 'ASKIYA ALINMA TARİHİ': 'askiya_alinma_tarihi'}
     raw_file_path = RAW_DATA_DIR / "ruhsatli_ilaclar_listesi.xlsx"
-    if not raw_file_path.exists(): logging.warning(f"Kaynak dosya bulunamadı, atlanıyor: {raw_file_path}"); return True
+    if not raw_file_path.exists():
+        logging.warning(f"Kaynak dosya bulunamadı, atlanıyor: {raw_file_path}")
+        return True
     logging.info("'ruhsatli_ilaclar_listesi.xlsx' -> 'RUHSATLI ÜRÜNLER LİSTESİ' sayfası işleniyor...")
     try:
         df = pd.read_excel(raw_file_path, sheet_name="RUHSATLI ÜRÜNLER LİSTESİ", header=5, dtype={'BARKOD': str, 'RUHSAT NUMARASI': str})
-        existing_cols = [col for col in column_map.keys() if col in df.columns]; df = df[existing_cols]; df.rename(columns=column_map, inplace=True); df.dropna(how='all', inplace=True)
+        existing_cols = [col for col in column_map.keys() if col in df.columns]
+        df = df[existing_cols]
+        df.rename(columns=column_map, inplace=True)
+        df.dropna(how='all', inplace=True)
         ruhsat_map = {0: 'Ruhsat Geçerli', 1: 'Madde-23 Gerekçeli Askıda', 2: 'Farmakovijilans Gerekçeli Askıda', 3: 'Madde-22 Gerekçeli Askıda'}
-        if 'ruhsat_durumu' in df.columns: df['ruhsat_durumu'] = df['ruhsat_durumu'].map(ruhsat_map).fillna('Bilinmeyen Durum Kodu')
-        for col in df.select_dtypes(include=['object']).columns: df[col] = df[col].str.strip()
-        processed_file_path = PROCESSED_DATA_DIR / "ruhsatli_urunler.jsonl"; df.to_json(processed_file_path, orient='records', lines=True, force_ascii=False)
-        logging.info(f"-> Başarıyla 'ruhsatli_urunler.jsonl' olarak kaydedildi. ({len(df)} satır)"); return True
-    except Exception as e: logging.error(f"'RUHSATLI ÜRÜNLER LİSTESİ' işlenirken KRİTİK HATA: {e}", exc_info=False); return False
+        if 'ruhsat_durumu' in df.columns:
+            df['ruhsat_durumu'] = df['ruhsat_durumu'].map(ruhsat_map).fillna('Bilinmeyen Durum Kodu')
+        for col in df.select_dtypes(include=['object']).columns:
+            df[col] = df[col].str.strip()
+        processed_file_path = PROCESSED_DATA_DIR / "ruhsatli_urunler.jsonl"
+        df.to_json(processed_file_path, orient='records', lines=True, force_ascii=False)
+        logging.info(f"-> Başarıyla 'ruhsatli_urunler.jsonl' olarak kaydedildi. ({len(df)} satır)")
+        return True
+    except Exception as e:
+        logging.error(f"'RUHSATLI ÜRÜNLER LİSTESİ' işlenirken KRİTİK HATA: {e}", exc_info=False)
+        return False
 
 def process_etkin_maddeler():
     """Etkin madde listesini işler."""
