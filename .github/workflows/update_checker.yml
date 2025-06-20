@@ -28,7 +28,7 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      # DEĞİŞİKLİK 1: Bu adıma bir ID ("setup_chrome") veriyoruz.
+      # 1. Adım: Chrome kurulum adımına bir ID ("setup_chrome") verilir.
       - name: Setup Chrome
         id: setup_chrome 
         uses: browser-actions/setup-chrome@v1
@@ -40,13 +40,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # DEĞİŞİKLİK 2: env bloğunu, bir önceki adımın çıktısını ve secret'ları doğru şekilde ayarlıyoruz.
+      # 2. Adım: Python script'ine ortam değişkenleri doğru şekilde aktarılır.
       - name: Run update script
         id: run_script
         env:
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
-          # 'setup_chrome' adımının 'chrome-driver' çıktısını ortam değişkeni olarak ata.
+          # 'setup_chrome' adımının 'chrome-driver' adlı çıktısı,
+          # CHROME_DRIVER_PATH değişkenine atanır.
           CHROME_DRIVER_PATH: ${{ steps.setup_chrome.outputs.chrome-driver }}
         run: python update_list.py
 
@@ -55,7 +56,6 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # Artık ham_veriler klasöründeki her şeyi ekliyoruz (.png'ler dahil)
           git add ham_veriler/
           git commit -m "${{ steps.run_script.outputs.summary }}"
           git pull --rebase
