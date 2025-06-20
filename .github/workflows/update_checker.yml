@@ -40,7 +40,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # DEĞİŞİKLİK 2: env bloğunu, bir önceki adımın çıktısını kullanacak şekilde düzeltiyoruz.
+      # DEĞİŞİKLİK 2: env bloğunu, bir önceki adımın çıktısını ve secret'ları doğru şekilde ayarlıyoruz.
       - name: Run update script
         id: run_script
         env:
@@ -55,7 +55,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # Artık data klasöründeki her şeyi ekliyoruz (.png'ler dahil)
+          # Artık ham_veriler klasöründeki her şeyi ekliyoruz (.png'ler dahil)
           git add ham_veriler/
           git commit -m "${{ steps.run_script.outputs.summary }}"
           git pull --rebase
