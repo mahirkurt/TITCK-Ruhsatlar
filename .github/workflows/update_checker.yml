@@ -28,8 +28,10 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      # 1. Adım: Chrome kurulum adımına bir ID ("setup_chrome") verilir.
-      # Bu ID, sonraki adımların bu adımın çıktılarına erişmesini sağlar.
+      # ====================================================================
+      # ❗️ KRİTİK BÖLÜM 1: Chrome kurulum adımına bir ID ("setup_chrome") verilir.
+      # Bu ID, bir sonraki adımın bu adımın çıktılarına erişmesini sağlar.
+      # ====================================================================
       - name: Setup Chrome
         id: setup_chrome 
         uses: browser-actions/setup-chrome@v1
@@ -41,15 +43,19 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 2. Adım: Python script'ine ortam değişkenleri doğru şekilde aktarılır.
+      # ====================================================================
+      # ❗️ KRİTİK BÖLÜM 2: Python script'ine ortam değişkenleri doğru şekilde aktarılır.
+      # Bu 'env' bloğu, hatanın çözümüdür.
+      # ====================================================================
       - name: Run update script
         id: run_script
         env:
+          # Secret'lar script'e aktarılır.
           TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
           TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
+          
           # 'setup_chrome' adımının 'chrome-driver' adlı çıktısı,
           # CHROME_DRIVER_PATH ortam değişkenine atanır.
-          # Bu satır, hatanın çözümüdür.
           CHROME_DRIVER_PATH: ${{ steps.setup_chrome.outputs.chrome-driver }}
         run: python update_list.py
 
