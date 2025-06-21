@@ -1,12 +1,14 @@
 # ====================================================================
-# İŞ AKIŞI 1: VERİ İNDİRME OTOMASYONU (Nihai Düzeltme)
+# İŞ AKIŞI 1: VERİ İNDİRME OTOMASYONU (Nihai ve Kararlı Sürüm)
 # ====================================================================
 name: 1 - Ham Veri İndirme
 
 on:
   schedule:
+    # Her gün sabah 07:00'de (UTC) çalışır.
     - cron: '0 7 * * *'
   
+  # Manuel çalıştırmayı sağlar
   workflow_dispatch:
 
 jobs:
@@ -26,13 +28,11 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      # Tarayıcının kendisini kurar
       - name: Chrome Tarayıcı Kurulumu
         uses: browser-actions/setup-chrome@v1
 
-      # Tarayıcıyı kontrol edecek sürücüyü kurar
       - name: ChromeDriver Kurulumu
-        id: setup_chromedriver # Bu adıma ID veriyoruz
+        id: setup_chromedriver
         uses: nanasess/setup-chromedriver@v2
 
       - name: Bağımlılıkları Yükle
@@ -40,7 +40,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Python script'ine doğru ortam değişkenini bu blok ile aktarıyoruz
       - name: Dosyaları İndir (update_list.py)
         id: run_downloader
         env:
@@ -55,5 +54,4 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add ham_veriler/
           git commit -m "Otomatik Ham Veri Güncellemesi: ${{ steps.run_downloader.outputs.summary }}"
-          # Hız ve stabilite için 'push --force' kullanıyoruz
           git push --force
