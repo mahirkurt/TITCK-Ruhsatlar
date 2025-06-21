@@ -28,16 +28,11 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      # Adım 1: Tarayıcının kendisini kurar
       - name: Setup Chrome Browser
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: stable
 
-      # ====================================================================
-      # ❗️ NİHAİ ÇÖZÜM: Ayrı bir adımla ChromeDriver'ı kuruyoruz.
-      # Bu action, chromedriver'ı sistemin PATH'ine ekler.
-      # ====================================================================
       - name: Setup ChromeDriver
         uses: nanasess/setup-chromedriver@v2
 
@@ -46,14 +41,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # ====================================================================
+      # ❗️ GÜNCELLEME: 'env' bloğu artık gerekli olmadığı için kaldırıldı.
+      # ====================================================================
       - name: Run update script
         id: run_script
-        env:
-          # Secret'lar script'e aktarılır.
-          TITCK_USERNAME: ${{ secrets.TITCK_USERNAME }}
-          TITCK_PASSWORD: ${{ secrets.TITCK_PASSWORD }}
-          # CHROME_DRIVER_PATH değişkeni artık gerekli değil, çünkü Python script'i 
-          # PATH'e eklenen chromedriver'ı otomatik olarak bulacaktır.
         run: python update_list.py
 
       - name: Commit and push if files changed
