@@ -1,5 +1,5 @@
 # ====================================================================
-# İŞ AKIŞI 1: VERİ İNDİRME OTOMASYONU (Optimize Edilmiş)
+# İŞ AKIŞI 1: VERİ İNDİRME OTOMASYONU (Nihai Düzeltme)
 # ====================================================================
 name: 1 - Ham Veri İndirme
 
@@ -19,7 +19,6 @@ jobs:
     steps:
       - name: Depoyu Klonla
         uses: actions/checkout@v4
-        # ❗️ DÜZELTME 1: 'fetch-depth: 0' kaldırıldı. Bu, klonlama işlemini hızlandıracak.
 
       - name: Python Kurulumu
         uses: actions/setup-python@v5
@@ -27,9 +26,13 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
       
-      - name: Chrome Tarayıcı ve Sürücü Kurulumu
+      # Tarayıcının kendisini kurar
+      - name: Chrome Tarayıcı Kurulumu
         uses: browser-actions/setup-chrome@v1
+
+      # Tarayıcıyı kontrol edecek sürücüyü kurar
       - name: ChromeDriver Kurulumu
+        id: setup_chromedriver # Bu adıma ID veriyoruz
         uses: nanasess/setup-chromedriver@v2
 
       - name: Bağımlılıkları Yükle
@@ -37,8 +40,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      # Python script'ine doğru ortam değişkenini bu blok ile aktarıyoruz
       - name: Dosyaları İndir (update_list.py)
         id: run_downloader
+        env:
+          # ChromeDriver kurulum adımının çıktısını CHROME_DRIVER_PATH değişkenine atıyoruz
+          CHROME_DRIVER_PATH: ${{ steps.setup_chromedriver.outputs.chromedriver-path }}
         run: python update_list.py
 
       - name: Ham Veri Değişikliklerini Depoya Gönder
@@ -48,6 +55,5 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add ham_veriler/
           git commit -m "Otomatik Ham Veri Güncellemesi: ${{ steps.run_downloader.outputs.summary }}"
-          # ❗️ DÜZELTME 2: 'git pull' yerine 'git push --force' kullanıyoruz.
-          # Bu, repoyu indirme ihtiyacını ortadan kaldırır.
+          # Hız ve stabilite için 'push --force' kullanıyoruz
           git push --force
