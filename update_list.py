@@ -22,25 +22,21 @@ logging.basicConfig(
 
 # --- Sabitler ve Ana Yapılandırma ---
 BASE_URL = "https://www.titck.gov.tr"
-LOGIN_URL = f"{BASE_URL}/login"
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "ham_veriler"
 DOWNLOAD_DIR = os.path.abspath(OUTPUT_DIR)
 
-# --- İndirilecek Veri Kaynakları ---
+# --- İndirilecek Veri Kaynakları (Sadece Halka Açık Olanlar) ---
 DATA_SOURCES = [
-    {"name": "Ruhsatli_Urunler", "page_url": f"{BASE_URL}/dinamikmodul/85", "is_private": False, "skiprows": 4, "output_filename": "ruhsatli_ilaclar_listesi.xlsx"},
-    {"name": "Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/100", "is_private": False, "skiprows": 3, "output_filename": "ilac_fiyat_listesi.xlsx"},
-    {"name": "SKRS_E-Recete", "page_url": f"{BASE_URL}/dinamikmodul/43", "is_private": False, "skiprows": 0, "output_filename": "skrs_erecete_listesi.xlsx"},
-    {"name": "Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/108", "is_private": False, "skiprows": 3, "output_filename": "etkin_madde_listesi.xlsx"},
-    {"name": "Yurtdisi_Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/126", "is_private": False, "skiprows": 3, "output_filename": "yurtdisi_etkin_madde_listesi.xlsx"},
-    {"name": "Detayli_Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/88", "is_private": True, "skiprows": 3, "output_filename": "detayli_ilac_fiyat_listesi.xlsx"}
+    {"name": "Ruhsatli_Urunler", "page_url": f"{BASE_URL}/dinamikmodul/85", "skiprows": 4, "output_filename": "ruhsatli_ilaclar_listesi.xlsx"},
+    {"name": "Fiyat_Listesi", "page_url": f"{BASE_URL}/dinamikmodul/100", "skiprows": 3, "output_filename": "ilac_fiyat_listesi.xlsx"},
+    {"name": "SKRS_E-Recete", "page_url": f"{BASE_URL}/dinamikmodul/43", "skiprows": 0, "output_filename": "skrs_erecete_listesi.xlsx"},
+    {"name": "Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/108", "skiprows": 3, "output_filename": "etkin_madde_listesi.xlsx"},
+    {"name": "Yurtdisi_Etkin_Madde", "page_url": f"{BASE_URL}/dinamikmodul/126", "skiprows": 3, "output_filename": "yurtdisi_etkin_madde_listesi.xlsx"}
 ]
 
 def setup_driver():
-    """
-    GitHub Actions ortamı ile uyumlu, kararlı bir Selenium WebDriver ayarlar ve başlatır.
-    """
+    """Selenium WebDriver'ı ayarlar ve başlatır."""
     logging.info("Selenium WebDriver başlatılıyor...")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -48,16 +44,8 @@ def setup_driver():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_experimental_option("prefs", {"download.default_directory": DOWNLOAD_DIR})
-
-    # GitHub Actions tarafından sağlanan chromedriver yolunu kullanır
-    driver_path = os.getenv("CHROME_DRIVER_PATH")
-    if driver_path:
-        logging.info(f"GitHub Actions tarafından sağlanan Chromedriver kullanılacak: {driver_path}")
-        service = Service(executable_path=driver_path)
-    else:
-        logging.info("Lokal ortamda otomatik Chromedriver kullanılacak.")
-        service = Service()
-        
+    
+    service = Service()
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
@@ -68,44 +56,6 @@ def set_github_action_output(name, value):
         with open(github_output_file, 'a') as f:
             f.write(f"{name}={value}\n")
     logging.info(f"GHA Çıktısı Ayarlandı -> {name}={value}")
-
-def login(driver):
-    """Verilen driver ile TİTCK sitesine giriş yapar."""
-    username = os.getenv("TITCK_USERNAME")
-    password = os.getenv("TITCK_PASSWORD")
-    if not (username and password):
-        logging.warning("TITCK_USERNAME ve TITCK_PASSWORD secret'ları bulunamadı. Giriş yapılamıyor.")
-        return False
-    
-    try:
-        logging.info(f"Selenium ile login sayfasına gidiliyor: {LOGIN_URL}")
-        driver.get(LOGIN_URL)
-        
-        wait = WebDriverWait(driver, 15)
-        
-        logging.info("Kullanıcı adı alanı bekleniyor ve dolduruluyor (ID ile)...")
-        user_field = wait.until(EC.visibility_of_element_located((By.ID, "username")))
-        user_field.send_keys(username)
-
-        logging.info("Şifre alanı bekleniyor ve dolduruluyor (ID ile)...")
-        pass_field = wait.until(EC.visibility_of_element_located((By.ID, "password")))
-        pass_field.send_keys(password)
-        
-        logging.info("Giriş butonu bekleniyor ve tıklanıyor...")
-        login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
-        login_button.click()
-        
-        logging.info("Giriş sonrası yönlendirme için bekleniyor...")
-        WebDriverWait(driver, 15).until_not(EC.url_contains("login"))
-        
-        logging.info("Giriş başarılı.")
-        return True
-
-    except Exception as e:
-        logging.error(f"Giriş işlemi sırasında bir hata oluştu: {e}")
-        # Ekran görüntüsünü doğru klasöre kaydet
-        driver.save_screenshot(os.path.join(DOWNLOAD_DIR, 'login_error.png'))
-        return False
 
 def process_source_with_selenium(driver, source):
     """Verilen driver'ı kullanarak tek bir kaynağı işler."""
@@ -162,40 +112,21 @@ def process_source_with_selenium(driver, source):
             
     except Exception as e:
         logging.error(f"'{source['name']}' işlenirken bir hata oluştu: {e}")
-        # Ekran görüntüsünü doğru klasöre kaydet
         driver.save_screenshot(os.path.join(DOWNLOAD_DIR, f"{source['name']}_error.png"))
         return False
 
 def main():
     """Ana program akışı: Tek bir Selenium oturumu ile tüm işlemleri yönetir."""
-    logging.info("===== Ham Veri İndirme Başlatıldı (Nihai Selenium Metodu) =====")
+    logging.info("===== Ham Veri İndirme Başlatıldı (Sadece Halka Açık) =====")
     OUTPUT_DIR.mkdir(exist_ok=True)
     
-    # Script'in GHA'da çalışıp çalışmadığını ve gerekli değişkenin ayarlanıp ayarlanmadığını kontrol et
-    is_github_actions = 'GITHUB_ACTIONS' in os.environ
-    if is_github_actions and not os.getenv("CHROME_DRIVER_PATH"):
-        logging.error("KRİTİK HATA: GitHub Actions ortamında çalışılıyor ancak CHROME_DRIVER_PATH ayarlanmamış.")
-        logging.error("Lütfen .github/workflows/update_checker.yml dosyasını kontrol edin.")
-        sys.exit(1) # Hatalı kurulum durumunda script'i hemen sonlandır
-
     updated_sources = []
     driver = None
-    is_logged_in = False
     
     try:
         driver = setup_driver()
         
         for source in DATA_SOURCES:
-            if source['is_private'] and not is_logged_in:
-                is_logged_in = login(driver)
-                if not is_logged_in:
-                    logging.error("Giriş başarısız olduğu için özel kaynaklar işlenemeyecek.")
-                    break 
-            
-            if source['is_private'] and not is_logged_in:
-                logging.warning(f"Giriş yapılmadığı için '{source['name']}' atlanıyor.")
-                continue
-
             if process_source_with_selenium(driver, source):
                 updated_sources.append(source['name'])
             
@@ -213,6 +144,6 @@ def main():
     set_github_action_output('summary', summary)
     logging.info("===== Ham Veri İndirme Tamamlandı =====")
     
-
 if __name__ == "__main__":
     main()
+
