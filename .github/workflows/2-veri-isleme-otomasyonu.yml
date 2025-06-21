@@ -1,24 +1,18 @@
 # ====================================================================
-# İŞ AKIŞI 2: VERİ İŞLEME VE TEMİZLEME OTOMASYONU
-# Görevi: 'ham_veriler' klasöründeki Excel dosyalarını işler, temizler
-# ve 'islenmis_veriler' klasörüne JSONL olarak kaydeder.
+# İŞ AKIŞI 2: VERİ İŞLEME VE TEMİZLEME OTOMASYONU (Optimize Edilmiş)
 # ====================================================================
 name: 2 - Veri İşleme ve Temizleme
 
 on:
-  # Bu workflow'un, "1 - Ham Veri İndirme" workflow'u başarıyla 
-  # tamamlandığında otomatik olarak tetiklenmesini sağlar.
   workflow_run:
     workflows: ["1 - Ham Veri İndirme"]
     types:
       - completed
   
-  # Ayrıca manuel olarak da çalıştırılabilir.
   workflow_dispatch:
 
 jobs:
   clean-and-process-data:
-    # Sadece bir önceki workflow başarılı olduysa çalışır.
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     
@@ -28,8 +22,7 @@ jobs:
     steps:
       - name: Depoyu Klonla
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        # ❗️ DÜZELTME 1: 'fetch-depth: 0' kaldırıldı.
 
       - name: Python Kurulumu
         uses: actions/setup-python@v5
@@ -48,6 +41,14 @@ jobs:
 
       - name: İşlenmiş Veri Değişikliklerini Depoya Gönder
         run: |
-          # Sadece işlenmiş verilerde bir değişiklik varsa commit at
           git add islenmis_veriler/
-          git diff --quiet --exit-code --cached || (git config --global user.name 'github-actions[bot]' && git config --global user.email 'github-actions[bot]@users.noreply.github.com' && git commit -m "Otomatik İşlenmiş Veri Güncellemesi" && git pull --rebase && git push)
+          # Sadece değişiklik varsa commit at ve push'la
+          if ! git diff --quiet --exit-code --cached; then
+            git config --global user.name 'github-actions[bot]'
+            git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+            git commit -m "Otomatik İşlenmiş Veri Güncellemesi"
+            # ❗️ DÜZELTME 2: 'git pull' yerine 'git push --force' kullanıyoruz.
+            git push --force
+          else
+            echo "İşlenmiş verilerde değişiklik yok, commit atılmadı."
+          fi
